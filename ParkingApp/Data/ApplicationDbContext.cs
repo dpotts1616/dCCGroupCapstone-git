@@ -20,20 +20,14 @@ namespace ParkingApp.Data
             base.OnModelCreating(builder);
             builder.Entity<IdentityRole>()
             .HasData(
-            new IdentityRole
-            {
-                Name = "Customer",
-                NormalizedName = "Customer"
-            }
+            new IdentityRole{Name = "Customer",NormalizedName = "CUSTOMER"}
             );
             builder.Entity<IdentityRole>()
            .HasData(
-           new IdentityRole
-           {
-               Name = "Contractor",
-               NormalizedName = "Contractor"
-           }
+           new IdentityRole{Name = "Contractor",NormalizedName = "CONTRACTOR"}
            );
+
+
         }
 
         public DbSet<Car> Cars { get; set; }
