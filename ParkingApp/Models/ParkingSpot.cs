@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,12 +19,15 @@ namespace ParkingApp.Models
         public string State { get; set; }
         [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
-        [Display(Name = "Reserved")]
-        public bool SpotReserved { get; set; }
         [Display(Name = "Hourly Rate")]
         public double HourlyRate { get; set; }
         [Display(Name = "Covered Spot")]
         public bool CoveredSpot { get; set; }
+        [ForeignKey("ReservationId")]
+        public int ReservationId { get; set; }
+        public Reservation Reservation { get; set; }
+        [Display(Name = "Notes")]
+        public string Notes { get; set; }
         
         public bool IsPaid { get; set; }
 
