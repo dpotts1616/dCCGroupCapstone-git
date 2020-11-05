@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkingApp.Data;
 
-namespace ParkingApp.Data.Migrations
+namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201105163551_addmigrations")]
-    partial class addmigrations
+    [Migration("20201105195654_fixingIssue")]
+    partial class fixingIssue
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace ParkingApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "859abd84-257f-49ff-88cb-8542a82cb97f",
-                            ConcurrencyStamp = "89ff6524-c8ba-4da9-b6a4-7b5592ad2fef",
+                            Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
+                            ConcurrencyStamp = "17e4890a-b54e-4505-abf0-8d5ea7b03044",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "c7e64a43-a7e0-4b55-8418-cb4c16bbe2e4",
-                            ConcurrencyStamp = "7852d0c3-c71e-45b1-8a7d-50ab6df81fe9",
+                            Id = "77e60802-3e18-40cf-8999-79aa642defb1",
+                            ConcurrencyStamp = "da78d61c-6d42-4eb4-bafa-f2f25a445fb5",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
