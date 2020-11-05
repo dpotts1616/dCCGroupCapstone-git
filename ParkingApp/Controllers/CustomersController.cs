@@ -164,18 +164,7 @@ namespace ParkingApp.Controllers
         {
             return _context.Customers.Any(e => e.Id == id);
         }
-        public async Task<IActionResult> ParkingSpot(Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CarID"] = new SelectList(_context.Cars, "Id", "Id", customer.CarID);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            return View(customer);
-        }
+      
 
     }
 }
