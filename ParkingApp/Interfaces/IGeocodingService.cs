@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ParkingApp.Interfaces
 {
-    interface IGeocodingService
+    public interface IGeocodingService
     {
         public void AttachLatAndLong(ParkingSpot parkingSpot);
 

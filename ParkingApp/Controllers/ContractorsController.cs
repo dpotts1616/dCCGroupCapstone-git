@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ParkingApp.Data;
+using ParkingApp.Interfaces;
 using ParkingApp.Models;
+using ParkingApp.Services;
 
 namespace ParkingApp.Controllers
 {
@@ -17,10 +19,12 @@ namespace ParkingApp.Controllers
     public class ContractorsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IGeocodingService _geocodingService;
 
-        public ContractorsController(ApplicationDbContext context)
+        public ContractorsController(ApplicationDbContext context, IGeocodingService geocodingService)
         {
             _context = context;
+            _geocodingService = geocodingService;
         }
 
         // GET: Contractors
@@ -36,13 +40,9 @@ namespace ParkingApp.Controllers
 
             contractor = await _context.Contractors
                 .Include(c => c.IdentityUser)
-                .Include(c => c.ParkingSpot)
+                .Include(c => c.ParkingSpots)
                 .FirstOrDefaultAsync(m => m.Id == contractor.Id);
 
-            if (contractor == null)
-            {
-                return NotFound();
-            }
 
             return View(contractor);
 
@@ -190,40 +190,49 @@ namespace ParkingApp.Controllers
             //var contractor = _context.Contractors.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             var contractor = await _context.Contractors.FindAsync(id);
 
-            if (contractor.ParkingSpot == null)
+            if (contractor.ParkingSpots == null)
             {
                 return RedirectToAction(nameof(CreateParkingSpot));
             }
 
             contractor = await _context.Contractors
                 .Include(c => c.IdentityUser)
-                .Include(c => c.ParkingSpot)
+                .Include(c => c.ParkingSpots)
                 .FirstOrDefaultAsync(m => m.Id == contractor.Id);
 
-            if (contractor == null)
-            {
-                return NotFound();
-            }
 
             return View(contractor);
             //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             //return View();
         }
+
+
+        //Get for Create Parking Spot
+        public IActionResult CreateParkingSpot()
+        {
+            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateParkingSpot([Bind("Id,FirstName,LastName,Address,City,State,ZipCode,IdentityUserId,SpotID")] Contractor contractor)
+        //public async Task<IActionResult> CreateParkingSpot([Bind("Id,FirstName,LastName,Address,City,State,ZipCode,IdentityUserId,SpotID")] Contractor contractor)
+        public async Task<IActionResult> CreateParkingSpot(ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                contractor.IdentityUserId = userId;
+                var contractor = _context.Contractors.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-                _context.Add(contractor);
+                _geocodingService.AttachLatAndLong(parkingSpot);
+
+                contractor.ParkingSpots.Add(parkingSpot);
+
+                _context.ParkingSpots.Add(parkingSpot);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", contractor.IdentityUserId);
-            return View(contractor);
+            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", contractor.IdentityUserId);
+            return View(parkingSpot);
         }
 
 
