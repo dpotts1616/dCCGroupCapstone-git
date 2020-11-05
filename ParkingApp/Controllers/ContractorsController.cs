@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
@@ -25,8 +26,28 @@ namespace ParkingApp.Controllers
         // GET: Contractors
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Contractors.Include(c => c.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var contractor = _context.Contractors.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+            if (contractor == null)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+
+            contractor = await _context.Contractors
+                .Include(c => c.IdentityUser)
+                .Include(c => c.ParkingSpot)
+                .FirstOrDefaultAsync(m => m.Id == contractor.Id);
+
+            if (contractor == null)
+            {
+                return NotFound();
+            }
+
+            return View(contractor);
+
+            //var applicationDbContext = _context.Contractors.Include(c => c.IdentityUser).Include(e => e.ParkingSpot);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Contractors/Details/5
