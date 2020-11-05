@@ -183,6 +183,12 @@ namespace ParkingApp.Controllers
         {
             return _context.Contractors.Any(e => e.Id == id);
         }
+
+        public IActionResult ParkingSpot()
+        {
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ParkingSpot([Bind("Id,FirstName,LastName,Address,City,State,ZipCode,IdentityUserId,SpotID")] Contractor contractor)
