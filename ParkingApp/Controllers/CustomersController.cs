@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NHibernate.Mapping;
 using ParkingApp.Data;
 using ParkingApp.Models;
 
@@ -27,19 +28,17 @@ namespace ParkingApp.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
             if (customer == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Create));
             }
 
                 customer = await _context.Customers
-                .Include(c => c.Car)
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == customer.Id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
+               .Include(c => c.Car)
+               .Include(c => c.IdentityUser)
+               .FirstOrDefaultAsync(m => m.Id == customer.Id);
+
 
             return View(customer);
 
@@ -82,7 +81,7 @@ namespace ParkingApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Address,City,State,ZipCode")] Customer customer)
+        public async Task<IActionResult> Create([Bind("FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -200,7 +199,7 @@ namespace ParkingApp.Controllers
             }
             else
             {
-                return View(customer);
+                return View();
 
             }
         }
@@ -208,19 +207,17 @@ namespace ParkingApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // POST: CustomersController/AddVehicle/
-        public ActionResult AddVehicle(Customer customer)
+        public ActionResult AddVehicle([Bind("CarMake,CarModel,CarYear")] Car car)
         {
-            try
-            {  
-                _context.Customers.Add(customer);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+           
+
+                _context.Cars.Add(car);
+                car.Id = customer.Id;
                 _context.SaveChanges();
-                
+              
                 return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                return View();
-            }
 
         }
 

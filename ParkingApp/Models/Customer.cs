@@ -35,7 +35,7 @@ namespace ParkingApp.Models
         public Car Car { get; set; }
 
         [ForeignKey("PaymentID")]
-        public int PaymentID { get; set; }
+        public int? PaymentID { get; set; }
         public CreditCard CreditCard { get; set; }
 
 
