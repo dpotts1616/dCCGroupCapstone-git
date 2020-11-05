@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkingApp.Data;
 
 namespace ParkingApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201105013826_made SpotID on Contractor nullable")]
+    partial class madeSpotIDonContractornullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,19 +50,15 @@ namespace ParkingApp.Data.Migrations
                     b.HasData(
                         new
                         {
-
                             Id = "99bdf0cb-b893-434a-883d-f612c7085838",
                             ConcurrencyStamp = "d28d6c5f-e9b3-4045-bd36-5205e0ed9da5",
-
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-
                             Id = "e46ae2b0-c671-4bb6-9d5a-344ff24b040c",
                             ConcurrencyStamp = "08606ded-6dd9-4272-84a1-075c0149f318",
-
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -396,17 +394,11 @@ namespace ParkingApp.Data.Migrations
                     b.Property<DateTime>("ExitTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("HourlyRate")
                         .HasColumnType("float");
 
                     b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
