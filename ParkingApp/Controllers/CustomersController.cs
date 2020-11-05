@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -164,7 +165,44 @@ namespace ParkingApp.Controllers
         {
             return _context.Customers.Any(e => e.Id == id);
         }
-      
+
+        // GET: CustomersController/AddVehicle/
+        public ActionResult AddVehicle(int? id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+            else
+            {
+                return View(customer);
+
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // POST: CustomersController/AddVehicle/
+        public ActionResult AddVehicle(Customer customer)
+        {
+            try
+            {  
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
+                
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+
+        }
+
+
 
     }
 }

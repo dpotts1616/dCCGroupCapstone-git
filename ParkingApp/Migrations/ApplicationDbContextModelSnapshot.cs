@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkingApp.Data;
 
-namespace ParkingApp.Data.Migrations
+namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201105013826_made SpotID on Contractor nullable")]
-    partial class madeSpotIDonContractornullable
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,15 +48,15 @@ namespace ParkingApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "99bdf0cb-b893-434a-883d-f612c7085838",
-                            ConcurrencyStamp = "d28d6c5f-e9b3-4045-bd36-5205e0ed9da5",
+                            Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
+                            ConcurrencyStamp = "17e4890a-b54e-4505-abf0-8d5ea7b03044",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "e46ae2b0-c671-4bb6-9d5a-344ff24b040c",
-                            ConcurrencyStamp = "08606ded-6dd9-4272-84a1-075c0149f318",
+                            Id = "77e60802-3e18-40cf-8999-79aa642defb1",
+                            ConcurrencyStamp = "da78d61c-6d42-4eb4-bafa-f2f25a445fb5",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -334,7 +332,7 @@ namespace ParkingApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarID")
+                    b.Property<int?>("CarID")
                         .HasColumnType("int");
 
                     b.Property<int?>("CreditCardId")
@@ -523,9 +521,7 @@ namespace ParkingApp.Data.Migrations
                 {
                     b.HasOne("ParkingApp.Models.Car", "Car")
                         .WithMany()
-                        .HasForeignKey("CarID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CarID");
 
                     b.HasOne("ParkingApp.Models.CreditCard", "CreditCard")
                         .WithMany()
