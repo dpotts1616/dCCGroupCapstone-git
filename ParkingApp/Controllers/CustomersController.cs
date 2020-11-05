@@ -248,7 +248,7 @@ namespace ParkingApp.Controllers
         // POST: CustomersController/AddVehicle/
         public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
         {
-            var listOfSpots = _context.ParkingSpots.ToList();
+            var listOfSpots =  _context.ParkingSpots.ToList();
 
             if(listOfSpots == null)
             {
