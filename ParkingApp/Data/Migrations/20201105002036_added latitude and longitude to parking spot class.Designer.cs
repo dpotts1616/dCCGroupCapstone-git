@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkingApp.Data;
 
 namespace ParkingApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201105002036_added latitude and longitude to parking spot class")]
+    partial class addedlatitudeandlongitudetoparkingspotclass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace ParkingApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "99bdf0cb-b893-434a-883d-f612c7085838",
-                            ConcurrencyStamp = "d28d6c5f-e9b3-4045-bd36-5205e0ed9da5",
+                            Id = "f4b7c37e-d08c-4353-8cf9-d38180302ea7",
+                            ConcurrencyStamp = "7c31527f-c382-4a7e-86d0-7607cf240ca1",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "e46ae2b0-c671-4bb6-9d5a-344ff24b040c",
-                            ConcurrencyStamp = "08606ded-6dd9-4272-84a1-075c0149f318",
+                            Id = "a1933d53-37ca-43be-a42f-2808ca361e94",
+                            ConcurrencyStamp = "3af6c920-b6c8-43bb-a6a9-74bf6a04d1be",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -277,7 +279,7 @@ namespace ParkingApp.Data.Migrations
                     b.Property<int?>("ParkingSpotID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SpotID")
+                    b.Property<int>("SpotID")
                         .HasColumnType("int");
 
                     b.Property<string>("State")

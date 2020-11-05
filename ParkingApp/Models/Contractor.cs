@@ -32,7 +32,7 @@ namespace ParkingApp.Models
 
         [ForeignKey("SpotID")]
         [Display(Name = "Parking Spot ID")]
-        public int SpotID { get; set; }
+        public int? SpotID { get; set; }
         public ParkingSpot ParkingSpot { get; set; }
     }
 }

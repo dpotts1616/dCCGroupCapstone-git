@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using ParkingApp.ActionFilters;
+using ParkingApp.Interfaces;
+using ParkingApp.Services;
 
 namespace ParkingApp
 {
@@ -48,6 +50,8 @@ namespace ParkingApp
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddTransient<IGeocodingService, GeocodingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

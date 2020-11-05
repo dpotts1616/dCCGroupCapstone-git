@@ -28,7 +28,9 @@ namespace ParkingApp.Models
         public Reservation Reservation { get; set; }
         [Display(Name = "Notes")]
         public string Notes { get; set; }
-        
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
         public bool IsPaid { get; set; }
 
 
