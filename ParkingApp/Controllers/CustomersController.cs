@@ -28,23 +28,17 @@ namespace ParkingApp.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-            if (customer == null)
+            if (userId == null)
             {
                 return RedirectToAction(nameof(Create));
             }
 
-            customer = await _context.Customers
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == customer.Id);
 
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return View(customer);
             //var applicationDbContext = _context.Customers.Include(c => c.Car).Include(c => c.IdentityUser);
             //return View(await applicationDbContext.ToListAsync());
+
+
+
         }
 
         // GET: Customers/Details/5
@@ -56,7 +50,7 @@ namespace ParkingApp.Controllers
             }
 
             var customer = await _context.Customers
-                .Include(c => c.Car)
+                //.Include(c => c.Car)
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
