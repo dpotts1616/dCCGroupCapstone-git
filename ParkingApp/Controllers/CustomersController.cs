@@ -25,8 +25,26 @@ namespace ParkingApp.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.Car).Include(c => c.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+            if (customer == null)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+
+            customer = await _context.Customers
+                //.Include(c => c.Car)
+                .Include(c => c.IdentityUser)
+                .FirstOrDefaultAsync(m => m.Id == customer.Id);
+            
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
+
         }
 
         // GET: Customers/Details/5
@@ -38,7 +56,7 @@ namespace ParkingApp.Controllers
             }
 
             var customer = await _context.Customers
-                .Include(c => c.Car)
+                //.Include(c => c.Car)
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
