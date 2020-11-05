@@ -183,7 +183,50 @@ namespace ParkingApp.Controllers
         {
             return _context.Contractors.Any(e => e.Id == id);
         }
-       
+
+        public async Task<IActionResult> ParkingSpot(int id)
+        {
+            //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var contractor = _context.Contractors.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var contractor = await _context.Contractors.FindAsync(id);
+
+            if (contractor.ParkingSpot == null)
+            {
+                return RedirectToAction(nameof(CreateParkingSpot));
+            }
+
+            contractor = await _context.Contractors
+                .Include(c => c.IdentityUser)
+                .Include(c => c.ParkingSpot)
+                .FirstOrDefaultAsync(m => m.Id == contractor.Id);
+
+            if (contractor == null)
+            {
+                return NotFound();
+            }
+
+            return View(contractor);
+            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            //return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateParkingSpot([Bind("Id,FirstName,LastName,Address,City,State,ZipCode,IdentityUserId,SpotID")] Contractor contractor)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                contractor.IdentityUserId = userId;
+
+                _context.Add(contractor);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", contractor.IdentityUserId);
+            return View(contractor);
+        }
+
+
     }
 
 

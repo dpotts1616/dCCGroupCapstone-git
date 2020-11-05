@@ -25,4 +25,6 @@ namespace ParkingApp.Services
             parkingSpot.Longitude = (double)jObject["results"][0]["geometry"]["location"]["lng"];
         }
     }
+
+   
 }
