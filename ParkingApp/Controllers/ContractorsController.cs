@@ -183,7 +183,24 @@ namespace ParkingApp.Controllers
         {
             return _context.Contractors.Any(e => e.Id == id);
         }
-       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ParkingSpot([Bind("Id,FirstName,LastName,Address,City,State,ZipCode,IdentityUserId,SpotID")] Contractor contractor)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                contractor.IdentityUserId = userId;
+
+                _context.Add(contractor);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", contractor.IdentityUserId);
+            return View(contractor);
+        }
+
+
     }
 
 
