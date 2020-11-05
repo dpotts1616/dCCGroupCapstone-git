@@ -10,8 +10,8 @@ using ParkingApp.Data;
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201105195654_fixingIssue")]
-    partial class fixingIssue
+    [Migration("20201105210236_fixingMergeIssue")]
+    partial class fixingMergeIssue
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,14 +51,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "17e4890a-b54e-4505-abf0-8d5ea7b03044",
+                            ConcurrencyStamp = "f1f0a967-b0df-4748-bf4e-244866353c0e",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "da78d61c-6d42-4eb4-bafa-f2f25a445fb5",
+                            ConcurrencyStamp = "87f5077d-ffb9-46cc-acf7-310fe4c5e521",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });

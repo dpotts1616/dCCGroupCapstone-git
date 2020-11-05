@@ -25,8 +25,26 @@ namespace ParkingApp.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.Car).Include(c => c.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+            if (customer == null)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+
+            customer = await _context.Customers
+                .Include(c => c.IdentityUser)
+                .FirstOrDefaultAsync(m => m.Id == customer.Id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
+            //var applicationDbContext = _context.Customers.Include(c => c.Car).Include(c => c.IdentityUser);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Customers/Details/5
@@ -52,29 +70,29 @@ namespace ParkingApp.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
-            ViewData["CarID"] = new SelectList(_context.Cars, "Id", "Id");
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
-
-        // POST: Customers/Create
+        // POST: Contractors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber,IdentityUserId,CarID,PaymentID")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Address,City,State,ZipCode")] Customer customer)
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
+
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CarID"] = new SelectList(_context.Cars, "Id", "Id", customer.CarID);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
-
+      
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -202,7 +220,38 @@ namespace ParkingApp.Controllers
 
         }
 
+        // GET: CustomersController/BookATrip/
+        public IActionResult BookATrip(int? id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+            else
+            {
+                return View(customer);
+
+            }
+
+        }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // POST: CustomersController/AddVehicle/
+        public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
+        {
+            var listOfSpots = _context.ParkingSpots.ToList();
+
+            if(listOfSpots == null)
+            {
+                return NotFound();
+            }
+            return View(listOfSpots);
+
+        }
     }
 }
