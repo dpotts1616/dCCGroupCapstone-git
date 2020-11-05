@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +25,29 @@ namespace ParkingApp.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.Car).Include(c => c.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+           
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+            if (customer == null)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+                customer = await _context.Customers
+               //.Include(c => c.Car)
+               .Include(c => c.IdentityUser)
+               .FirstOrDefaultAsync(m => m.Id == customer.Id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
+
+            //var applicationDbContext = _context.Customers.Include(c => c.Car).Include(c => c.IdentityUser);
+            //return View(await applicationDbContext.ToListAsync());
+            
         }
 
         // GET: Customers/Details/5
@@ -160,9 +182,49 @@ namespace ParkingApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.Id == id);
         }
+
+        // GET: CustomersController/AddVehicle/
+        public ActionResult AddVehicle(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var userID = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userID).SingleOrDefault();
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            ViewData["CarID"] = new SelectList(_context.Cars, "Id", "Id", customer.CarID);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            return View(customer);
+
+        }
+
+        // POST: CustomersController/AddVehicle/
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddVehicle(Car car)
+        {
+            try
+            {
+                _context.Cars.Add(car);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+
+
+        }
     }
+
 }
