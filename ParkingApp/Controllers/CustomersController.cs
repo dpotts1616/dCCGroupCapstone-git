@@ -164,20 +164,18 @@ namespace ParkingApp.Controllers
         {
             return _context.Customers.Any(e => e.Id == id);
         }
-        public async Task<IActionResult> Reservations(int? id)
+        public async Task<IActionResult> ParkingSpot(Customer customer)
         {
-            if (id == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                _context.Add(customer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var applicationDbContext = _context.ParkingSpots.Include(c => c.ID);
-
-            if (applicationDbContext == null)
-            {
-                return NotFound();
-            }
-
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["CarID"] = new SelectList(_context.Cars, "Id", "Id", customer.CarID);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            return View(customer);
         }
+
     }
 }

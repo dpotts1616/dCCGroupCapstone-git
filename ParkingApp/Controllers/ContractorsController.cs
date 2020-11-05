@@ -183,21 +183,7 @@ namespace ParkingApp.Controllers
         {
             return _context.Contractors.Any(e => e.Id == id);
         }
-        public async Task<IActionResult> Reservations(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var applicationDbContext = _context.ParkingSpots.Include(c => c.ID);
-
-            if (applicationDbContext == null)
-            {
-                return NotFound();
-            }
-
-            return View(await applicationDbContext.ToListAsync());
-        }
+       
     }
 
 

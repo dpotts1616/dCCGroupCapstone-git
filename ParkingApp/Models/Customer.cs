@@ -31,7 +31,7 @@ namespace ParkingApp.Models
         public IdentityUser IdentityUser { get; set; }
 
         [ForeignKey("CarID")]
-        public int CarID { get; set; }
+        public int? CarID { get; set; }
         public Car Car { get; set; }
 
         [ForeignKey("PaymentID")]
