@@ -255,5 +255,43 @@ namespace ParkingApp.Controllers
             return View(listOfSpots);
 
         }
+
+        // GET: CustomersController/ViewVehicles/
+        public async Task<IActionResult> ViewVehiclesAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customers
+                .Include(c => c.Car)
+                .Include(c => c.IdentityUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
+        }
+
+        // GET: CustomersController/CheckBalance/5
+        public ActionResult CheckBalance(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var customerToCheckBalanceOn = _context.Customers.Where(c => c.Id == id).SingleOrDefault();
+            if (customerToCheckBalanceOn == null)
+            {
+                return NotFound();
+            }
+            return View(customerToCheckBalanceOn);
+        }
+
+
+
     }
 }
