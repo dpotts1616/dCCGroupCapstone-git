@@ -1,4 +1,4 @@
-﻿ateusing System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ParkingApp.Migrations
@@ -317,12 +317,12 @@ namespace ParkingApp.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "c1425cc9-2ef2-46ac-99a0-d0a5000821ea", "Customer", "CUSTOMER" });
+                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "b62adabe-b2c0-4353-910a-0675dabfe579", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "49f513c1-ee5c-4fd5-afd2-00277a290975", "Contractor", "CONTRACTOR" });
+                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "b1535422-30e0-4e9e-9530-1eb4d5c51418", "Contractor", "CONTRACTOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
