@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkingApp.Data;
 
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201106174227_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,22 +51,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "fd95a184-f615-452f-b125-174bb4e8f904",
-=======
                             ConcurrencyStamp = "b62adabe-b2c0-4353-910a-0675dabfe579",
->>>>>>> c3b63533b1b62693ab3ee44d6d6252da61aefd38
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "4295d0a8-f70f-48fd-bb10-559494a35f09",
-=======
                             ConcurrencyStamp = "b1535422-30e0-4e9e-9530-1eb4d5c51418",
->>>>>>> c3b63533b1b62693ab3ee44d6d6252da61aefd38
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });

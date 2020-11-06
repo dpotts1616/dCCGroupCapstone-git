@@ -259,7 +259,7 @@ namespace ParkingApp.Controllers
         //}
 
         // GET: CustomersController/ViewVehicles/
-        public async Task<IActionResult> ViewVehicles(int? id)
+        public ActionResult ViewVehicles(int? id)
         {
 
             if (id == null)
@@ -268,10 +268,7 @@ namespace ParkingApp.Controllers
             }
 
             var cars =  _context.Cars.Where(w => w.OwnerId == id);
-            //var customer = await _context.Customers
-            //    .Include(c => c.Car)
-            //    .Include(c => c.IdentityUser)
-            //    .FirstOrDefaultAsync(m => m.Id == id);
+          
             if (cars == null)
             {
                 return NotFound();

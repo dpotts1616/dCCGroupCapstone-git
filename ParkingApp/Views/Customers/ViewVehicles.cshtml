@@ -2,7 +2,10 @@
 
 @{
     ViewData["Title"] = "ViewVehicles";
+<<<<<<< HEAD
     Layout = "~/Views/Shared/_Layout.cshtml";
+=======
+>>>>>>> c3b63533b1b62693ab3ee44d6d6252da61aefd38
 }
 
 <h1>ViewVehicles</h1>
@@ -14,6 +17,12 @@
     <thead>
         <tr>
             <th>
+<<<<<<< HEAD
+=======
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+>>>>>>> c3b63533b1b62693ab3ee44d6d6252da61aefd38
                 @Html.DisplayNameFor(model => model.CarMake)
             </th>
             <th>
@@ -32,6 +41,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+<<<<<<< HEAD
+=======
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+>>>>>>> c3b63533b1b62693ab3ee44d6d6252da61aefd38
                 @Html.DisplayFor(modelItem => item.CarMake)
             </td>
             <td>
@@ -44,9 +59,15 @@
                 @Html.DisplayFor(modelItem => item.OwnerId)
             </td>
             <td>
+<<<<<<< HEAD
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+=======
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+>>>>>>> c3b63533b1b62693ab3ee44d6d6252da61aefd38
             </td>
         </tr>
 }
