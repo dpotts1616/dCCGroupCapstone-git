@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -8,11 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using NHibernate.Mapping;
 using ParkingApp.Data;
 using ParkingApp.Models;
-using Stripe;
 
 namespace ParkingApp.Controllers
 {
@@ -286,29 +281,29 @@ namespace ParkingApp.Controllers
             return View();
         }
 
-        public ActionResult Charge(string stripeEmail, string stripeToken)
-        {
-            var customers = new Stripe.CustomerCreateOptions();
-            var charges = new Stripe.CustomerCreateOptions();
+        //public ActionResult Charge(string stripeEmail, string stripeToken)
+        //{
+        //    var customers = new Stripe.CustomerCreateOptions();
+        //    var charges = new Stripe.CustomerCreateOptions();
 
-            var customer = customers.Create(new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                SourceToken = stripeToken
-            });
+        //    var customer = customers.Create(new CustomerCreateOptions
+        //    {
+        //        Email = stripeEmail,
+        //        SourceToken = stripeToken
+        //    });
 
-            var charge = charges.Create(new CustomerCreateOptions
-            {
-                Amount = 500,//charge in cents
-                Description = "Sample Charge",
-                Currency = "usd",
-                CustomerId = customer.Id
-            });
+        //    var charge = charges.Create(new CustomerCreateOptions
+        //    {
+        //        Amount = 500,//charge in cents
+        //        Description = "Sample Charge",
+        //        Currency = "usd",
+        //        CustomerId = customer.Id
+        //    });
 
-            // further application specific code goes here
+        //    // further application specific code goes here
 
-            return View();
-        }
+        //    return View();
+        //}
 
 
     }
