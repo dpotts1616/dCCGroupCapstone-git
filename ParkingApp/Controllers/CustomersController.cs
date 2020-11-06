@@ -278,6 +278,23 @@ namespace ParkingApp.Controllers
         }
 
 
+
+        public ActionResult AllSpots()
+        {
+
+            var parkingSpots = _context.ParkingSpots;
+
+            if (parkingSpots == null)
+            {
+                return NotFound();
+            }
+
+            return View(parkingSpots);
+        }
+
+
+
+
         //// GET: CustomersController/CheckBalance/5
         //public ActionResult PayBill()
         //{
