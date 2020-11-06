@@ -1,0 +1,126 @@
+﻿@model IEnumerable<ParkingApp.Models.ParkingSpot>
+
+@{
+    ViewData["Title"] = "AllSpots";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AllSpots</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZipCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HourlyRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoveredSpot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZipCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HourlyRate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CoveredSpot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reservation.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    <a asp-action="BookASpot" asp-route-id="@item.ID">Book</a> |
+                    @*<a asp-action="Details" asp-route-id="@item.ID">Details</a> |*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="map" style="position: fixed; overflow: visible; height: 400px; width: 400px;"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=@ParkingApp.Services.APIKeys.GOOGLE_API_KEY&callback=initMap&libraries=&v=weekly"
+        defer></script>
+<script>
+
+    let myLats = [];
+    let myLongs = [];
+    let Ids = [];
+</script>
+@foreach (var item in Model)
+{
+    <script>
+            myLats.push(@item.Latitude)
+        myLongs.push(@item.Longitude)
+        Ids.push(@item.ID)
+    </script>
+}
+
+<script>
+
+    let map;
+
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: @Model.First().Latitude, lng: @Model.First().Longitude },
+            zoom: 10,
+        });
+
+
+            for (let i = 0; i < myLats.length; i++) {
+                new google.maps.Marker({
+                    position: { lat: myLats[i], lng: myLongs[i] },
+                    label: `${Ids[i]}`,
+                    map: map,
+            })
+        }
+
+    }
+</script>

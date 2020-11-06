@@ -10,6 +10,7 @@ namespace ParkingApp.Models
     public class ParkingSpot
     {
         [Key]
+        [Display(Name ="Spot ID")]
         public int ID { get; set; }
         public string Address { get; set; }
         [Display(Name = "City")]
