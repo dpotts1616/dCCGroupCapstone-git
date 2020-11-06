@@ -11,15 +11,12 @@ body {
 
 .index{
     font-size: 60px; 
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+    font-family: 'Leelawadee UI';   
     opacity: 0.5; 
     color: white; 
     text-align: center; 
-    
     top: 50%; 
-    left: 50%; 
-    
-    
+    left: 50%;   
 }
 
 .console-container {
@@ -36,6 +33,7 @@ body {
     left: 0;
     right: 0;
     margin: auto;
+    text-shadow: #888 6px 6px; 
 }
 
 .console-underscore {
@@ -43,4 +41,8 @@ body {
     position: relative;
     top: -0.14em;
     left: 10px;
+}
+.nav-bar{
+    background-color: black; 
+
 }

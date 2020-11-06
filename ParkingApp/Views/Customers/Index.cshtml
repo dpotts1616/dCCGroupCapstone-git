@@ -26,6 +26,9 @@
     @Html.ActionLink("Add a vehicle", "AddVehicle", new { id = Model.Id })
 </p>
 <p>
+    @Html.ActionLink("Your vehicles", "ViewVehiclesAsync", new { id = Model.Id })
+</p>
+<p>
     @Html.ActionLink("Book a trip", "BookATrip", new { id = Model.Id })
 </p>
 <p>
