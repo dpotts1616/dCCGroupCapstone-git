@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NHibernate.Mapping;
 using ParkingApp.Data;
 using ParkingApp.Models;
 
@@ -33,17 +34,19 @@ namespace ParkingApp.Controllers
                 return RedirectToAction(nameof(Create));
             }
 
-            customer = await _context.Customers
-                //.Include(c => c.Car)
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == customer.Id);
-            
-            if (customer == null)
-            {
-                return NotFound();
-            }
+                customer = await _context.Customers
+               .Include(c => c.Car)
+               .Include(c => c.IdentityUser)
+               .FirstOrDefaultAsync(m => m.Id == customer.Id);
+
 
             return View(customer);
+
+
+            //var applicationDbContext = _context.Customers.Include(c => c.Car).Include(c => c.IdentityUser);
+            //return View(await applicationDbContext.ToListAsync());
+
+
 
         }
 
@@ -56,7 +59,7 @@ namespace ParkingApp.Controllers
             }
 
             var customer = await _context.Customers
-                //.Include(c => c.Car)
+                .Include(c => c.Car)
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
@@ -70,29 +73,29 @@ namespace ParkingApp.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
-            ViewData["CarID"] = new SelectList(_context.Cars, "Id", "Id");
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
-
-        // POST: Customers/Create
+        // POST: Contractors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber,IdentityUserId,CarID,PaymentID")] Customer customer)
+        public async Task<IActionResult> Create([Bind("FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber")] Customer customer)
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
+
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CarID"] = new SelectList(_context.Cars, "Id", "Id", customer.CarID);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
-
+      
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -196,7 +199,7 @@ namespace ParkingApp.Controllers
             }
             else
             {
-                return View(customer);
+                return View();
 
             }
         }
@@ -204,23 +207,52 @@ namespace ParkingApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // POST: CustomersController/AddVehicle/
-        public ActionResult AddVehicle(Customer customer)
+        public ActionResult AddVehicle([Bind("CarMake,CarModel,CarYear")] Car car)
         {
-            try
-            {  
-                _context.Customers.Add(customer);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+           
+
+                _context.Cars.Add(car);
+                car.Id = customer.Id;
                 _context.SaveChanges();
-                
+              
                 return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
+
+        }
+
+        // GET: CustomersController/BookATrip/
+        public IActionResult BookATrip(int? id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+            if (customer == null)
             {
-                return View();
+                return RedirectToAction("Create");
+            }
+            else
+            {
+                return View(customer);
+
             }
 
         }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // POST: CustomersController/AddVehicle/
+        public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
+        {
+            var listOfSpots =  _context.ParkingSpots.ToList();
 
+            if(listOfSpots == null)
+            {
+                return NotFound();
+            }
+            return View(listOfSpots);
+
+        }
     }
 }
