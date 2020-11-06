@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NHibernate.Mapping;
 using ParkingApp.Data;
 using ParkingApp.Models;
-using Stripe;
+//using Stripe;
 
 namespace ParkingApp.Controllers
 {
@@ -224,91 +224,88 @@ namespace ParkingApp.Controllers
 
         }
 
-        // GET: CustomersController/BookATrip/
-        public IActionResult BookATrip(int? id)
-        {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+        //// GET: CustomersController/BookATrip/
+        //public IActionResult BookATrip(int? id)
+        //{
+        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-            if (customer == null)
-            {
-                return RedirectToAction("Create");
-            }
-            else
-            {
-                return View(customer);
+        //    if (customer == null)
+        //    {
+        //        return RedirectToAction("Create");
+        //    }
+        //    else
+        //    {
+        //        return View(customer);
 
-            }
+        //    }
 
-        }
+        //}
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        // POST: CustomersController/AddVehicle/
-        public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
-        {
-            var listOfSpots =  _context.ParkingSpots.ToList();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //POST: CustomersController/AddVehicle/
+        //public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
+        //{
+        //    var listOfSpots = _context.ParkingSpots.ToList();
 
-            if(listOfSpots == null)
-            {
-                return NotFound();
-            }
-            return View(listOfSpots);
+        //    if (listOfSpots == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(listOfSpots);
 
-        }
+        //}
 
         // GET: CustomersController/ViewVehicles/
-        public async Task<IActionResult> ViewVehiclesAsync(int? id)
+        public ActionResult ViewVehicles(int? id)
         {
-            if (id == null)
+            if(id == null)
             {
                 return NotFound();
             }
-
-            var customer = await _context.Customers
-                .Include(c => c.Car)
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            var cars = _context.Cars.Where(w => w.OwnerId == id);
+            if(cars == null)
             {
                 return NotFound();
             }
-
-            return View(customer);
+            return View(cars);
         }
 
-        // GET: CustomersController/CheckBalance/5
-        public ActionResult PayBill()
-        {
-            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-            ViewBag.StripePublishKey = stripePublishKey;
-            return View();
-        }
+        //// GET: CustomersController/CheckBalance/5
+        //public ActionResult PayBill()
+        //{
+        //    var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+        //    ViewBag.StripePublishKey = stripePublishKey;
+        //    return View();
+        //}
 
-        public ActionResult Charge(string stripeEmail, string stripeToken)
-        {
-            var customers = new Stripe.CustomerCreateOptions();
-            var charges = new Stripe.CustomerCreateOptions();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Charge(string stripeEmail, string stripeToken)
+        //{
+        //    var customers = new Stripe.CustomerCreateOptions();
+        //    var charges = new Stripe.CustomerCreateOptions();
 
-            var customer = customers.Create(new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                SourceToken = stripeToken
-            });
+        //    var customer = customers.Create(new CustomerCreateOptions
+        //    {
+        //        Email = stripeEmail,
+        //        charges.SourceToken = stripeToken
+        //    });
 
-            var charge = charges.Create(new CustomerCreateOptions
-            {
-                Amount = 500,//charge in cents
-                Description = "Sample Charge",
-                Currency = "usd",
-                CustomerId = customer.Id
-            });
+        //    var charge = charges.Create(new CustomerCreateOptions
+        //    {
+        //        Amount = 500,//charge in cents
+        //        Description = "Sample Charge",
+        //        Currency = "usd",
+        //        CustomerId = customer.Id
+        //    });
 
-            // further application specific code goes here
+        //    // further application specific code goes here
 
-            return View();
-        }
+        //    return View();
+        //}
 
 
     }
