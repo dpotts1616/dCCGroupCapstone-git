@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NHibernate.Mapping;
 using ParkingApp.Data;
 using ParkingApp.Models;
-using Stripe;
+//using Stripe;
 
 namespace ParkingApp.Controllers
 {
