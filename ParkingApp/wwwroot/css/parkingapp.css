@@ -36,6 +36,7 @@ body {
     background-color: black; 
 
 }
+/*car/ road/ */
 .hero{
     
     position: relative; 
@@ -108,3 +109,5 @@ body {
         transform: rotate(360edg); 
     }
 }
+/*Scroll bar*/
+ 

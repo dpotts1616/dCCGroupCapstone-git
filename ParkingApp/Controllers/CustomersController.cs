@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -8,11 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using NHibernate.Mapping;
 using ParkingApp.Data;
 using ParkingApp.Models;
-
 
 namespace ParkingApp.Controllers
 {
@@ -84,7 +79,7 @@ namespace ParkingApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber")] Models.Customer customer)
+        public async Task<IActionResult> Create([Bind("FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +117,7 @@ namespace ParkingApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber,IdentityUserId,CarID,PaymentID")] Models.Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber,IdentityUserId,CarID,PaymentID")] Customer customer)
         {
             if (id != customer.Id)
             {
@@ -243,51 +238,49 @@ namespace ParkingApp.Controllers
         }
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //// POST: CustomersController/AddVehicle/
-        //public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Models.Customer customer)
-        //{
-        //    var listOfSpots =   _context.ParkingSpots.ToList();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // POST: CustomersController/AddVehicle/
+        public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
+        {
+            var listOfSpots =  _context.ParkingSpots.ToList();
 
-        //    if(listOfSpots == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(listOfSpots);
+            if(listOfSpots == null)
+            {
+                return NotFound();
+            }
+            return View(listOfSpots);
 
-        //}
+        }
 
         // GET: CustomersController/ViewVehicles/
-        public ActionResult ViewVehicles(int? id)
+        public async Task<IActionResult> ViewVehiclesAsync(int? id)
         {
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            var cars =  _context.Cars.Where(w => w.OwnerId == id);
-          
-            if (cars == null)
+            var customer = await _context.Customers
+                .Include(c => c.Car)
+                .Include(c => c.IdentityUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(cars);
+            return View(customer);
         }
 
+        // GET: CustomersController/CheckBalance/5
+        public ActionResult PayBill()
+        {
+            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+            ViewBag.StripePublishKey = stripePublishKey;
+            return View();
+        }
 
-        //// GET: CustomersController/CheckBalance/5
-        //public ActionResult PayBill()
-        //{
-        //    var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-        //    ViewBag.StripePublishKey = stripePublishKey;
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
         //public ActionResult Charge(string stripeEmail, string stripeToken)
         //{
         //    var customers = new Stripe.CustomerCreateOptions();
@@ -296,11 +289,7 @@ namespace ParkingApp.Controllers
         //    var customer = customers.Create(new CustomerCreateOptions
         //    {
         //        Email = stripeEmail,
-
-        //        charges.SourceToken = stripeToken
-
         //        SourceToken = stripeToken
-
         //    });
 
         //    var charge = charges.Create(new CustomerCreateOptions
