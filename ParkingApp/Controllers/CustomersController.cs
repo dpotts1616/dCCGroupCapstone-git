@@ -281,29 +281,55 @@ namespace ParkingApp.Controllers
             return View();
         }
 
-        //public ActionResult Charge(string stripeEmail, string stripeToken)
-        //{
-        //    var customers = new Stripe.CustomerCreateOptions();
-        //    var charges = new Stripe.CustomerCreateOptions();
+        public ActionResult AllSpots()
+        {
 
-        //    var customer = customers.Create(new CustomerCreateOptions
-        //    {
-        //        Email = stripeEmail,
-        //        SourceToken = stripeToken
-        //    });
+            var parkingSpots = _context.ParkingSpots;
 
-        //    var charge = charges.Create(new CustomerCreateOptions
-        //    {
-        //        Amount = 500,//charge in cents
-        //        Description = "Sample Charge",
-        //        Currency = "usd",
-        //        CustomerId = customer.Id
-        //    });
+            if (parkingSpots == null)
+            {
+                return NotFound();
+            }
 
-        //    // further application specific code goes here
+            return View(parkingSpots);
+        }
 
-        //    return View();
-        //}
+
+
+
+        // GET: CustomersController/CheckBalance/5
+        public ActionResult PayBill()
+        {
+            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+            ViewBag.StripePublishKey = stripePublishKey;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Charge(string stripeEmail, string stripeToken)
+        {
+            var customers = new Stripe.CustomerCreateOptions();
+            var charges = new Stripe.CustomerCreateOptions();
+
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                SourceToken = stripeToken
+            });
+
+            var charge = charges.Create(new CustomerCreateOptions
+            {
+                Amount = 500,//charge in cents
+                Description = "Sample Charge",
+                Currency = "usd",
+                CustomerId = customer.Id
+            });
+
+            // further application specific code goes here
+
+            return View();
+        }
 
 
     }

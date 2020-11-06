@@ -1,18 +1,21 @@
 ﻿@model IEnumerable<ParkingApp.Models.ParkingSpot>
 
 @{
-    ViewData["Title"] = "View";
+    ViewData["Title"] = "AllSpots";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>View</h1>
+<h1>AllSpots</h1>
 
 <p>
-    <a asp-action="CreateParkingSpot">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Address)
             </th>
@@ -37,32 +40,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.Notes)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Latitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Longitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OwnerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPaid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EntryTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExitTime)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Address)
                 </td>
@@ -88,55 +75,34 @@
                     @Html.DisplayFor(modelItem => item.Notes)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Latitude)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Longitude)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OwnerId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsPaid)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EntryTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExitTime)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <a asp-action="BookASpot" asp-route-id="@item.ID">Book</a> |
+                    @*<a asp-action="Details" asp-route-id="@item.ID">Details</a> |*@
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-
 <div id="map" style="position: fixed; overflow: visible; height: 400px; width: 400px;"></div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=@ParkingApp.Services.APIKeys.GOOGLE_API_KEY&callback=initMap&libraries=&v=weekly"
-
         defer></script>
 <script>
 
     let myLats = [];
-        let myLongs = [];
-        console.log(mylats);
-        console.log(myLongs);
+    let myLongs = [];
+    let Ids = [];
 </script>
 @foreach (var item in Model)
 {
     <script>
             myLats.push(@item.Latitude)
-            myLongs.push(@item.Longitude)
+        myLongs.push(@item.Longitude)
+        Ids.push(@item.ID)
     </script>
 }
 
-@*<script>
+<script>
 
     let map;
 
@@ -148,21 +114,13 @@
         });
 
 
-        console.log(myLats);
-        console.log(myLongs);
-
-
             for (let i = 0; i < myLats.length; i++) {
                 new google.maps.Marker({
-                position: { lat: myLats[i], lng: myLongs[i] },
-                map: map,
+                    position: { lat: myLats[i], lng: myLongs[i] },
+                    label: `${Ids[i]}`,
+                    map: map,
             })
         }
-       
-    }
-<<<<<<< HEAD
-</script>*@
-=======
-</script>
 
->>>>>>> 74f233547a673669ec203a96ce8fa07b419eef6d
+    }
+</script>

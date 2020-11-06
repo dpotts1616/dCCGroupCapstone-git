@@ -317,12 +317,12 @@ namespace ParkingApp.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "f87bbf69-d320-42c3-88da-05e963616079", "Customer", "CUSTOMER" });
+                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "c7de8821-98a8-455c-9a6a-db92ce0ed613", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "baf669f1-b6ac-4221-be1b-213d25b0fb18", "Contractor", "CONTRACTOR" });
+                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "e13f7e5a-8ae8-473b-a56a-46c6f9bdb456", "Contractor", "CONTRACTOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
