@@ -226,7 +226,7 @@ namespace ParkingApp.Controllers
 
 
                  
-                contractor.SpotID = parkingSpot.ID;
+                //contractor.SpotID = parkingSpot.ID;
                 parkingSpot.OwnerId = contractor.Id;
                 _context.ParkingSpots.Add(parkingSpot);
                 await _context.SaveChangesAsync();

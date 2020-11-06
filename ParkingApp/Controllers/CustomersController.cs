@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NHibernate.Mapping;
 using ParkingApp.Data;
 using ParkingApp.Models;
@@ -193,6 +194,7 @@ namespace ParkingApp.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
 
+
             if (customer == null)
             {
                 return RedirectToAction("Create");
@@ -200,7 +202,7 @@ namespace ParkingApp.Controllers
             else
             {
                 return View();
-
+                
             }
         }
 
@@ -211,10 +213,9 @@ namespace ParkingApp.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-           
 
+            car.OwnerId = customer.Id; 
                 _context.Cars.Add(car);
-                car.Id = customer.Id;
                 _context.SaveChanges();
               
                 return RedirectToAction(nameof(Index));
@@ -254,5 +255,43 @@ namespace ParkingApp.Controllers
             return View(listOfSpots);
 
         }
+
+        // GET: CustomersController/ViewVehicles/
+        public async Task<IActionResult> ViewVehiclesAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customers
+                .Include(c => c.Car)
+                .Include(c => c.IdentityUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
+        }
+
+        // GET: CustomersController/CheckBalance/5
+        public ActionResult CheckBalance(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var customerToCheckBalanceOn = _context.Customers.Where(c => c.Id == id).SingleOrDefault();
+            if (customerToCheckBalanceOn == null)
+            {
+                return NotFound();
+            }
+            return View(customerToCheckBalanceOn);
+        }
+
+
+
     }
 }
