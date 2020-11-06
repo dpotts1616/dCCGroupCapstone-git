@@ -49,14 +49,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "1112ef49-c522-4f18-b5ae-3e1c38b649d4",
+                            ConcurrencyStamp = "f87bbf69-d320-42c3-88da-05e963616079",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "02cbfe5c-7cb3-41c6-af1b-cdaf45404a4b",
+                            ConcurrencyStamp = "baf669f1-b6ac-4221-be1b-213d25b0fb18",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });

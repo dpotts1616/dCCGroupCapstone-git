@@ -54,7 +54,8 @@ namespace ParkingApp.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CarMake = table.Column<string>(nullable: true),
                     CarModel = table.Column<string>(nullable: true),
-                    CarYear = table.Column<int>(nullable: false)
+                    CarYear = table.Column<int>(nullable: false),
+                    OwnerId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -224,7 +225,7 @@ namespace ParkingApp.Migrations
                     LicenseIDNumber = table.Column<string>(nullable: true),
                     IdentityUserId = table.Column<string>(nullable: true),
                     CarID = table.Column<int>(nullable: true),
-                    PaymentID = table.Column<int>(nullable: false),
+                    PaymentID = table.Column<int>(nullable: true),
                     CreditCardId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -286,10 +287,11 @@ namespace ParkingApp.Migrations
                     ZipCode = table.Column<string>(nullable: true),
                     HourlyRate = table.Column<double>(nullable: false),
                     CoveredSpot = table.Column<bool>(nullable: false),
-                    ReservationId = table.Column<int>(nullable: false),
+                    ReservationId = table.Column<int>(nullable: true),
                     Notes = table.Column<string>(nullable: true),
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
+                    OwnerId = table.Column<int>(nullable: true),
                     IsPaid = table.Column<bool>(nullable: false),
                     EntryTime = table.Column<DateTime>(nullable: false),
                     ExitTime = table.Column<DateTime>(nullable: false),
@@ -309,18 +311,26 @@ namespace ParkingApp.Migrations
                         column: x => x.ReservationId,
                         principalTable: "Reservations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+<<<<<<< HEAD:ParkingApp/Migrations/20201105221639_initial.cs
                 values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "ebd16298-bd3b-4955-b62d-2598d17b2606", "Customer", "CUSTOMER" });
+=======
+                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "f87bbf69-d320-42c3-88da-05e963616079", "Customer", "CUSTOMER" });
+>>>>>>> 74f233547a673669ec203a96ce8fa07b419eef6d:ParkingApp/Migrations/20201106203247_initial.cs
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+<<<<<<< HEAD:ParkingApp/Migrations/20201105221639_initial.cs
                 values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "9611ecd2-9a2a-4e7c-8257-627ee389a49f", "Contractor", "CONTRACTOR" });
+=======
+                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "baf669f1-b6ac-4221-be1b-213d25b0fb18", "Contractor", "CONTRACTOR" });
+>>>>>>> 74f233547a673669ec203a96ce8fa07b419eef6d:ParkingApp/Migrations/20201106203247_initial.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
