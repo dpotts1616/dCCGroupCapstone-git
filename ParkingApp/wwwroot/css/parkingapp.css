@@ -93,12 +93,18 @@ body {
 .wheel img{
     width: 72px; 
     height: 72px; 
+    animation: wheel 1s linear infinite; 
 }
 .back-wheel{
     left: -135px; 
     position: absolute; 
 }
 .front-wheel{
-    right: -600px; 
+    left: 165px; 
      
+}
+@keyframes wheel{
+    100%{
+        transform: rotate(360edg); 
+    }
 }
