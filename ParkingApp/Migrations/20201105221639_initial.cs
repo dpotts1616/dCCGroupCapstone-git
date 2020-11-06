@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ParkingApp.Migrations
 {
-    public partial class fixingMergeIssue : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -186,6 +186,32 @@ namespace ParkingApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Contractors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
+                    ZipCode = table.Column<string>(nullable: true),
+                    IdentityUserId = table.Column<string>(nullable: true),
+                    SpotID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contractors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Contractors_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -266,11 +292,18 @@ namespace ParkingApp.Migrations
                     Longitude = table.Column<double>(nullable: false),
                     IsPaid = table.Column<bool>(nullable: false),
                     EntryTime = table.Column<DateTime>(nullable: false),
-                    ExitTime = table.Column<DateTime>(nullable: false)
+                    ExitTime = table.Column<DateTime>(nullable: false),
+                    ContractorId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ParkingSpots", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ParkingSpots_Contractors_ContractorId",
+                        column: x => x.ContractorId,
+                        principalTable: "Contractors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ParkingSpots_Reservations_ReservationId",
                         column: x => x.ReservationId,
@@ -279,48 +312,15 @@ namespace ParkingApp.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Contractors",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    State = table.Column<string>(nullable: true),
-                    ZipCode = table.Column<string>(nullable: true),
-                    IdentityUserId = table.Column<string>(nullable: true),
-                    SpotID = table.Column<int>(nullable: true),
-                    ParkingSpotID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contractors", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Contractors_AspNetUsers_IdentityUserId",
-                        column: x => x.IdentityUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Contractors_ParkingSpots_ParkingSpotID",
-                        column: x => x.ParkingSpotID,
-                        principalTable: "ParkingSpots",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "ebd16298-bd3b-4955-b62d-2598d17b2606", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "f1f0a967-b0df-4748-bf4e-244866353c0e", "Customer", "CUSTOMER" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "87f5077d-ffb9-46cc-acf7-310fe4c5e521", "Contractor", "CONTRACTOR" });
+                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "9611ecd2-9a2a-4e7c-8257-627ee389a49f", "Contractor", "CONTRACTOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -367,11 +367,6 @@ namespace ParkingApp.Migrations
                 column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contractors_ParkingSpotID",
-                table: "Contractors",
-                column: "ParkingSpotID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Customers_CarID",
                 table: "Customers",
                 column: "CarID");
@@ -385,6 +380,11 @@ namespace ParkingApp.Migrations
                 name: "IX_Customers_IdentityUserId",
                 table: "Customers",
                 column: "IdentityUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ParkingSpots_ContractorId",
+                table: "ParkingSpots",
+                column: "ContractorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ParkingSpots_ReservationId",
@@ -415,13 +415,13 @@ namespace ParkingApp.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Contractors");
+                name: "ParkingSpots");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "ParkingSpots");
+                name: "Contractors");
 
             migrationBuilder.DropTable(
                 name: "Reservations");
