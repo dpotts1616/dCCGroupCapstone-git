@@ -84,7 +84,7 @@ namespace ParkingApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber")] Customer customer)
+        public async Task<IActionResult> Create([Bind("FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber")] Models.Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +122,7 @@ namespace ParkingApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber,IdentityUserId,CarID,PaymentID")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber,IdentityUserId,CarID,PaymentID")] Models.Customer customer)
         {
             if (id != customer.Id)
             {
@@ -243,39 +243,41 @@ namespace ParkingApp.Controllers
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        // POST: CustomersController/AddVehicle/
-        public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
-        {
-            var listOfSpots =  _context.ParkingSpots.ToList();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //// POST: CustomersController/AddVehicle/
+        //public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Models.Customer customer)
+        //{
+        //    var listOfSpots =   _context.ParkingSpots.ToList();
 
-            if(listOfSpots == null)
-            {
-                return NotFound();
-            }
-            return View(listOfSpots);
+        //    if(listOfSpots == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(listOfSpots);
 
-        }
+        //}
 
         // GET: CustomersController/ViewVehicles/
-        public async Task<IActionResult> ViewVehiclesAsync(int? id)
+        public async Task<IActionResult> ViewVehicles(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .Include(c => c.Car)
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            var cars =  _context.Cars.Where(w => w.OwnerId == id);
+            //var customer = await _context.Customers
+            //    .Include(c => c.Car)
+            //    .Include(c => c.IdentityUser)
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            if (cars == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(cars);
         }
 
         // GET: CustomersController/CheckBalance/5
@@ -286,29 +288,29 @@ namespace ParkingApp.Controllers
             return View();
         }
 
-        public ActionResult Charge(string stripeEmail, string stripeToken)
-        {
-            var customers = new Stripe.CustomerCreateOptions();
-            var charges = new Stripe.CustomerCreateOptions();
+        //public ActionResult Charge(string stripeEmail, string stripeToken)
+        //{
+        //    var customers = new Stripe.CustomerCreateOptions();
+        //    var charges = new Stripe.CustomerCreateOptions();
 
-            var customer = customers.Create(new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                SourceToken = stripeToken
-            });
+        //    var customer = customers.Create(new CustomerCreateOptions
+        //    {
+        //        Email = stripeEmail,
+        //        SourceToken = stripeToken
+        //    });
 
-            var charge = charges.Create(new CustomerCreateOptions
-            {
-                Amount = 500,//charge in cents
-                Description = "Sample Charge",
-                Currency = "usd",
-                CustomerId = customer.Id
-            });
+        //    var charge = charges.Create(new CustomerCreateOptions
+        //    {
+        //        Amount = 500,//charge in cents
+        //        Description = "Sample Charge",
+        //        Currency = "usd",
+        //        CustomerId = customer.Id
+        //    });
 
-            // further application specific code goes here
+        //    // further application specific code goes here
 
-            return View();
-        }
+        //    return View();
+        //}
 
 
     }
