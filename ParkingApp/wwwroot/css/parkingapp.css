@@ -60,3 +60,45 @@ body {
         transform: translateX(-3400px); 
     }
 }
+.car{
+    width: 400px;
+    left: 50%; 
+    bottom: 100px; 
+    transform: translateX(-50%); 
+    position: absolute; 
+    z-index: 2; 
+}
+.car img{
+    width: 100%;
+    animation: car 1s linear infinite; 
+}
+@keyframes car {
+    100%{
+        transform: translateY(-1px); 
+    }
+    50%{
+        transform: translateY(1px); 
+    }
+    0%{
+        transform: translateY(1-px); 
+    }
+}
+.wheel{
+    left: 50%; 
+    bottom: 100px; 
+    transform: translateX(-50%); 
+    position: absolute; 
+    z-index: 2; 
+}
+.wheel img{
+    width: 72px; 
+    height: 72px; 
+}
+.back-wheel{
+    left: -135px; 
+    position: absolute; 
+}
+.front-wheel{
+    right: -600px; 
+     
+}
