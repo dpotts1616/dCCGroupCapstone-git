@@ -17,5 +17,8 @@ namespace ParkingApp.Models
         public string CarModel { get; set; }
         [Display(Name = "Car Year")]
         public int CarYear { get; set; }
+
+        public int? OwnerId { get; set; }
+
     }
 }
