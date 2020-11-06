@@ -10,7 +10,7 @@ using ParkingApp.Data;
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201105221639_initial")]
+    [Migration("20201106213153_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,14 +51,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "ebd16298-bd3b-4955-b62d-2598d17b2606",
+                            ConcurrencyStamp = "c7de8821-98a8-455c-9a6a-db92ce0ed613",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "9611ecd2-9a2a-4e7c-8257-627ee389a49f",
+                            ConcurrencyStamp = "e13f7e5a-8ae8-473b-a56a-46c6f9bdb456",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -249,6 +249,9 @@ namespace ParkingApp.Migrations
                     b.Property<int>("CarYear")
                         .HasColumnType("int");
 
+                    b.Property<int?>("OwnerId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Cars");
@@ -276,6 +279,9 @@ namespace ParkingApp.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ParkingSpotID")
+                        .HasColumnType("int");
+
                     b.Property<int?>("SpotID")
                         .HasColumnType("int");
 
@@ -288,6 +294,8 @@ namespace ParkingApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
+
+                    b.HasIndex("ParkingSpotID");
 
                     b.ToTable("Contractors");
                 });
@@ -350,7 +358,7 @@ namespace ParkingApp.Migrations
                     b.Property<string>("LicenseIDNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PaymentID")
+                    b.Property<int?>("PaymentID")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
@@ -380,9 +388,6 @@ namespace ParkingApp.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ContractorId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("CoveredSpot")
                         .HasColumnType("bit");
 
@@ -407,7 +412,10 @@ namespace ParkingApp.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ReservationId")
+                    b.Property<int?>("OwnerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReservationId")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
@@ -417,8 +425,6 @@ namespace ParkingApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ContractorId");
 
                     b.HasIndex("ReservationId");
 
@@ -513,6 +519,10 @@ namespace ParkingApp.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
+
+                    b.HasOne("ParkingApp.Models.ParkingSpot", "ParkingSpot")
+                        .WithMany()
+                        .HasForeignKey("ParkingSpotID");
                 });
 
             modelBuilder.Entity("ParkingApp.Models.Customer", b =>
@@ -532,15 +542,9 @@ namespace ParkingApp.Migrations
 
             modelBuilder.Entity("ParkingApp.Models.ParkingSpot", b =>
                 {
-                    b.HasOne("ParkingApp.Models.Contractor", null)
-                        .WithMany("ParkingSpots")
-                        .HasForeignKey("ContractorId");
-
                     b.HasOne("ParkingApp.Models.Reservation", "Reservation")
                         .WithMany()
-                        .HasForeignKey("ReservationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReservationId");
                 });
 
             modelBuilder.Entity("ParkingApp.Models.Reservation", b =>

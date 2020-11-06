@@ -28,7 +28,7 @@ body {
 
 .console-underscore {
     display: inline-block;
-    position: relative;
+    position: fixed;
     top: -0.14em;
     left: 10px;
 }
@@ -96,12 +96,12 @@ body {
     animation: wheel 1s linear infinite; 
 }
 .back-wheel{
-    left: -135px; 
-    position: absolute; 
+    left: -130px; 
+    position: fixed
 }
-.front-wheel{
-    left: 165px; 
-     
+.front-wheel {
+    right: -118px;
+    position: relative
 }
 @keyframes wheel{
     100%{
