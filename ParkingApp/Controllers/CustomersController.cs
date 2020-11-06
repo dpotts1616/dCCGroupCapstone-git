@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -6,10 +8,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NHibernate.Mapping;
 using ParkingApp.Data;
 using ParkingApp.Models;
+<<<<<<< HEAD
 
 
+=======
+//using Stripe;
+>>>>>>> 75d85734b52fd7eaf20e5bc6fd19c50c5ca5673f
 
 namespace ParkingApp.Controllers
 {
@@ -81,7 +89,7 @@ namespace ParkingApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber")] Customer customer)
+        public async Task<IActionResult> Create([Bind("FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber")] Models.Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +127,7 @@ namespace ParkingApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber,IdentityUserId,CarID,PaymentID")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,EmailAddress,PhoneNumber,LicenseIDNumber,IdentityUserId,CarID,PaymentID")] Models.Customer customer)
         {
             if (id != customer.Id)
             {
@@ -221,33 +229,33 @@ namespace ParkingApp.Controllers
 
         }
 
-        //// GET: CustomersController/BookATrip/
-        //public IActionResult BookATrip(int? id)
-        //{
-        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+        // GET: CustomersController/BookATrip/
+        public IActionResult BookATrip(int? id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-        //    if (customer == null)
-        //    {
-        //        return RedirectToAction("Create");
-        //    }
-        //    else
-        //    {
-        //        return View(customer);
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+            else
+            {
+                return View(customer);
 
-        //    }
+            }
 
-        //}
+        }
 
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //POST: CustomersController/AddVehicle/
-        //public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
+        //// POST: CustomersController/AddVehicle/
+        //public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Models.Customer customer)
         //{
-        //    var listOfSpots = _context.ParkingSpots.ToList();
+        //    var listOfSpots =   _context.ParkingSpots.ToList();
 
-        //    if (listOfSpots == null)
+        //    if(listOfSpots == null)
         //    {
         //        return NotFound();
         //    }
@@ -258,18 +266,23 @@ namespace ParkingApp.Controllers
         // GET: CustomersController/ViewVehicles/
         public ActionResult ViewVehicles(int? id)
         {
-            if(id == null)
+
+            if (id == null)
             {
                 return NotFound();
             }
-            var cars = _context.Cars.Where(w => w.OwnerId == id);
-            if(cars == null)
+
+            var cars =  _context.Cars.Where(w => w.OwnerId == id);
+          
+            if (cars == null)
             {
                 return NotFound();
             }
+
             return View(cars);
         }
 
+<<<<<<< HEAD
 
         //// GET: CustomersController/CheckBalance/5
         //public ActionResult PayBill()
@@ -283,6 +296,16 @@ namespace ParkingApp.Controllers
         //[ValidateAntiForgeryToken]
 
 
+=======
+        // GET: CustomersController/CheckBalance/5
+        public ActionResult PayBill()
+        {
+            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+            ViewBag.StripePublishKey = stripePublishKey;
+            return View();
+        }
+
+>>>>>>> 75d85734b52fd7eaf20e5bc6fd19c50c5ca5673f
         //public ActionResult Charge(string stripeEmail, string stripeToken)
         //{
         //    var customers = new Stripe.CustomerCreateOptions();
@@ -291,11 +314,15 @@ namespace ParkingApp.Controllers
         //    var customer = customers.Create(new CustomerCreateOptions
         //    {
         //        Email = stripeEmail,
+<<<<<<< HEAD
 
         //        charges.SourceToken = stripeToken
 
         //        SourceToken = stripeToken
 
+=======
+        //        SourceToken = stripeToken
+>>>>>>> 75d85734b52fd7eaf20e5bc6fd19c50c5ca5673f
         //    });
 
         //    var charge = charges.Create(new CustomerCreateOptions
