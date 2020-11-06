@@ -9,16 +9,6 @@ body {
     opacity: 0;
 }
 
-.index{
-    font-size: 60px; 
-    font-family: 'Leelawadee UI';   
-    opacity: 0.5; 
-    color: white; 
-    text-align: center; 
-    top: 50%; 
-    left: 50%;   
-}
-
 .console-container {
     font-family: Khula;
     font-size: 6em;

@@ -10,8 +10,8 @@ using ParkingApp.Data;
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201106143312_AddedOwnerIdToCar")]
-    partial class AddedOwnerIdToCar
+    [Migration("20201106173306_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,14 +51,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "1112ef49-c522-4f18-b5ae-3e1c38b649d4",
+                            ConcurrencyStamp = "c1425cc9-2ef2-46ac-99a0-d0a5000821ea",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "02cbfe5c-7cb3-41c6-af1b-cdaf45404a4b",
+                            ConcurrencyStamp = "49f513c1-ee5c-4fd5-afd2-00277a290975",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });

@@ -1,9 +1,9 @@
-﻿using System;
+﻿ateusing System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ParkingApp.Migrations
 {
-    public partial class fixingMergeIssue : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,8 @@ namespace ParkingApp.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CarMake = table.Column<string>(nullable: true),
                     CarModel = table.Column<string>(nullable: true),
-                    CarYear = table.Column<int>(nullable: false)
+                    CarYear = table.Column<int>(nullable: false),
+                    OwnerId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -198,7 +199,7 @@ namespace ParkingApp.Migrations
                     LicenseIDNumber = table.Column<string>(nullable: true),
                     IdentityUserId = table.Column<string>(nullable: true),
                     CarID = table.Column<int>(nullable: true),
-                    PaymentID = table.Column<int>(nullable: false),
+                    PaymentID = table.Column<int>(nullable: true),
                     CreditCardId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -260,10 +261,11 @@ namespace ParkingApp.Migrations
                     ZipCode = table.Column<string>(nullable: true),
                     HourlyRate = table.Column<double>(nullable: false),
                     CoveredSpot = table.Column<bool>(nullable: false),
-                    ReservationId = table.Column<int>(nullable: false),
+                    ReservationId = table.Column<int>(nullable: true),
                     Notes = table.Column<string>(nullable: true),
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
+                    OwnerId = table.Column<int>(nullable: true),
                     IsPaid = table.Column<bool>(nullable: false),
                     EntryTime = table.Column<DateTime>(nullable: false),
                     ExitTime = table.Column<DateTime>(nullable: false)
@@ -276,7 +278,7 @@ namespace ParkingApp.Migrations
                         column: x => x.ReservationId,
                         principalTable: "Reservations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -315,12 +317,12 @@ namespace ParkingApp.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "f1f0a967-b0df-4748-bf4e-244866353c0e", "Customer", "CUSTOMER" });
+                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "c1425cc9-2ef2-46ac-99a0-d0a5000821ea", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "87f5077d-ffb9-46cc-acf7-310fe4c5e521", "Contractor", "CONTRACTOR" });
+                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "49f513c1-ee5c-4fd5-afd2-00277a290975", "Contractor", "CONTRACTOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
