@@ -118,20 +118,3 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=@ParkingApp.Services.APIKeys.GOOGLE_API_KEY&callback=initMap&libraries=&v=weekly"
         defer></script>
-
-<script>
-
-    let map;
-
-    function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: @Model[0].Latitude, lng: @Model[0].Longitude },
-            zoom: 14,
-        });
-
-        const marker = new google.maps.Marker({
-            position: { lat: @Model.Latitude, lng: @Model.Longitude },
-            map: map,
-        })
-    }
-</script>
