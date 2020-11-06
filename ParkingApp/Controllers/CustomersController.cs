@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NHibernate.Mapping;
 using ParkingApp.Data;
 using ParkingApp.Models;
-//using Stripe;
+
 
 namespace ParkingApp.Controllers
 {
@@ -277,14 +277,17 @@ namespace ParkingApp.Controllers
             return View(cars);
         }
 
-        // GET: CustomersController/CheckBalance/5
-        public ActionResult PayBill()
-        {
-            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-            ViewBag.StripePublishKey = stripePublishKey;
-            return View();
-        }
 
+        //// GET: CustomersController/CheckBalance/5
+        //public ActionResult PayBill()
+        //{
+        //    var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+        //    ViewBag.StripePublishKey = stripePublishKey;
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         //public ActionResult Charge(string stripeEmail, string stripeToken)
         //{
         //    var customers = new Stripe.CustomerCreateOptions();
@@ -293,7 +296,11 @@ namespace ParkingApp.Controllers
         //    var customer = customers.Create(new CustomerCreateOptions
         //    {
         //        Email = stripeEmail,
+
+        //        charges.SourceToken = stripeToken
+
         //        SourceToken = stripeToken
+
         //    });
 
         //    var charge = charges.Create(new CustomerCreateOptions
