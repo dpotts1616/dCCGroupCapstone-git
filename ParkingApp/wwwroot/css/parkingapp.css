@@ -36,3 +36,27 @@ body {
     background-color: black; 
 
 }
+.hero{
+    
+    position: relative; 
+    
+}
+.highway{
+    height: 200px; 
+    width: 500%; 
+    display: block; 
+    background-image: url(road.png); 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    z-index: 1; 
+    background-repeat: repeat-x; 
+    animation: highway 5s linear infinite; 
+
+}
+@keyframes highway{
+    100%{
+        transform: translateX(-3400px); 
+    }
+}
