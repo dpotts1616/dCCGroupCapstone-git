@@ -8,10 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ParkingApp.Data;
 using ParkingApp.Models;
-<<<<<<< HEAD
-//using Stripe;
-=======
->>>>>>> 520028ec556ff25330f34fb436fedcaff5a0e672
+
+
 
 namespace ParkingApp.Controllers
 {
@@ -272,7 +270,7 @@ namespace ParkingApp.Controllers
             return View(cars);
         }
 
-<<<<<<< HEAD
+
         //// GET: CustomersController/CheckBalance/5
         //public ActionResult PayBill()
         //{
@@ -283,8 +281,8 @@ namespace ParkingApp.Controllers
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-=======
->>>>>>> 520028ec556ff25330f34fb436fedcaff5a0e672
+
+
         //public ActionResult Charge(string stripeEmail, string stripeToken)
         //{
         //    var customers = new Stripe.CustomerCreateOptions();
@@ -293,11 +291,11 @@ namespace ParkingApp.Controllers
         //    var customer = customers.Create(new CustomerCreateOptions
         //    {
         //        Email = stripeEmail,
-<<<<<<< HEAD
+
         //        charges.SourceToken = stripeToken
-=======
+
         //        SourceToken = stripeToken
->>>>>>> 520028ec556ff25330f34fb436fedcaff5a0e672
+
         //    });
 
         //    var charge = charges.Create(new CustomerCreateOptions
