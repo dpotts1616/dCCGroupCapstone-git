@@ -8,7 +8,7 @@ namespace ParkingApp.Interfaces
 {
     public interface IGeocodingService
     {
-        public void AttachLatAndLong(ParkingSpot parkingSpot);
+        public Task<ParkingSpot> AttachLatAndLong(ParkingSpot parkingSpot);
 
     }
 }

@@ -12,7 +12,7 @@ namespace ParkingApp.Services
     public class GeocodingService : IGeocodingService
     {
 
-       public async void AttachLatAndLong(ParkingSpot parkingSpot)
+       public async Task<ParkingSpot> AttachLatAndLong(ParkingSpot parkingSpot)
         {
             string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={parkingSpot.Address}+{parkingSpot.City}+{parkingSpot.State}+&key={APIKeys.GOOGLE_API_KEY}";
 
@@ -23,6 +23,8 @@ namespace ParkingApp.Services
             JObject jObject = JObject.Parse(jsonResult);
             parkingSpot.Latitude = (double)jObject["results"][0]["geometry"]["location"]["lat"];
             parkingSpot.Longitude = (double)jObject["results"][0]["geometry"]["location"]["lng"];
+
+            return parkingSpot;
         }
     }
 

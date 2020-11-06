@@ -40,7 +40,7 @@ namespace ParkingApp.Controllers
 
             contractor = await _context.Contractors
                 .Include(c => c.IdentityUser)
-                .Include(c => c.ParkingSpots)
+                .Include(c => c.ParkingSpot)
                 .FirstOrDefaultAsync(m => m.Id == contractor.Id);
 
 
@@ -190,18 +190,16 @@ namespace ParkingApp.Controllers
             //var contractor = _context.Contractors.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             var contractor = await _context.Contractors.FindAsync(id);
 
-            if (contractor.ParkingSpots == null)
+            
+
+            var parkingSpots = _context.ParkingSpots.Where(w => w.OwnerId == contractor.Id);
+
+            if (parkingSpots.Any() == false)
             {
                 return RedirectToAction(nameof(CreateParkingSpot));
             }
 
-            contractor = await _context.Contractors
-                .Include(c => c.IdentityUser)
-                .Include(c => c.ParkingSpots)
-                .FirstOrDefaultAsync(m => m.Id == contractor.Id);
-
-
-            return View(contractor);
+            return View(parkingSpots);
             //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             //return View();
         }
@@ -213,20 +211,23 @@ namespace ParkingApp.Controllers
             //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> CreateParkingSpot([Bind("Id,FirstName,LastName,Address,City,State,ZipCode,IdentityUserId,SpotID")] Contractor contractor)
-        public async Task<IActionResult> CreateParkingSpot(ParkingSpot parkingSpot)
+        public async Task<IActionResult> CreateParkingSpot([Bind("Id,Address, City, State, ZipCode, HourlyRate, CoveredSpot, Notes")]ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var contractor = _context.Contractors.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-                _geocodingService.AttachLatAndLong(parkingSpot);
+                parkingSpot = await _geocodingService.AttachLatAndLong(parkingSpot);
 
-                contractor.ParkingSpots.Add(parkingSpot);
 
+                 
+                contractor.SpotID = parkingSpot.ID;
+                parkingSpot.OwnerId = contractor.Id;
                 _context.ParkingSpots.Add(parkingSpot);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

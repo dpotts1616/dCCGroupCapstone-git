@@ -23,12 +23,13 @@ namespace ParkingApp.Models
         [Display(Name = "Covered Spot")]
         public bool CoveredSpot { get; set; }
         [ForeignKey("ReservationId")]
-        public int ReservationId { get; set; }
+        public int? ReservationId { get; set; }
         public Reservation Reservation { get; set; }
         [Display(Name = "Notes")]
         public string Notes { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public int? OwnerId { get; set; }
 
         public bool IsPaid { get; set; }
 

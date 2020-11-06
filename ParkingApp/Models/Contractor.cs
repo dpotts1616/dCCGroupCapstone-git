@@ -33,6 +33,6 @@ namespace ParkingApp.Models
         [ForeignKey("SpotID")]
         [Display(Name = "Parking Spot ID")]
         public int? SpotID { get; set; }
-        public List<ParkingSpot> ParkingSpots { get; set; }
+        public ParkingSpot ParkingSpot { get; set; }
     }
 }
