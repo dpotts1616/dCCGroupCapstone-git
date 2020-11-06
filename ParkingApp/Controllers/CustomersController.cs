@@ -193,6 +193,7 @@ namespace ParkingApp.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
 
+
             if (customer == null)
             {
                 return RedirectToAction("Create");
@@ -211,10 +212,9 @@ namespace ParkingApp.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-           
 
+            car.OwnerId = customer.Id; 
                 _context.Cars.Add(car);
-                car.Id = customer.Id;
                 _context.SaveChanges();
               
                 return RedirectToAction(nameof(Index));
