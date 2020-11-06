@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NHibernate.Mapping;
 using ParkingApp.Data;
 using ParkingApp.Models;
+using Stripe;
 
 namespace ParkingApp.Controllers
 {
@@ -277,20 +279,36 @@ namespace ParkingApp.Controllers
         }
 
         // GET: CustomersController/CheckBalance/5
-        public ActionResult CheckBalance(int? id)
+        public ActionResult PayBill()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var customerToCheckBalanceOn = _context.Customers.Where(c => c.Id == id).SingleOrDefault();
-            if (customerToCheckBalanceOn == null)
-            {
-                return NotFound();
-            }
-            return View(customerToCheckBalanceOn);
+            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+            ViewBag.StripePublishKey = stripePublishKey;
+            return View();
         }
 
+        public ActionResult Charge(string stripeEmail, string stripeToken)
+        {
+            var customers = new Stripe.CustomerCreateOptions();
+            var charges = new Stripe.CustomerCreateOptions();
+
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                SourceToken = stripeToken
+            });
+
+            var charge = charges.Create(new CustomerCreateOptions
+            {
+                Amount = 500,//charge in cents
+                Description = "Sample Charge",
+                Currency = "usd",
+                CustomerId = customer.Id
+            });
+
+            // further application specific code goes here
+
+            return View();
+        }
 
 
     }
