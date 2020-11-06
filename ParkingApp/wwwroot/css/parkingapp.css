@@ -9,16 +9,6 @@ body {
     opacity: 0;
 }
 
-.index{
-    font-size: 60px; 
-    font-family: 'Leelawadee UI';   
-    opacity: 0.5; 
-    color: white; 
-    text-align: center; 
-    top: 50%; 
-    left: 50%;   
-}
-
 .console-container {
     font-family: Khula;
     font-size: 6em;
@@ -45,4 +35,76 @@ body {
 .nav-bar{
     background-color: black; 
 
+}
+.hero{
+    
+    position: relative; 
+    
+}
+.highway{
+    height: 200px; 
+    width: 500%; 
+    display: block; 
+    background-image: url(road.png); 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    z-index: 1; 
+    background-repeat: repeat-x; 
+    animation: highway 5s linear infinite; 
+
+}
+@keyframes highway{
+    100%{
+        transform: translateX(-3400px); 
+    }
+}
+.car{
+    width: 400px;
+    left: 50%; 
+    bottom: 100px; 
+    transform: translateX(-50%); 
+    position: absolute; 
+    z-index: 2; 
+}
+.car img{
+    width: 100%;
+    animation: car 1s linear infinite; 
+}
+@keyframes car {
+    100%{
+        transform: translateY(-1px); 
+    }
+    50%{
+        transform: translateY(1px); 
+    }
+    0%{
+        transform: translateY(1-px); 
+    }
+}
+.wheel{
+    left: 50%; 
+    bottom: 100px; 
+    transform: translateX(-50%); 
+    position: absolute; 
+    z-index: 2; 
+}
+.wheel img{
+    width: 72px; 
+    height: 72px; 
+    animation: wheel 1s linear infinite; 
+}
+.back-wheel{
+    left: -135px; 
+    position: absolute; 
+}
+.front-wheel{
+    left: 165px; 
+     
+}
+@keyframes wheel{
+    100%{
+        transform: rotate(360edg); 
+    }
 }
