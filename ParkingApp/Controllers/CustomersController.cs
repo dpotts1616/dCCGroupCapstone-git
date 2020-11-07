@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal.Account;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -57,7 +58,7 @@ namespace ParkingApp.Controllers
             }
 
             var customer = await _context.Customers
-                .Include(c => c.Car)
+                //.Include(c => c.Car)
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
@@ -216,70 +217,29 @@ namespace ParkingApp.Controllers
                 _context.SaveChanges();
               
                 return RedirectToAction(nameof(Index));
-
         }
 
-        // GET: CustomersController/BookATrip/
-        public IActionResult BookATrip(int? id)
+
+        // GET: CustomersController/ViewVehicles/
+        public ActionResult ViewVehicles(int? id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-            if (customer == null)
-            {
-                return RedirectToAction("Create");
-            }
-            else
-            {
-                return View(customer);
-
-            }
-
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        // POST: CustomersController/AddVehicle/
-        public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
-        {
-            var listOfSpots =  _context.ParkingSpots.ToList();
-
-            if(listOfSpots == null)
+            if(customer == null)
             {
                 return NotFound();
             }
-            return View(listOfSpots);
-
-        }
-
-        // GET: CustomersController/ViewVehicles/
-        public async Task<IActionResult> ViewVehiclesAsync(int? id)
-        {
-            if (id == null)
+            var vehicles = _context.Cars.Where(c => c.OwnerId == customer.Id);
+            
+            if(vehicles == null)
             {
                 return NotFound();
             }
+            return View(vehicles);
 
-            var customer = await _context.Customers
-                .Include(c => c.Car)
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return View(customer);
         }
 
-        // GET: CustomersController/CheckBalance/5
-        public ActionResult PayBill()
-        {
-            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-            ViewBag.StripePublishKey = stripePublishKey;
-            return View();
-        }
 
         public ActionResult AllSpots()
         {
@@ -295,41 +255,61 @@ namespace ParkingApp.Controllers
         }
 
 
-
-
-        GET: CustomersController/CheckBalance/5
-        public ActionResult PayBill()
+        public async Task<IActionResult> BookASpot(int? ID)
         {
-            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-            ViewBag.StripePublishKey = stripePublishKey;
-            return View();
+            if (ID == null)
+            {
+                return NotFound();
+            }
+             = customer.Id;
+            var spotToReserve = await _context.Customers
+                .Include(c => c.Car)
+                .Include(c => c.IdentityUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Charge(string stripeEmail, string stripeToken)
-        {
-            var customers = new Stripe.CustomerCreateOptions();
-            var charges = new Stripe.CustomerCreateOptions();
 
-            var customer = customers.Create(new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                SourceToken = stripeToken
-            });
 
-            var charge = charges.Create(new CustomerCreateOptions
-            {
-                Amount = 500,//charge in cents
-                Description = "Sample Charge",
-                Currency = "usd",
-                CustomerId = customer.Id
-            });
 
-            // further application specific code goes here
+        //// GET: CustomersController/CheckBalance/5
+        //public ActionResult PayBill()
+        //{
+        //    var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+        //    ViewBag.StripePublishKey = stripePublishKey;
+        //    return View();
+        //}
 
-            return View();
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Charge(string stripeEmail, string stripeToken)
+        //{
+        //    var customers = new Stripe.CustomerCreateOptions();
+        //    var charges = new Stripe.CustomerCreateOptions();
+
+        //    var customer = customers.Create(new CustomerCreateOptions
+        //    {
+        //        Email = stripeEmail,
+        //        SourceToken = stripeToken
+        //    });
+
+        //    var charge = charges.Create(new CustomerCreateOptions
+        //    {
+        //        Amount = 500,//charge in cents
+        //        Description = "Sample Charge",
+        //        Currency = "usd",
+        //        CustomerId = customer.Id
+        //    });
+
+        //    // further application specific code goes here
+
+        //    return View();
+        //}
 
 
     }
