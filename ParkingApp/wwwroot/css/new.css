@@ -1,8 +1,92 @@
-body{
+.bodyCustomerCreate{
     background-image: url("../css/peoplecars.jpg");
     background-position: center;
     background-repeat: no-repeat; 
     background-size: cover; 
     
     
+}
+.bodyCustomerAddVehicle {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyCustomerAllSpots {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyCustomerDelete {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyCustomerDetails {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyCustomerEdit {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyCustomerIndex {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyCustomerPayBill {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyCustomerViewVehicles {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyContractorCreate {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyContractorCreateParkingSpot {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyContractorDelete {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyContractorEdit {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyContractorIndex {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bodyContractorParkingSpot {
+    background-image: url("../css/peoplecars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
