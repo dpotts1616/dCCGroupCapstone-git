@@ -5,32 +5,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
+<head>
+    Please Choose Your Selection
+    <link rel="stylesheet" href="/css/new.css">
+</head>
+<body>
+    <div class="content-wrapper">
+        <p>
+            @Html.ActionLink("Your Details", "Details", new { id = Model.Id })
+        </p>
+        <p>
+            @Html.ActionLink("Edit Your Information", "Edit", new { id = Model.Id })
+        </p>
+        <p>
+            @Html.ActionLink("Delete your profile", "Delete", new { id = Model.Id })
+        </p>
+        <p>
+            @Html.ActionLink("Add a vehicle", "AddVehicle", new { id = Model.Id })
+        </p>
+        <p>
+            @Html.ActionLink("Your vehicles", "ViewVehicles", new { id = Model.Id })
+        </p>
+        <p>
+            @Html.ActionLink("Book a Spot", "AllSpots", new { id = Model.Id })
+        </p>
+        <p>
+            @Html.ActionLink("Check Your Balance", "PayBill", new { id = Model.Id })
+        </p>
 
-<h1>Customer Portal</h1>
-<h3>Please select from the following options:</h3>
+   
+    </div>
+</body>
 
-
-
-<p>
-    @Html.ActionLink("Your Details", "Details", new { id = Model.Id })
-</p>
-<p>
-    @Html.ActionLink("Edit Your Information", "Edit", new { id = Model.Id })
-</p>
-<p>
-    @Html.ActionLink("Delete your profile", "Delete", new { id = Model.Id })
-</p>
-<p>
-    @Html.ActionLink("Add a vehicle", "AddVehicle", new { id = Model.Id })
-</p>
-<p>
-    @Html.ActionLink("Your vehicles", "ViewVehicles", new { id = Model.Id })
-</p>
-<p>
-    @Html.ActionLink("Book a Spot", "AllSpots", new { id = Model.Id })
-</p>
-<p>
-    @Html.ActionLink("Check Your Balance", "PayBill", new { id = Model.Id })
-</p>

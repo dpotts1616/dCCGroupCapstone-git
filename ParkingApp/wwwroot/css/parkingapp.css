@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Khula:700);
+@import url('https://fonts.googleapis.com/css?family=Monoton');
 
 /*Home/Index.cshtml*/
 body {
@@ -109,5 +110,8 @@ body {
         transform: rotate(360edg); 
     }
 }
-/*Scroll bar*/
- 
+.pictures{
+    left: auto; 
+
+}
+/*background animationnnnn*/
