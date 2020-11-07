@@ -1,5 +1,5 @@
 ﻿// function([string1, string2],target id,[color1,color2])    
-consoleText(['WAIP', 'Where Am I Parking?'], 'text', ['White', 'White']);
+consoleText(['WAIP', 'Where Am I Parking?'], 'text', ['Black', 'Black']);
 
 function consoleText(words, id, colors) {
     if (colors === undefined) colors = ['#fff'];
