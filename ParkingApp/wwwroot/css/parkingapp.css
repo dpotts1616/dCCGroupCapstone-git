@@ -114,4 +114,7 @@ body {
     left: auto; 
 
 }
-/*background animationnnnn*/
+/*CREATE PAGES */
+.content-wrapper > p:hover{
+    background-color: white; 
+}

@@ -297,39 +297,39 @@ namespace ParkingApp.Controllers
 
 
 
-        // GET: CustomersController/CheckBalance/5
-        //public ActionResult PayBill()
-        //{
-        //    var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-        //    ViewBag.StripePublishKey = stripePublishKey;
-        //    return View();
-        //}
+        GET: CustomersController/CheckBalance/5
+        public ActionResult PayBill()
+        {
+            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+            ViewBag.StripePublishKey = stripePublishKey;
+            return View();
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Charge(string stripeEmail, string stripeToken)
-        //{
-        //    var customers = new Stripe.CustomerCreateOptions();
-        //    var charges = new Stripe.CustomerCreateOptions();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Charge(string stripeEmail, string stripeToken)
+        {
+            var customers = new Stripe.CustomerCreateOptions();
+            var charges = new Stripe.CustomerCreateOptions();
 
-        //    var customer = customers.Create(new CustomerCreateOptions
-        //    {
-        //        Email = stripeEmail,
-        //        SourceToken = stripeToken
-        //    });
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                SourceToken = stripeToken
+            });
 
-        //    var charge = charges.Create(new CustomerCreateOptions
-        //    {
-        //        Amount = 500,//charge in cents
-        //        Description = "Sample Charge",
-        //        Currency = "usd",
-        //        CustomerId = customer.Id
-        //    });
+            var charge = charges.Create(new CustomerCreateOptions
+            {
+                Amount = 500,//charge in cents
+                Description = "Sample Charge",
+                Currency = "usd",
+                CustomerId = customer.Id
+            });
 
-        //    // further application specific code goes here
+            // further application specific code goes here
 
-        //    return View();
-        //}
+            return View();
+        }
 
 
     }
