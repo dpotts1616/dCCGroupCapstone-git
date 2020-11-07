@@ -220,22 +220,6 @@ namespace ParkingApp.Controllers
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        // POST: CustomersController/AddVehicle/
-        public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
-        {
-            var listOfSpots =  _context.ParkingSpots.ToList();
-
-            if(listOfSpots == null)
-            {
-                return NotFound();
-            }
-            return View(listOfSpots);
-        }
-
-
-
         // GET: CustomersController/ViewVehicles/
         public ActionResult ViewVehicles(int? id)
         {
@@ -254,7 +238,6 @@ namespace ParkingApp.Controllers
             }
             return View(vehicles);
 
-
         }
 
 
@@ -270,6 +253,30 @@ namespace ParkingApp.Controllers
 
             return View(parkingSpots);
         }
+
+
+      
+        //public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
+        //{
+        //    var listOfSpots = _context.ParkingSpots.ToList();
+
+        //    if (listOfSpots == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(listOfSpots);
+        //}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
