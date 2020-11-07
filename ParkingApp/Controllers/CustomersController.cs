@@ -58,7 +58,7 @@ namespace ParkingApp.Controllers
             }
 
             var customer = await _context.Customers
-                .Include(c => c.Car)
+                //.Include(c => c.Car)
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
@@ -255,17 +255,28 @@ namespace ParkingApp.Controllers
         }
 
 
-      
-        //public async Task<IActionResult> BookATrip(ParkingSpot parkingSpot, Customer customer)
-        //{
-        //    var listOfSpots = _context.ParkingSpots.ToList();
+        public async Task<IActionResult> BookASpot(int? ID)
+        {
+            if (ID == null)
+            {
+                return NotFound();
+            }
+             = customer.Id;
+            var spotToReserve = await _context.Customers
+                .Include(c => c.Car)
+                .Include(c => c.IdentityUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
 
-        //    if (listOfSpots == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(listOfSpots);
-        //}
+            return View(customer);
+        }
+
+
+
+
 
 
 
