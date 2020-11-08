@@ -320,19 +320,13 @@ namespace ParkingApp.Controllers
             return View(parkingSpots);
         }
 
-
-     
-
-
-
-
-        //// GET: CustomersController/CheckBalance/5
-        //public ActionResult PayBill()
-        //{
-        //    var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-        //    ViewBag.StripePublishKey = stripePublishKey;
-        //    return View();
-        //}
+        // GET: CustomersController/CheckBalance/5
+        public ActionResult PayBill()
+        {
+            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+            ViewBag.StripePublishKey = stripePublishKey;
+            return View();
+        }
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
