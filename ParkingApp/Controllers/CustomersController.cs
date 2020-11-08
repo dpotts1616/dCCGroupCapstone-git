@@ -34,7 +34,7 @@ namespace ParkingApp.Controllers
             }
 
                 customer = await _context.Customers
-               .Include(c => c.Car)
+               //.Include(c => c.Car)
                .Include(c => c.IdentityUser)
                .FirstOrDefaultAsync(m => m.Id == customer.Id);
 
@@ -186,6 +186,68 @@ namespace ParkingApp.Controllers
             return _context.Customers.Any(e => e.Id == id);
         }
 
+        // GET: CustomersController/BookASpot/
+        public ActionResult BookASpot(int? id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+
+
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+            else
+            {
+                return View(customer);
+            }
+        }
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // POST: CustomersController/BookASpot/
+        public ActionResult BookASpot([Bind("CarMake,CarModel,CarYear")] Car car)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+            car.OwnerId = customer.Id;
+            _context.Cars.Add(car);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+
+
+
+
+
+        //ReserveTheSpot() - to actually reserve 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: CustomersController/AddVehicle/
         public ActionResult AddVehicle(int? id)
         {
@@ -255,24 +317,7 @@ namespace ParkingApp.Controllers
         }
 
 
-        public async Task<IActionResult> BookASpot(int? ID)
-        {
-            if (ID == null)
-            {
-                return NotFound();
-            }
-             = customer.Id;
-            var spotToReserve = await _context.Customers
-                .Include(c => c.Car)
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return View(customer);
-        }
+     
 
 
 
