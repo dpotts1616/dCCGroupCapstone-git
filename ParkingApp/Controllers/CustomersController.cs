@@ -192,7 +192,6 @@ namespace ParkingApp.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
 
-
             if (customer == null)
             {
                 return RedirectToAction("Create");
@@ -203,50 +202,55 @@ namespace ParkingApp.Controllers
             }
         }
 
-
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         // POST: CustomersController/BookASpot/
-        public ActionResult BookASpot([Bind("CarMake,CarModel,CarYear")] Car car)
+        public ActionResult BookASpot([Bind("ReservationDate,StartTime,EndTime")] Reservation reservation, int ID)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            //var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
 
-            car.OwnerId = customer.Id;
-            _context.Cars.Add(car);
+            //reservation.Id = customer.Id;
+            _context.Reservations.Add(reservation);
             _context.SaveChanges();
+            ReserveTheSpot(reservation, ID);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        public ActionResult ReserveTheSpot(Reservation reservation, int ID)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
+
+            reservation.Id = customer.Id;
+            parkingSpotToReserve.IsBooked = true;
+            _context.ParkingSpots.Update(parkingSpotToReserve);
+            _context.SaveChanges();
+
 
             return RedirectToAction(nameof(Index));
         }
 
 
+        // POST: Customers/YourReservations
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> YourReservationsAsync(int? id)
+        {
+            var customer = await _context.Customers.FindAsync(id);
 
+            var reservations = _context.Reservations.Where(w => w.Id == customer.Id);
 
+            if (reservations.Any() == false)
+            {
+                return RedirectToAction(nameof(Index));
+            }
 
-
-
-
-        //ReserveTheSpot() - to actually reserve 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            return View(reservations);
+        }
 
         // GET: CustomersController/AddVehicle/
         public ActionResult AddVehicle(int? id)
