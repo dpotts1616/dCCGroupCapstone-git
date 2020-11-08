@@ -238,7 +238,7 @@ namespace ParkingApp.Controllers
         // POST: Customers/YourReservations
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> YourReservationsAsync(int? id)
+        public async Task<ActionResult> YourReservations(int? id)
         {
             var customer = await _context.Customers.FindAsync(id);
 
