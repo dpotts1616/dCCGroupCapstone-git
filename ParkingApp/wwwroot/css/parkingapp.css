@@ -1,8 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Khula:700);
+@import url('https://fonts.googleapis.com/css?family=Monoton');
 
 /*Home/Index.cshtml*/
 body {
-    background: #252424;
+    background: #ffffff;
 }
 
 .hidden {
@@ -109,5 +110,11 @@ body {
         transform: rotate(360edg); 
     }
 }
-/*Scroll bar*/
- 
+.pictures{
+    left: auto; 
+
+}
+/*CREATE PAGES */
+.content-wrapper > p:hover{
+    background-color: white; 
+}

@@ -322,21 +322,6 @@ namespace ParkingApp.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //// GET: CustomersController/CheckBalance/5
         //public ActionResult PayBill()
         //{

@@ -6,10 +6,11 @@
 }
 
 
-<h1>Create</h1>
-
-<h4>Contractor</h4>
-<hr />
+<head>Please Enter In Your Information
+    <link rel="stylesheet" href="/css/new.css">
+    </head>
+<body class="bodyContractorCreate">
+</body>
 <div>
     <div class="row">
         <div class="col-md-4 scroller">
@@ -54,18 +55,16 @@
                     <input type="hidden" asp-for="SpotID" class="form-control" />
                     <span asp-validation-for="SpotID" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-warning" />
-                </div>
+                
+                <input type="submit" value="Create" class="btn btn-warning" />
+                <a class="btn btn-warning" asp-action="Index">Back to List</a>
+               
             </form>
         </div>
     </div>
 </div>
 <div class="pictures">
     <img src="/css/background-01.tif" />
-</div>
-<div>
-    <a class="btn btn-warning" asp-action="Index">Back to List</a>
 </div>
 
 
