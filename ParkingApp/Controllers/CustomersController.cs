@@ -255,24 +255,24 @@ namespace ParkingApp.Controllers
         }
 
 
-        public async Task<IActionResult> BookASpot(int? ID)
-        {
-            if (ID == null)
-            {
-                return NotFound();
-            }
-             = customer.Id;
-            var spotToReserve = await _context.Customers
-                .Include(c => c.Car)
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> BookASpot(int? ID)
+        //{
+        //    if (ID == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //     = customer.Id;
+        //    var spotToReserve = await _context.Customers
+        //        .Include(c => c.Car)
+        //        .Include(c => c.IdentityUser)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (customer == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(customer);
-        }
+        //    return View(customer);
+        //}
 
 
 

@@ -4,12 +4,12 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Please Enter In Your Information</h1>
+<h1 style="color: white; font-weight: bold; text-align: center;">Please Enter In Your Information</h1>
 <link rel="stylesheet" href="/css/new.css">
 <body class="bodyCustomerCreate">
 </body>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="width: 50%; margin: auto; padding: 10px 6px 4px 6px; color:#808080; background-color: #ffffff; border: 2px solid">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />

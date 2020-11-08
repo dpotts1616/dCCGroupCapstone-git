@@ -50,4 +50,5 @@ function consoleText(words, id, colors) {
         }
     }, 400)
 }
-//firewooks
+//fireworks 
+
