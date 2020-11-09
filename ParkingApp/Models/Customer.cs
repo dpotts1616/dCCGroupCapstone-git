@@ -41,17 +41,18 @@ namespace ParkingApp.Models
         [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
         [StringLength(5)]
         public string Rating { get; set; }
-        public int RateCount
+        public int? RateCount
         {
             get { return ratings.Count; }
         }
-        public int RateTotal
+        public int? RateTotal
         {
             get
             {
                 return (ratings.Sum(m => m.Rate));
             }
         }
+
         public virtual ICollection<StarRating> ratings { get; set; }
 
 

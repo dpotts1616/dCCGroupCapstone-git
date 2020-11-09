@@ -253,7 +253,6 @@ namespace ParkingApp.Controllers
         }
 
 
-
         //GET: CustomersController/AddVehicle/
          public ActionResult AddVehicle(int? id)
         {
