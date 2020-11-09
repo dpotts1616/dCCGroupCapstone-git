@@ -41,17 +41,52 @@ namespace ParkingApp.Models
         [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
         [StringLength(5)]
         public string Rating { get; set; }
-        public int RateCount
+
+        [NotMapped]
+        public int?  RateCount
         {
-            get { return ratings.Count; }
+            get {
+                if (ratings == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return ratings.Count;
+                }
+                }
         }
-        public int RateTotal
+        [NotMapped]
+        public decimal RateAvg
         {
             get
             {
+
+                if (ratings == null) {
+                    return 0;
+                }
+                else
+                {
+                   return (decimal)(RateTotal / RateCount);
+                }
+                   
+            }
+        }
+
+        [NotMapped]
+        public int? RateTotal
+        {
+            get
+            {
+                if(ratings == null)
+                {
+                    return null;
+                }
+                else
                 return (ratings.Sum(m => m.Rate));
             }
         }
+        [NotMapped]
         public virtual ICollection<StarRating> ratings { get; set; }
 
 

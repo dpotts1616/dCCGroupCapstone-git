@@ -49,14 +49,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "e8d302d5-4621-4833-96c1-51aff6b9fe31",
+                            ConcurrencyStamp = "c0dcb9e0-6fa4-4140-94c1-13265a7f2372",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "b8ea1e6b-42a5-4b38-bb77-47bdfbcfbca9",
+                            ConcurrencyStamp = "22c8f712-a1d1-405d-9e23-512e41339c65",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -594,7 +594,7 @@ namespace ParkingApp.Migrations
             modelBuilder.Entity("ParkingApp.Models.StarRating", b =>
                 {
                     b.HasOne("ParkingApp.Models.Customer", "customer")
-                        .WithMany("ratings")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
