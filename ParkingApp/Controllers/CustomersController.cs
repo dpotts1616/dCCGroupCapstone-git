@@ -199,8 +199,8 @@ namespace ParkingApp.Controllers
 
             ViewData["OwnedSpotID"] = id;
             ViewData["ReservationDate"] = new DateTime();
-            ViewData["StartTime"] = new TimeSpan();
-            ViewData["EndTime"] = new TimeSpan();
+            ViewData["StartTime"] = new DateTime();
+            ViewData["EndTime"] = new DateTime();
             return View(reservations);
         }
 

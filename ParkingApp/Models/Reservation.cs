@@ -15,10 +15,10 @@ namespace ParkingApp.Models
         public DateTime ReservationDate { get; set; }
         [Display(Name ="Start Time")]
         [DataType(DataType.Time)]
-        public TimeSpan StartTime { get; set; }
+        public DateTime StartTime { get; set; }
         [Display(Name = "End Time")]
         [DataType(DataType.Time)]
-        public TimeSpan EndTime { get; set; }
+        public DateTime EndTime { get; set; }
         public DateTime DateBooked { get; set; }
         public double EstimatedCost { get; set; }
         public Customer Customer { get; set; }
