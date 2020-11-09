@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkingApp.Data;
 
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201109200011_added spot id to reservtion")]
+    partial class addedspotidtoreservtion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,19 +51,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-
-                            ConcurrencyStamp = "c0dcb9e0-6fa4-4140-94c1-13265a7f2372",
-
+                            ConcurrencyStamp = "d64071ec-a650-4f69-9573-92b09388dc87",
                             Name = "Customer",
-
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-
-                            ConcurrencyStamp = "22c8f712-a1d1-405d-9e23-512e41339c65",
-
+                            ConcurrencyStamp = "d99bf75f-52c0-4416-ad87-3d7bdf8b449f",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -601,7 +598,7 @@ namespace ParkingApp.Migrations
             modelBuilder.Entity("ParkingApp.Models.StarRating", b =>
                 {
                     b.HasOne("ParkingApp.Models.Customer", "customer")
-                        .WithMany()
+                        .WithMany("ratings")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

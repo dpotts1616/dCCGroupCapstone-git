@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +23,9 @@ namespace ParkingApp.Models
         public DateTime DateBooked { get; set; }
         public double EstimatedCost { get; set; }
         public Customer Customer { get; set; }
+        [ForeignKey("SpotID")]
         public int? OwnedSpotID { get; set; }
+        public ParkingSpot ParkingSpot { get; set; }
         public int? BookedCustomerID { get; set; }
         
     }

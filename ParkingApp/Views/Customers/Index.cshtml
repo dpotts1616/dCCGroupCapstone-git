@@ -36,7 +36,9 @@
             <p class="box">
                 @Html.ActionLink("Your vehicles", "ViewVehicles", new { id = Model.Id })
             </p>
-
+            <p class="box">
+                @Html.ActionLink("Your Reservations", "YourReservations", new { id = Model.Id })
+            </p>
             <p class="box">
                 @Html.ActionLink("Pay for your spot", "PayBill", new { id = Model.Id })
             </p>
