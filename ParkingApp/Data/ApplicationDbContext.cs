@@ -46,7 +46,7 @@ namespace ParkingApp.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<ParkingSpot> ParkingSpots { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-
+        public DbSet<StarRating> Ratings { get; set; }
 
     }
 }

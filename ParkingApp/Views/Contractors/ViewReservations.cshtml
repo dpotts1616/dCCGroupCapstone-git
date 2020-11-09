@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ParkingApp.Models.Reservation>
+
+@{
+    ViewData["Title"] = "ViewReservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ViewReservations</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstimatedCost)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateBooked)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnedSpotID)
+            </td>
+            <td>
+                <a asp-action="ViewCustomerDetails" asp-route-id="@item.BookedCustomerID">Customer Details</a> |
+                <a asp-action="CancelReservation" asp-route-id="@item.Id">Cancel Reservation</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -233,6 +233,7 @@ namespace ParkingApp.Controllers
             var spot = _context.ParkingSpots.Find(reservation.OwnedSpotID);
 
             reservation.Customer = customer;
+            reservation.BookedCustomerID = customer.Id;
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
             string subject = "Reservation Confirmed";
@@ -378,6 +379,24 @@ namespace ParkingApp.Controllers
 
         //    return View();
         //}
+
+
+
+
+        [HttpPost]
+        public JsonResult PostRating(int rating, int mid)
+        {
+            //save data into the database
+            StarRating rt = new StarRating();
+            rt.Rate = rating;
+
+            rt.CustomerId = mid;
+            //save into the database
+            //_context.Rating.Add(rt);
+            _context.SaveChanges();
+
+            return Json("You rated this " + rating.ToString() + " star(s)");
+        }
 
 
     }

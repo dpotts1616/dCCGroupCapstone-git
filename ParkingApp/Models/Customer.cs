@@ -38,6 +38,22 @@ namespace ParkingApp.Models
         public int? PaymentID { get; set; }
         public CreditCard CreditCard { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
+        [StringLength(5)]
+        public string Rating { get; set; }
+        public int RateCount
+        {
+            get { return ratings.Count; }
+        }
+        public int RateTotal
+        {
+            get
+            {
+                return (ratings.Sum(m => m.Rate));
+            }
+        }
+        public virtual ICollection<StarRating> ratings { get; set; }
+
 
     }
 }

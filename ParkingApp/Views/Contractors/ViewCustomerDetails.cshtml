@@ -1,0 +1,107 @@
+﻿@model ParkingApp.Models.Customer
+
+@{
+    ViewData["Title"] = "ViewCustomerDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ViewCustomerDetails</h1>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LicenseIDNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LicenseIDNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.CarMake)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.CarMake)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.CarModel)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.CarModel)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.CarYear)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.CarYear)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="ViewReservations">Back to List</a>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(function () {
+            $("img.rating").mouseover(function () {
+                giveRating($(this), "FilledStar.png");
+                $(this).css("cursor", "pointer");
+            });
+
+            $("img.rating").mouseout(function () {
+                giveRating($(this), "EmptyStar.png");
+                refilRating($(this));
+            });
+
+            $("img.rating").click(function (e) {
+                // $("img.rating").unbind("mouseout mouseover click");
+                $(this).css('color', 'red');
+                // alert(e.currentTarget + ' was clicked!');
+                // call ajax methods to update database
+                var url = "/Customer/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
+                $.post(url, null, function (data) {
+                    $(e.currentTarget).closest('tr').find('div.result').text(data).css('color', 'red') // $("#result").text(data);
+                });
+            });
+        });
+
+        function giveRating(img, image) {
+            img.attr("src", "/Images/" + image)
+                .prevAll("img.rating").attr("src", "/Images/" + image);
+        }
+        function refilRating(img1) {
+            var rt = $(img1).closest('tr').find("span.avr").text();
+            var img = $(img1).closest('tr').find("img[id='" + parseInt(rt) + "']");
+            img.attr("src", "/images/FilledStar.png").prevAll("img.rating").attr("src", "/images/FilledStar.png");
+        }
+
+    </script>
+}
