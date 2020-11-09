@@ -6,16 +6,14 @@
 }
 
 <link rel="stylesheet" href="/css/new.css">
-<h1 style="text-align: center; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 50px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">
-    Details
+<h1 class="headers"> Your Information
 </h1>
-<link rel="stylesheet" href="/css/new.css">
 
 <body class="bodyContractorIndex">
 </body>
 
 <div>
-    <div class="form-group" style="background-color: white; margin: 0 auto; height: 50%; color: black; padding: 5px 5px 5px 5px; border: 2px solid black; box-shadow: 5px 5px 5px black; font-size: 20px;">
+    <div class="form-group" style="background-color: white; margin: 0 auto; height: 50%; width: 50%; color: black; padding: 5px 5px 5px 5px; border: 1px solid black; box-shadow: 5px 5px 5px black; font-size: 20px;">
         <div>
             @Html.DisplayNameFor(model => model.FirstName)
             @Html.DisplayFor(model => model.FirstName)
@@ -40,11 +38,11 @@
             @Html.DisplayNameFor(model => model.ZipCode)
             @Html.DisplayFor(model => model.ZipCode)
         </div>
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a> |
-            <a asp-action="Index" class="btn btn-primary">Back to List</a>|
-            <a asp-action="ParkingSpot" asp-route-id="@Model.Id" class="btn btn-primary">Parking Spots</a>|
-            <a asp-action="ViewReservations" class="btn btn-primary">View Reservations</a>
+        <div class="buttonMargins">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> |
+            <a asp-action="Index" class="btn btn-warning">Back to List</a>|
+            <a asp-action="ParkingSpot" asp-route-id="@Model.Id" class="btn btn-warning">Parking Spots</a>|
+            <a asp-action="ViewReservations" class="btn btn-warning">View Reservations</a>
         </div>
     </div>
     

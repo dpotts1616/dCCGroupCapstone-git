@@ -5,18 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>View</h1>
 <link rel="stylesheet" href="/css/new.css">
 <body class="bodyContractorParkingSpot">
 </body>
-<p>
-    <a asp-action="CreateParkingSpot">Create New</a>
-</p>
-<table class="table">
+
+<table class="table" style="color: black; background-color: white; border: 1px solid black;">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
+            <th> 
+               @Html.DisplayNameFor(model => model.Address)
+               
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.City)
@@ -24,19 +22,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.State)
             </th>
-            <th>
+            <th >
                 @Html.DisplayNameFor(model => model.ZipCode)
             </th>
-            <th>
+            <th >
                 @Html.DisplayNameFor(model => model.HourlyRate)
             </th>
-            <th>
+            <th >
                 @Html.DisplayNameFor(model => model.CoveredSpot)
             </th>
-            <th>
+            <th >
                 @Html.DisplayNameFor(model => model.Reservation)
             </th>
-            <th>
+            <th >
                 @Html.DisplayNameFor(model => model.Notes)
             </th>
             <th>
@@ -57,7 +55,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ExitTime)
             </th>
-            <th></th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -65,7 +65,7 @@
         {
 
             <tr>
-                <td>
+                <td >
                     @Html.DisplayFor(modelItem => item.Address)
                 </td>
                 <td>
@@ -117,6 +117,10 @@
     </tbody>
 </table>
 
+<p class="createHeader">
+    <a asp-action="CreateParkingSpot">Create New</a>
+</p>
+
 
 <div id="map" style="position: fixed; overflow: visible; height: 400px; width: 400px;"></div>
 
@@ -164,7 +168,5 @@
     }
 <<<<<<< HEAD
 </script>*@
-=======
-</script>
 
->>>>>>> 74f233547a673669ec203a96ce8fa07b419eef6d
+

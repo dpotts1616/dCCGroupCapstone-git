@@ -263,32 +263,32 @@ namespace ParkingApp.Controllers
             return View(reservation);
         }
 
-        Cancel Reservation
-        [HttpPost, ActionName("CancelReservation")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CancelConfirmed(int id)
-        {
-            var reservation = await _context.Reservations.FindAsync(id);
-            var customer = _context.Customers.Find(reservation.BookedCustomerID);
-            var spot = _context.ParkingSpots.Find(reservation.OwnedSpotID);
+        //Cancel Reservation
+        //[HttpPost, ActionName("CancelReservation")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> CancelConfirmed(int id)
+        //{
+        //    var reservation = await _context.Reservations.FindAsync(id);
+        //    var customer = _context.Customers.Find(reservation.BookedCustomerID);
+        //    var spot = _context.ParkingSpots.Find(reservation.OwnedSpotID);
 
-            _context.Reservations.Remove(reservation);
-            await _context.SaveChangesAsync();
+        //    _context.Reservations.Remove(reservation);
+        //    await _context.SaveChangesAsync();
 
-            string subject = "Reservation Cancelled";
-            string body = $"{customer.FirstName}, your parking spot reservation at {spot.Address} on {reservation.ReservationDate.Date} " +
-                $"from {reservation.StartTime.TimeOfDay} to {reservation.EndTime.TimeOfDay} has been cancelled by the owner.";
-            SendMail.SendEmail(customer.EmailAddress, subject, body);
+        //    string subject = "Reservation Cancelled";
+        //    string body = $"{customer.FirstName}, your parking spot reservation at {spot.Address} on {reservation.ReservationDate.Date} " +
+        //        $"from {reservation.StartTime.TimeOfDay} to {reservation.EndTime.TimeOfDay} has been cancelled by the owner.";
+        //    SendMail.SendEmail(customer.EmailAddress, subject, body);
 
-            return RedirectToAction(nameof(Index));
-        }
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        public IActionResult ViewCustomerDetails(int id)
-        {
-            var customer = _context.Customers.Find(id);
+        //public IActionResult ViewCustomerDetails(int id)
+        //{
+        //    var customer = _context.Customers.Find(id);
 
-            return View(customer);
-        }
+        //    return View(customer);
+        //}
 
     }
 }
