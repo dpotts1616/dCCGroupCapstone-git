@@ -203,12 +203,12 @@ namespace ParkingApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // POST: CustomersController/BookASpot/
+        POST: CustomersController/BookASpot/
         public ActionResult BookASpot([Bind("ReservationDate,StartTime,EndTime, OwnedSpotID")] Reservation reservation, int ID)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            //var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
+            var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
 
             if (reservation.EndTime.TimeOfDay < reservation.StartTime.TimeOfDay)
             {
@@ -217,7 +217,7 @@ namespace ParkingApp.Controllers
 
             var reservations = _context.Reservations.Where(c => c.OwnedSpotID == reservation.OwnedSpotID)
                 .Where(a => a.ReservationDate == reservation.ReservationDate);
-           foreach(var item in reservations)
+            foreach (var item in reservations)
             {
                 if ((item.StartTime.TimeOfDay < reservation.StartTime.TimeOfDay && reservation.StartTime.TimeOfDay < item.EndTime.TimeOfDay)
                     || (item.StartTime.TimeOfDay < reservation.EndTime.TimeOfDay && reservation.EndTime.TimeOfDay < item.EndTime.TimeOfDay)
@@ -229,7 +229,6 @@ namespace ParkingApp.Controllers
             var spot = _context.ParkingSpots.Find(reservation.OwnedSpotID);
 
             reservation.Customer = customer;
-            reservation.BookedCustomerID = customer.Id;
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
             string subject = "Reservation Confirmed";
@@ -239,41 +238,42 @@ namespace ParkingApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //public ActionResult ReserveTheSpot(Reservation reservation, int ID)
-        //{
-        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-        //    var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
 
-        //    reservation.Id = customer.Id;
-        //    parkingSpotToReserve.IsBooked = true;
-        //    _context.ParkingSpots.Update(parkingSpotToReserve);
-        //    _context.SaveChanges();
+        public ActionResult ReserveTheSpot(Reservation reservation, int ID)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
 
-
-        //    return RedirectToAction(nameof(Index));
-        //}
+            reservation.Id = customer.Id;
+            parkingSpotToReserve.IsBooked = true;
+            _context.ParkingSpots.Update(parkingSpotToReserve);
+            _context.SaveChanges();
 
 
-        //// POST: Customers/YourReservations
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> YourReservations(int? id)
-        //{
-        //    var customer = await _context.Customers.FindAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
 
-        //    var reservations = _context.Reservations.Where(w => w.Id == customer.Id);
 
-        //    if (reservations.Any() == false)
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
+        POST: Customers/YourReservations
+       [HttpPost]
+       [ValidateAntiForgeryToken]
+         public async Task<ActionResult> YourReservations(int? id)
+        {
+            var customer = await _context.Customers.FindAsync(id);
 
-        //    return View(reservations);
-        //}
+            var reservations = _context.Reservations.Where(w => w.Id == customer.Id);
 
-        // GET: CustomersController/AddVehicle/
-        public ActionResult AddVehicle(int? id)
+            if (reservations.Any() == false)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(reservations);
+        }
+
+        GET: CustomersController/AddVehicle/
+         public ActionResult AddVehicle(int? id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
@@ -291,8 +291,8 @@ namespace ParkingApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // POST: CustomersController/AddVehicle/
-        public ActionResult AddVehicle([Bind("CarMake,CarModel,CarYear")] Car car)
+        POST: CustomersController/AddVehicle/
+         public ActionResult AddVehicle([Bind("CarMake,CarModel,CarYear")] Car car)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
@@ -305,8 +305,8 @@ namespace ParkingApp.Controllers
         }
 
 
-        // GET: CustomersController/ViewVehicles/
-        public ActionResult ViewVehicles(int? id)
+        GET: CustomersController/ViewVehicles/
+         public ActionResult ViewVehicles(int? id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
@@ -399,53 +399,37 @@ namespace ParkingApp.Controllers
 
 
 
-        //public ActionResult PayBill()
-        //{
-        //    var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-        //    ViewBag.StripePublishKey = stripePublishKey;
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Charge(string stripeEmail, string stripeToken)
-        //{
-        //    var customers = new Stripe.CustomerCreateOptions();
-        //    var charges = new Stripe.CustomerCreateOptions();
-
-        //    var customer = customers.Create(new CustomerCreateOptions
-        //    {
-        //        Email = stripeEmail,
-        //        SourceToken = stripeToken
-        //    });
-
-        //    var charge = charges.Create(new CustomerCreateOptions
-        //    {
-        //        Amount = 500,//charge in cents
-        //        Description = "Sample Charge",
-        //        Currency = "usd",
-        //        CustomerId = customer.Id
-        //    });
-
-        //    // further application specific code goes here
-
-        //    return View();
-        //}
-
+        public ActionResult PayBill()
+        {
+            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+            ViewBag.StripePublishKey = stripePublishKey;
+            return View();
+        }
 
         [HttpPost]
-        public JsonResult PostRating(int rating, int mid)
+        [ValidateAntiForgeryToken]
+        public ActionResult Charge(string stripeEmail, string stripeToken)
         {
-            //save data into the database
-            StarRating rt = new StarRating();
-            rt.Rate = rating;
+            var customers = new Stripe.CustomerCreateOptions();
+            var charges = new Stripe.CustomerCreateOptions();
 
-            rt.CustomerId = mid;
-            //save into the database
-            //_context.Rating.Add(rt);
-            _context.SaveChanges();
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                SourceToken = stripeToken
+            });
 
-            return Json("You rated this " + rating.ToString() + " star(s)");
+            var charge = charges.Create(new CustomerCreateOptions
+            {
+                Amount = 500,//charge in cents
+                Description = "Sample Charge",
+                Currency = "usd",
+                CustomerId = customer.Id
+            });
+
+            // further application specific code goes here
+
+            return View();
         }
 
 
