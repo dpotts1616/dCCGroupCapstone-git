@@ -69,7 +69,7 @@
                 <input for="EndTime" class="timepicker" name="EndTime" />
                 @*<span asp-validation-for="@ViewData["EndTime"]" class="text-danger"></span>*@
             </div>
-            <div class="form-group">
+            <div style="display: none;" class="form-group">
                 @*<label asp-for="OwnedSpotID" class="control-label"></label>*@
                 <input type="hidden" for="OwnedSpotID" class="form-control" value="@ViewData["OwnedSpotID"]" name="OwnedSpotID" />
                 @*<span asp-validation-for="OwnedSpotID" class="text-danger"></span>*@
@@ -133,6 +133,7 @@
             $('.timepicker').timepicker();
         });
     </script>
+
 
 
 }
