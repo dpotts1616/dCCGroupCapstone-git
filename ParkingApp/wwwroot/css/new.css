@@ -3,8 +3,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+   
 }
 
 .bodyCustomerAddVehicle {
@@ -12,17 +11,13 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
-}
+}  
 
 .bodyCustomerAllSpots {
     background-image: url("../css/Images/beach.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
 }
 
 .bodyCustomerDelete {
@@ -30,26 +25,20 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
 }
-
-.bodyCustomerDetails {
+.bodyCustomerDetails
+{
     background-image: url("../css/Images/no-parking-1426520.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
 }
-
 .bodyCustomerEdit {
     background-image: url("../css/Images/parkinglot.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+   
 }
 
 .bodyCustomerIndex {
@@ -57,29 +46,20 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(1);
-    -webkit-filter: grayscale(100%);
-    filter: gray;
-    filter: grayscale(100%);
-    filter: url(desaturate.svg#greyscale);
 }
-
 .bodyCustomerPayBill {
     background-image: url("../css/Images/parkedcars.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
-}
+   }
 
 .bodyCustomerViewVehicles {
     background-image: url("../css/Images/city.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+   
 }
 
 .bodyContractorCreate {
@@ -87,8 +67,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+   
 }
 
 .bodyContractorCreateParkingSpot {
@@ -96,8 +75,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+  
 }
 
 .bodyContractorDelete {
@@ -105,8 +83,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+   
 }
 
 .bodyContractorEdit {
@@ -114,8 +91,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+   
 }
 
 .bodyContractorIndex {
@@ -123,17 +99,13 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
 }
-
-.bodyContractorParkingSpot {
+.bodyContractorParkingSpot{
     background-image: url("../css/Images/city.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+  
 }
 
 .header {
@@ -188,8 +160,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+
 }
 
 .bodyCustomerAddVehicle {
@@ -197,8 +168,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+    
 }
 
 .bodyCustomerAllSpots {
@@ -206,8 +176,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+    
 }
 
 .bodyCustomerDelete {
@@ -215,8 +184,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+  
 }
 
 .bodyCustomerDetails {
@@ -224,8 +192,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+  
 }
 
 .bodyCustomerEdit {
@@ -243,9 +210,7 @@
     background-size: cover;
     -webkit-filter: grayscale(1);
     -webkit-filter: grayscale(100%);
-    filter: gray;
-    filter: grayscale(100%);
-    filter: url(desaturate.svg#greyscale);
+    
 }
 
 .bodyCustomerPayBill {
@@ -253,8 +218,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+    
 }
 
 .bodyCustomerViewVehicles {
@@ -262,8 +226,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+
 }
 
 .bodyContractorCreate {
@@ -271,8 +234,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
 }
 
 .bodyContractorCreateParkingSpot {
@@ -280,8 +241,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+  
 }
 
 .bodyContractorDelete {
@@ -289,8 +249,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+   
 }
 
 .bodyContractorEdit {
@@ -298,8 +257,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+  
 }
 
 .bodyContractorIndex {
@@ -307,8 +265,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+   
 }
 
 .bodyContractorParkingSpot {
@@ -316,9 +273,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
-}
+   
 
 .header {
     width: 500px;
