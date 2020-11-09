@@ -102,115 +102,108 @@
         </dd>
     </dl>
 </div>
-<<<<<<< HEAD
+
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-=======
-<div>m  bbn
     <a asp-action="ViewReservations">Back to List</a>
->>>>>>> 3644cae6f0a3cea996ce4945fe1281e3a801d76e
-</div>
+    <a asp-action="Index">Back to List</a>
+
+ </div>
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
 
-    $(function () {
+        $(function () {
 
-        $('#ViewCustomerDetails > tbody  > tr').each(function () {
-
-
-
-           var av = $(this).find("span.avr").text();
+            $('#ViewCustomerDetails > tbody  > tr').each(function () {
 
 
 
-           if (av != "" || av != null)
-
-           {
-
-              // alert(av);
-
-              // fillRating(parseInt(av));
-
-               var img = $(this).find("img[id='" + parseInt(av) + "']");
-
-               img.attr("src", "/images/FilledStar.png").prevAll("img.rating").attr("src", "/images/FilledStar.png");
-
-           }
+                var av = $(this).find("span.avr").text();
 
 
 
-        });
+                if (av != "" || av != null) {
+
+                    // alert(av);
+
+                    // fillRating(parseInt(av));
+
+                    var img = $(this).find("img[id='" + parseInt(av) + "']");
+
+                    img.attr("src", "/images/FilledStar.png").prevAll("img.rating").attr("src", "/images/FilledStar.png");
+
+                }
 
 
+
+            });
 
 
 
 
 
-        $("img.rating").mouseover(function () {
-
-            giveRating($(this), "FilledStar.png");
-
-            $(this).css("cursor", "pointer");
-
-        });
 
 
+            $("img.rating").mouseover(function () {
 
-        $("img.rating").mouseout(function () {
+                giveRating($(this), "FilledStar.png");
 
-            giveRating($(this), "EmptyStar.png");
+                $(this).css("cursor", "pointer");
 
-            refilRating($(this));
-
-        });
+            });
 
 
 
-        $("img.rating").click(function (e) {
+            $("img.rating").mouseout(function () {
 
-           // $("img.rating").unbind("mouseout mouseover click");
+                giveRating($(this), "EmptyStar.png");
 
-            $(this).css('color', 'red');
+                refilRating($(this));
 
-           // alert(e.currentTarget + ' was clicked!');
+            });
 
-            // call ajax methods to update database
 
-            var url = "/Customer/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
 
-            $.post(url, null, function (data) {
+            $("img.rating").click(function (e) {
 
-                $(e.currentTarget).closest('tr').find('div.result').text(data).css('color','red') // $("#result").text(data);
+                // $("img.rating").unbind("mouseout mouseover click");
+
+                $(this).css('color', 'red');
+
+                // alert(e.currentTarget + ' was clicked!');
+
+                // call ajax methods to update database
+
+                var url = "/CustomersController/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
+
+                $.post(url, null, function (data) {
+
+                    $(e.currentTarget).closest('tr').find('div.result').text(data).css('color', 'red') // $("#result").text(data);
+
+                });
 
             });
 
         });
 
-    });
 
 
+        function giveRating(img, image) {
 
-    function giveRating(img, image) {
+            img.attr("src", "/Images/" + image)
 
-        img.attr("src", "/Images/" + image)
+                .prevAll("img.rating").attr("src", "/Images/" + image);
 
-            .prevAll("img.rating").attr("src", "/Images/" + image);
+        }
 
-    }
+        function refilRating(img1) {
 
-    function refilRating(img1)
+            var rt = $(img1).closest('tr').find("span.avr").text();
 
-    {
+            var img = $(img1).closest('tr').find("img[id='" + parseInt(rt) + "']");
 
-        var rt = $(img1).closest('tr').find("span.avr").text();
+            img.attr("src", "/images/FilledStar.png").prevAll("img.rating").attr("src", "/images/FilledStar.png");
 
-        var img = $(img1).closest('tr').find("img[id='" + parseInt(rt) + "']");
-
-        img.attr("src", "/images/FilledStar.png").prevAll("img.rating").attr("src", "/images/FilledStar.png");
-
-    }
-</script>
+        }
+    </script>
