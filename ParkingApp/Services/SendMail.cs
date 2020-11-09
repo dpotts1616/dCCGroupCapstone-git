@@ -17,15 +17,15 @@ namespace ParkingApp.Services
 
 
 
-        public static void SendEmail(string emailToAddress, string subject, string body)
-        {
-            using (SmtpClient client = new SmtpClient(smtpAddress, portNumber))
-            {
-                client.Credentials = new NetworkCredential(emailFromAddress, PrivateInfo.emailPassword);
-                client.EnableSsl = enableSSL;
-                MailMessage eMail = new MailMessage(emailFromAddress, emailToAddress, subject, body);
-                client.Send(eMail);
-            }
-        }
+        //public static void SendEmail(string emailToAddress, string subject, string body)
+        //{
+        //    using (SmtpClient client = new SmtpClient(smtpAddress, portNumber))
+        //    {
+        //        client.Credentials = new NetworkCredential(emailFromAddress, PrivateInfo.emailPassword);
+        //        client.EnableSsl = enableSSL;
+        //        MailMessage eMail = new MailMessage(emailFromAddress, emailToAddress, subject, body);
+        //        client.Send(eMail);
+        //    }
+        //}
     }
 }
