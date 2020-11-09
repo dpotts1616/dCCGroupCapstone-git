@@ -263,7 +263,7 @@ namespace ParkingApp.Controllers
             return View(reservation);
         }
 
-        Cancel Reservation
+        //Cancel Reservation
         [HttpPost, ActionName("CancelReservation")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CancelConfirmed(int id)

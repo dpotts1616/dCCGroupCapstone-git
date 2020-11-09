@@ -191,8 +191,6 @@ namespace ParkingApp.Controllers
             var spot = _context.ParkingSpots.Find(id);
             var reservations = _context.Reservations.Where(c => c.OwnedSpotID == spot.ID);
 
-            //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
 
             ViewData["OwnedSpotID"] = id;
             ViewData["ReservationDate"] = new DateTime();
@@ -201,9 +199,9 @@ namespace ParkingApp.Controllers
             return View(reservations);
         }
 
+       // POST: CustomersController/BookASpot/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        POST: CustomersController/BookASpot/
         public ActionResult BookASpot([Bind("ReservationDate,StartTime,EndTime, OwnedSpotID")] Reservation reservation, int ID)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -255,24 +253,8 @@ namespace ParkingApp.Controllers
         }
 
 
-        POST: Customers/YourReservations
-       [HttpPost]
-       [ValidateAntiForgeryToken]
-         public async Task<ActionResult> YourReservations(int? id)
-        {
-            var customer = await _context.Customers.FindAsync(id);
 
-            var reservations = _context.Reservations.Where(w => w.Id == customer.Id);
-
-            if (reservations.Any() == false)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(reservations);
-        }
-
-        GET: CustomersController/AddVehicle/
+        //GET: CustomersController/AddVehicle/
          public ActionResult AddVehicle(int? id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -289,9 +271,9 @@ namespace ParkingApp.Controllers
             }
         }
 
+       // POST: CustomersController/AddVehicle/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        POST: CustomersController/AddVehicle/
          public ActionResult AddVehicle([Bind("CarMake,CarModel,CarYear")] Car car)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -305,7 +287,7 @@ namespace ParkingApp.Controllers
         }
 
 
-        GET: CustomersController/ViewVehicles/
+        //GET: CustomersController/ViewVehicles/
          public ActionResult ViewVehicles(int? id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -406,31 +388,31 @@ namespace ParkingApp.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Charge(string stripeEmail, string stripeToken)
-        {
-            var customers = new Stripe.CustomerCreateOptions();
-            var charges = new Stripe.CustomerCreateOptions();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Charge(string stripeEmail, string stripeToken)
+        //{
+        //    var customers = new Stripe.CustomerCreateOptions();
+        //    var charges = new Stripe.CustomerCreateOptions();
 
-            var customer = customers.Create(new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                SourceToken = stripeToken
-            });
+        //    var customer = customers.Create(new CustomerCreateOptions
+        //    {
+        //        Email = stripeEmail,
+        //        SourceToken = stripeToken
+        //    });
 
-            var charge = charges.Create(new CustomerCreateOptions
-            {
-                Amount = 500,//charge in cents
-                Description = "Sample Charge",
-                Currency = "usd",
-                CustomerId = customer.Id
-            });
+        //    var charge = charges.Create(new CustomerCreateOptions
+        //    {
+        //        Amount = 500,//charge in cents
+        //        Description = "Sample Charge",
+        //        Currency = "usd",
+        //        CustomerId = customer.Id
+        //    });
 
-            // further application specific code goes here
+        //    // further application specific code goes here
 
-            return View();
-        }
+        //    return View();
+        //}
 
 
     }
