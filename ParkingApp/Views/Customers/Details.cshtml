@@ -5,49 +5,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1 style="margin: 0 auto; justify-content: space-around; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 20px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">
+    Details
+</h1>
 <link rel="stylesheet" href="/css/new.css">
-<body class="bodyCustomerDetails">
+
+|
+<body class="bodyCustomerIndex">
+    <link rel="stylesheet" href="/css/new.css">
+    <div id="container">
+        <p class="box">
+            <a asp-action="Reservations">Reservations</a>
+        </p>
+
+        <form>
+            <p class="box">
+                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayFor(model => model.FirstName)
+            </p>
+            <p class="box">
+                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayFor(model => model.LastName)
+            </p>
+            <p class="box">
+                @Html.DisplayNameFor(model => model.EmailAddress)
+                @Html.DisplayFor(model => model.EmailAddress)
+            </p>
+            <p class="box">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </p>
+            <p class="box">
+                @Html.DisplayNameFor(model => model.LicenseIDNumber)
+                @Html.DisplayFor(model => model.LicenseIDNumber)
+            </p>
+
+        </form>
+    </div>
 </body>
-|<p>
-    <a asp-action="Reservations">Reservations</a>
-</p>
-<div>
-    <h4>Customer</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EmailAddress)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EmailAddress)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LicenseIDNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LicenseIDNumber)
-        </dd>
-    </dl>
-</div>
 <div>
     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a class="btn btn-primary" asp-action="Index">Back to main menu</a>

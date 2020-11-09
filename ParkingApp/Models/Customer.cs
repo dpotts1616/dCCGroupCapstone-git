@@ -13,15 +13,15 @@ namespace ParkingApp.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "First Name")]
+        [Display(Name = "First Name:")]
         public string FirstName { get; set; }
-        [Display(Name = "Last Name")]
+        [Display(Name = "Last Name:")]
         public string LastName { get; set; }
-        [Display(Name = "Email Address")]
+        [Display(Name = "Email Address:")]
         public string EmailAddress { get; set; }
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Phone Number:")]
         public string PhoneNumber { get; set; }
-        [Display(Name = "Driver's License ID")]
+        [Display(Name = "Driver's License ID:")]
         public string LicenseIDNumber { get; set; }
 
 

@@ -6,37 +6,40 @@
 }
 
 
-<head>
+
+
+<link rel="stylesheet" href="/css/new.css">
+<h1 style="margin: 0 auto; justify-content: space-around; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 20px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">
     Please Choose Your Selection
-    <link rel="stylesheet" href="/css/new.css">
-</head>
+</h1>
 <body class="bodyCustomerIndex">
+    <link rel="stylesheet" href="/css/new.css">
+    <div id="container">
+        <form>
+            <p class="box">
+
+                @Html.ActionLink("Find a spot", "AllSpots", new { id = Model.Id })
+
+            </p>
+            <p class="box">
+                @Html.ActionLink("Profile Details", "Details", new { id = Model.Id })
+            </p>
+            <p class="box">
+                @Html.ActionLink("Edit Your Information", "Edit", new { id = Model.Id })
+            </p>
+            <p class="box">
+                @Html.ActionLink("Delete your profile", "Delete", new { id = Model.Id })
+            </p>
+            <p class="box">
+                @Html.ActionLink("Add a vehicle to your account", "AddVehicle", new { id = Model.Id })
+            </p>
+            <p class="box">
+                @Html.ActionLink("Your vehicles", "ViewVehicles", new { id = Model.Id })
+            </p>
+
+            <p class="box">
+                @Html.ActionLink("Pay for your spot", "PayBill", new { id = Model.Id })
+            </p>
+        </form>
+    </div>
 </body>
-    
-
-<div class="content-wrapper">
-    <p>
-        @Html.ActionLink("Your Details", "Details", new { id = Model.Id })
-    </p>
-    <p>
-        @Html.ActionLink("Edit Your Information", "Edit", new { id = Model.Id })
-    </p>
-    <p>
-        @Html.ActionLink("Delete your profile", "Delete", new { id = Model.Id })
-    </p>
-    <p>
-        @Html.ActionLink("Add a vehicle", "AddVehicle", new { id = Model.Id })
-    </p>
-    <p>
-        @Html.ActionLink("Your vehicles", "ViewVehicles", new { id = Model.Id })
-    </p>
-    <p>
-        @Html.ActionLink("Find a spot", "AllSpots", new { id = Model.Id })
-    </p>
-    <p>
-        @Html.ActionLink("Pay for your spot", "PayBill", new { id = Model.Id })
-    </p>
-
-
-</div>
-

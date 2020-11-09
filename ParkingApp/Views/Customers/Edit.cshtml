@@ -5,14 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
 <link rel="stylesheet" href="/css/new.css">
-<h4>Customer</h4>
+<h1 style="text-align: center; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 50px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Edit</h1>
+
 <body class="bodyCustomerEdit">
 </body>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div style="width: 500px; margin: auto; padding: 20px 20px 15px 10px; color:#808080; background-color: #ffffff; border: 1px solid black; box-shadow: 5px 6px 6px black;">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -44,11 +43,11 @@
             <input type="hidden" asp-for="IdentityUserId" />
             <input type="hidden" asp-for="CarID" />
             <input type="hidden" asp-for="PaymentID" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+      
+            <input style="text-align: center;" type="submit" value="Save" class="btn btn-warning" />
+           
         </form>
-    </div>
+   
 </div>
 
 <div>
