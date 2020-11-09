@@ -190,7 +190,7 @@ namespace ParkingApp.Controllers
             //var contractor = _context.Contractors.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             var contractor = await _context.Contractors.FindAsync(id);
 
-            
+
 
             var parkingSpots = _context.ParkingSpots.Where(w => w.OwnerId == contractor.Id);
 
@@ -215,7 +215,7 @@ namespace ParkingApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateParkingSpot([Bind("Id,Address, City, State, ZipCode, HourlyRate, CoveredSpot, Notes")]ParkingSpot parkingSpot)
+        public async Task<IActionResult> CreateParkingSpot([Bind("Id,Address, City, State, ZipCode, HourlyRate, CoveredSpot, Notes")] ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {
@@ -225,7 +225,7 @@ namespace ParkingApp.Controllers
                 parkingSpot = await _geocodingService.AttachLatAndLong(parkingSpot);
 
 
-                 
+
                 //contractor.SpotID = parkingSpot.ID;
                 parkingSpot.OwnerId = contractor.Id;
                 _context.ParkingSpots.Add(parkingSpot);
@@ -243,7 +243,7 @@ namespace ParkingApp.Controllers
             var contractor = _context.Contractors.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             var spots = _context.ParkingSpots.Where(c => c.OwnerId == contractor.Id);
             var reservations = new List<Reservation>();
-            foreach(var item in spots)
+            foreach (var item in spots)
             {
                 reservations.AddRange(_context.Reservations.Where(c => c.OwnedSpotID == item.ID).ToList());
             }
