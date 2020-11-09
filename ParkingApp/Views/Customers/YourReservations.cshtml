@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ParkingApp.Models.Reservation>
+
+@{
+    ViewData["Title"] = "YourReservations";
+}
+
+<h1>YourReservations</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.DateBooked)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.EstimatedCost)
+                </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.DateBooked)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.EstimatedCost)
+                    </td>*@
+                <!--<td>-->
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                <!--</td>-->
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div><a class="btn btn-primary" asp-action="Index">Back to main menu</a></div>

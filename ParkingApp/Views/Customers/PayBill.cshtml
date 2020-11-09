@@ -4,20 +4,20 @@
     ViewData["Title"] = "PayBill";
 }
 
-<h1>PayBill</h1>
+<h1></h1>
 <link rel="stylesheet" href="/css/new.css">
 <body class="bodyCustomerPayBill">
 </body>
 
 <form action="/Payment/Charge" method="POST">
     <article>
-        <label>Amount: $5.00</label>
+        <label>Amount: $15.00</label>
     </article>
     <script src="//checkout.stripe.com/v2/checkout.js"
             class="stripe-button"
             data-key="@ViewBag.StripePublishKey"
             data-locale="auto"
             data-description="Where Are I Parking?"
-            data-amount="500">
+            data-amount="15000">
     </script>
 </form>

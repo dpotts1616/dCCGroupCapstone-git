@@ -34,7 +34,7 @@ namespace ParkingApp.Controllers
             }
 
                 customer = await _context.Customers
-               .Include(c => c.Car)
+               //.Include(c => c.Car)
                .Include(c => c.IdentityUser)
                .FirstOrDefaultAsync(m => m.Id == customer.Id);
 
@@ -186,6 +186,72 @@ namespace ParkingApp.Controllers
             return _context.Customers.Any(e => e.Id == id);
         }
 
+        // GET: CustomersController/BookASpot/
+        public ActionResult BookASpot(int? id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+            else
+            {
+                return View(customer);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // POST: CustomersController/BookASpot/
+        public ActionResult BookASpot([Bind("ReservationDate,StartTime,EndTime")] Reservation reservation, int ID)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            //var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
+
+            //reservation.Id = customer.Id;
+            _context.Reservations.Add(reservation);
+            _context.SaveChanges();
+            ReserveTheSpot(reservation, ID);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        public ActionResult ReserveTheSpot(Reservation reservation, int ID)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
+
+            reservation.Id = customer.Id;
+            parkingSpotToReserve.IsBooked = true;
+            _context.ParkingSpots.Update(parkingSpotToReserve);
+            _context.SaveChanges();
+
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        // POST: Customers/YourReservations
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> YourReservations(int? id)
+        {
+            var customer = await _context.Customers.FindAsync(id);
+
+            var reservations = _context.Reservations.Where(w => w.Id == customer.Id);
+
+            if (reservations.Any() == false)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(reservations);
+        }
+
         // GET: CustomersController/AddVehicle/
         public ActionResult AddVehicle(int? id)
         {
@@ -254,6 +320,7 @@ namespace ParkingApp.Controllers
             return View(parkingSpots);
         }
 
+<<<<<<< HEAD
 
         //public async Task<IActionResult> BookASpot(int? ID)
         //{
@@ -273,17 +340,15 @@ namespace ParkingApp.Controllers
 
         //    return View(customer);
         //}
-
-
-
-
-        //// GET: CustomersController/CheckBalance/5
-        //public ActionResult PayBill()
-        //{
-        //    var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-        //    ViewBag.StripePublishKey = stripePublishKey;
-        //    return View();
-        //}
+=======
+        // GET: CustomersController/CheckBalance/5
+        public ActionResult PayBill()
+        {
+            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+            ViewBag.StripePublishKey = stripePublishKey;
+            return View();
+        }
+>>>>>>> eef7ddcb59b3548870c79e81725eef7b68e3e7a4
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]

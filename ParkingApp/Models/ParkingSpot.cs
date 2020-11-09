@@ -10,7 +10,7 @@ namespace ParkingApp.Models
     public class ParkingSpot
     {
         [Key]
-        [Display(Name ="Spot ID")]
+        [Display(Name = "Spot ID")]
         public int ID { get; set; }
         public string Address { get; set; }
         [Display(Name = "City")]
@@ -34,6 +34,7 @@ namespace ParkingApp.Models
 
         public bool IsPaid { get; set; }
 
+        public bool IsBooked {get; set; }
 
         public DateTime EntryTime { get; set; }
         public DateTime ExitTime { get; set; }
