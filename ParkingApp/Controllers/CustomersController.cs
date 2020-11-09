@@ -199,8 +199,8 @@ namespace ParkingApp.Controllers
 
             ViewData["OwnedSpotID"] = id;
             ViewData["ReservationDate"] = new DateTime();
-            ViewData["StartTime"] = new DateTime();
-            ViewData["EndTime"] = new DateTime();
+            ViewData["StartTime"] = new TimeSpan();
+            ViewData["EndTime"] = new TimeSpan();
             return View(reservations);
         }
 
@@ -213,10 +213,26 @@ namespace ParkingApp.Controllers
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             //var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
 
-            //reservation.Id = customer.Id;
+            if(reservation.EndTime.TimeOfDay < reservation.StartTime.TimeOfDay)
+            {
+                return RedirectToAction(nameof(BookASpot));
+            }
+            
+            var reservations = _context.Reservations.Where(c => c.OwnedSpotID == reservation.OwnedSpotID)
+                .Where(a => a.ReservationDate == reservation.ReservationDate);
+           foreach(var item in reservations)
+            {
+                if ((item.StartTime.TimeOfDay < reservation.StartTime.TimeOfDay && reservation.StartTime.TimeOfDay < item.EndTime.TimeOfDay)
+                    || (item.StartTime.TimeOfDay < reservation.EndTime.TimeOfDay && reservation.EndTime.TimeOfDay < item.EndTime.TimeOfDay)
+                    || (item.StartTime.TimeOfDay > reservation.StartTime.TimeOfDay && item.EndTime.TimeOfDay < reservation.EndTime.TimeOfDay))
+                {
+                    return RedirectToAction(nameof(BookASpot));
+                }
+            }
+
+            reservation.Customer = customer;
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
-            ReserveTheSpot(reservation, ID);
             return RedirectToAction(nameof(Index));
         }
 

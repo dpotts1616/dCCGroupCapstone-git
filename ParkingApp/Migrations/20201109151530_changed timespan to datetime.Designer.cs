@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkingApp.Data;
 
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201109151530_changed timespan to datetime")]
+    partial class changedtimespantodatetime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,14 +51,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "a7d87012-dab4-4516-8d2c-431b287b9420",
+                            ConcurrencyStamp = "b09aeaee-d96f-46f8-bc9e-5c4b70881bfd",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "e18e6e85-27b9-4ac9-a53a-a9473b2c4923",
+                            ConcurrencyStamp = "f4edc73b-4e05-4052-84f9-b2c9142700ce",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
