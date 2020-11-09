@@ -41,15 +41,10 @@ namespace ParkingApp.Controllers
                .Include(c => c.IdentityUser)
                .FirstOrDefaultAsync(m => m.Id == customer.Id);
 
-
             return View(customer);
-
 
             //var applicationDbContext = _context.Customers.Include(c => c.Car).Include(c => c.IdentityUser);
             //return View(await applicationDbContext.ToListAsync());
-
-
-
         }
 
         // GET: Customers/Details/5
@@ -78,6 +73,7 @@ namespace ParkingApp.Controllers
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
+
         // POST: Contractors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -214,11 +210,11 @@ namespace ParkingApp.Controllers
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             //var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
 
-            if(reservation.EndTime.TimeOfDay < reservation.StartTime.TimeOfDay)
+            if (reservation.EndTime.TimeOfDay < reservation.StartTime.TimeOfDay)
             {
                 return RedirectToAction(nameof(BookASpot));
             }
-            
+
             var reservations = _context.Reservations.Where(c => c.OwnedSpotID == reservation.OwnedSpotID)
                 .Where(a => a.ReservationDate == reservation.ReservationDate);
            foreach(var item in reservations)
@@ -243,39 +239,38 @@ namespace ParkingApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //public ActionResult ReserveTheSpot(Reservation reservation, int ID)
+        //{
+        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+        //    var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
 
-        public ActionResult ReserveTheSpot(Reservation reservation, int ID)
-        {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
-
-            reservation.Id = customer.Id;
-            parkingSpotToReserve.IsBooked = true;
-            _context.ParkingSpots.Update(parkingSpotToReserve);
-            _context.SaveChanges();
-
-
-            return RedirectToAction(nameof(Index));
-        }
+        //    reservation.Id = customer.Id;
+        //    parkingSpotToReserve.IsBooked = true;
+        //    _context.ParkingSpots.Update(parkingSpotToReserve);
+        //    _context.SaveChanges();
 
 
-        // POST: Customers/YourReservations
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> YourReservations(int? id)
-        {
-            var customer = await _context.Customers.FindAsync(id);
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-            var reservations = _context.Reservations.Where(w => w.Id == customer.Id);
 
-            if (reservations.Any() == false)
-            {
-                return RedirectToAction(nameof(Index));
-            }
+        //// POST: Customers/YourReservations
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> YourReservations(int? id)
+        //{
+        //    var customer = await _context.Customers.FindAsync(id);
 
-            return View(reservations);
-        }
+        //    var reservations = _context.Reservations.Where(w => w.Id == customer.Id);
+
+        //    if (reservations.Any() == false)
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+
+        //    return View(reservations);
+        //}
 
         // GET: CustomersController/AddVehicle/
         public ActionResult AddVehicle(int? id)
@@ -291,7 +286,6 @@ namespace ParkingApp.Controllers
             else
             {
                 return View();
-                
             }
         }
 
@@ -303,11 +297,11 @@ namespace ParkingApp.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-            car.OwnerId = customer.Id; 
-                _context.Cars.Add(car);
-                _context.SaveChanges();
-              
-                return RedirectToAction(nameof(Index));
+            car.OwnerId = customer.Id;
+            _context.Cars.Add(car);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -317,13 +311,13 @@ namespace ParkingApp.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-            if(customer == null)
+            if (customer == null)
             {
                 return NotFound();
             }
             var vehicles = _context.Cars.Where(c => c.OwnerId == customer.Id);
-            
-            if(vehicles == null)
+
+            if (vehicles == null)
             {
                 return NotFound();
             }
@@ -379,8 +373,6 @@ namespace ParkingApp.Controllers
 
         //    return View();
         //}
-
-
 
 
         [HttpPost]

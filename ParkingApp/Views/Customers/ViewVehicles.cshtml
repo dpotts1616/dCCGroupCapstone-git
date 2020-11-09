@@ -4,37 +4,35 @@
     ViewData["Title"] = "ViewVehicles";
 }
 
-<h1>ViewVehicles</h1>
+<h1 style="margin: 0 auto; justify-content: space-around; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 20px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Vehicles</h1>
 <link rel="stylesheet" href="/css/new.css">
 <body class="bodyCustomerViewVehicles">
 </body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+
+<table class="table table-hover">
     <thead>
-        <tr>
-            <th>
+        <tr class="table-secondary">
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.CarMake)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.CarModel)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.CarYear)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.OwnerId)
             </th>
-            <th></th>
+            
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="table-secondary">
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>

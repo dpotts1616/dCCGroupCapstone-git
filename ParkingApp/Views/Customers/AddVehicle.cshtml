@@ -4,14 +4,13 @@
     ViewData["Title"] = "AddVehicle";
 }
 
-<h1>AddVehicle</h1>
 <link rel="stylesheet" href="/css/new.css">
-<h4>Car</h4>
-<body class="bodyCustomerAddVehicle">
+<h1 style="text-align: center; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 50px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Add Vehicle</h1>
+<body class="bodyCustomerCreate">
 </body>
-<hr />
+
 <div class="row">
-    <div class="col-md-4">
+    <div style="width: 500px; margin: auto; padding: 20px 20px 15px 10px; color:#808080; background-color: #ffffff; border: 1px solid black; box-shadow: 5px 6px 6px black;">
         <form asp-action="AddVehicle">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -37,20 +36,19 @@
             </div>
             <input type="hidden" asp-for="OwnerId" />
             @*<div class="form-group">
-                <label asp-for="OwnerId" class="control-label"></label>
-                <input asp-for="OwnerId" class="form-control" />
-                <span asp-validation-for="OwnerId" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            <label asp-for="OwnerId" class="control-label"></label>
+            <input asp-for="OwnerId" class="form-control" />
+            <span asp-validation-for="OwnerId" class="text-danger"></span>
+        </div>*@
+           
+           <input type="submit" value="Create" class="btn btn-warning" style="text-align: center;" />
+           <a style="text-align: center;" class="btn btn-warning" asp-action="Index">Back to List</a>
+            
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
