@@ -320,7 +320,7 @@ namespace ParkingApp.Controllers
             return View(parkingSpots);
         }
 
-<<<<<<< HEAD
+
 
         //public async Task<IActionResult> BookASpot(int? ID)
         //{
@@ -340,15 +340,12 @@ namespace ParkingApp.Controllers
 
         //    return View(customer);
         //}
-=======
-        // GET: CustomersController/CheckBalance/5
-        public ActionResult PayBill()
-        {
-            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-            ViewBag.StripePublishKey = stripePublishKey;
-            return View();
-        }
->>>>>>> eef7ddcb59b3548870c79e81725eef7b68e3e7a4
+        //public ActionResult PayBill()
+        //{
+        //    var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
+        //    ViewBag.StripePublishKey = stripePublishKey;
+        //    return View();
+        //}
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
