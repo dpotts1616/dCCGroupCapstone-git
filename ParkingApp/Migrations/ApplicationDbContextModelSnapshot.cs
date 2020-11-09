@@ -49,14 +49,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "c7de8821-98a8-455c-9a6a-db92ce0ed613",
+                            ConcurrencyStamp = "8eb6e691-faff-4c43-9182-f7226bee2528",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "e13f7e5a-8ae8-473b-a56a-46c6f9bdb456",
+                            ConcurrencyStamp = "99e1ebc6-32ca-4636-a6ff-96176501f446",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -397,6 +397,9 @@ namespace ParkingApp.Migrations
 
                     b.Property<double>("HourlyRate")
                         .HasColumnType("float");
+
+                    b.Property<bool>("IsBooked")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsPaid")
                         .HasColumnType("bit");

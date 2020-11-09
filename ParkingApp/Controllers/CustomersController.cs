@@ -38,15 +38,10 @@ namespace ParkingApp.Controllers
                .Include(c => c.IdentityUser)
                .FirstOrDefaultAsync(m => m.Id == customer.Id);
 
-
             return View(customer);
-
 
             //var applicationDbContext = _context.Customers.Include(c => c.Car).Include(c => c.IdentityUser);
             //return View(await applicationDbContext.ToListAsync());
-
-
-
         }
 
         // GET: Customers/Details/5
@@ -75,6 +70,7 @@ namespace ParkingApp.Controllers
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
+
         // POST: Contractors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -265,8 +261,7 @@ namespace ParkingApp.Controllers
             }
             else
             {
-                return View();
-                
+                return View();   
             }
         }
 
