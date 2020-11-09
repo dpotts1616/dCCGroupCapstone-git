@@ -13,8 +13,8 @@
     <thead>
         <tr>
             @*<th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>*@
+            @Html.DisplayNameFor(model => model.Id)
+        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.ReservationDate)
             </th>
@@ -24,43 +24,36 @@
             <th>
                 @Html.DisplayNameFor(model => model.EndTime)
             </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.DateBooked)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.EstimatedCost)
-                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.DateBooked)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReservationDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.DateBooked)
-                    </td>*@
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.EstimatedCost)
-                    </td>*@
-                <!--<td>-->
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                <!--</td>-->
-            </tr>
+        <tr>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.DateBooked)
+        </td>
+            <td>
+        @Html.ActionLink("Details", "ReservationDetails", new {  id=item.OwnedSpotID }) |
+        @Html.ActionLink("Cancel", "CancelReservation", new { id=item.Id })
+            </td>
+        </tr>
         }
     </tbody>
 </table>

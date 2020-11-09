@@ -325,6 +325,64 @@ namespace ParkingApp.Controllers
 
         }
 
+        // GET: CustomersController/ViewVehicles/
+        public ActionResult YourReservations(int? id)
+        {
+            var reservations = _context.Reservations.Where(c => c.BookedCustomerID == id);
+
+            return View(reservations);
+
+        }
+
+
+        // GET: Cancel Reservtion
+        public async Task<IActionResult> CancelReservation(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var reservation = await _context.Reservations.FindAsync(id);
+
+            return View(reservation);
+        }
+
+        //Cancel Reservation
+        [HttpPost, ActionName("CancelReservation")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CancelConfirmed(int id)
+        {
+            var reservation = await _context.Reservations.FindAsync(id);
+            var customer = _context.Customers.Find(reservation.BookedCustomerID);
+            var spot = _context.ParkingSpots.Find(reservation.OwnedSpotID);
+
+            _context.Reservations.Remove(reservation);
+            await _context.SaveChangesAsync();
+
+            string subject = "Reservation Cancelled";
+            string body = $"{customer.FirstName}, your parking spot reservation at {spot.Address} on {reservation.ReservationDate.Date} " +
+                $"from {reservation.StartTime.TimeOfDay} to {reservation.EndTime.TimeOfDay} has been cancelled by the owner.";
+            SendMail.SendEmail(customer.EmailAddress, subject, body);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult ReservationDetails(int? id)
+        {
+            var spot = _context.ParkingSpots.Find(id);
+
+            return View(spot);
+
+        }
+        public ActionResult ViewOwner(int? id)
+        {
+            var owner = _context.Contractors.Find(id);
+
+            return View(owner);
+
+        }
+
 
         public ActionResult AllSpots()
         {
