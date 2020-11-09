@@ -49,14 +49,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "c7de8821-98a8-455c-9a6a-db92ce0ed613",
+                            ConcurrencyStamp = "80a5ce22-a6f8-474e-9205-980bf4fbb67e",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "e13f7e5a-8ae8-473b-a56a-46c6f9bdb456",
+                            ConcurrencyStamp = "e4438d2b-8796-4f79-9a2c-ff032f250f65",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -398,6 +398,9 @@ namespace ParkingApp.Migrations
                     b.Property<double>("HourlyRate")
                         .HasColumnType("float");
 
+                    b.Property<bool>("IsBooked")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
 
@@ -436,23 +439,29 @@ namespace ParkingApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BookedCustomerID")
+                        .HasColumnType("int");
+
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateBooked")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
 
                     b.Property<double>("EstimatedCost")
                         .HasColumnType("float");
 
+                    b.Property<int?>("OwnedSpotID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
 
                     b.HasKey("Id");
 

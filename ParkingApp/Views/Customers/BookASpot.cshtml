@@ -1,50 +1,109 @@
-﻿@model ParkingApp.Models.Reservation
+﻿@model IEnumerable<ParkingApp.Models.Reservation>
 
 @{
     ViewData["Title"] = "BookASpot";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>BookASpot</h1>
 
-<h4>Reservation</h4>
+<h1>Reservations</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateBooked)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstimatedCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookedCustomerID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateBooked)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstimatedCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookedCustomerID)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<h4>Book A Spot</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="BookASpot">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" for="Id" name="Id" />
             @*<div class="form-group">
             <label asp-for="Id" class="control-label"></label>
             <input asp-for="Id" class="form-control" />
             <span asp-validation-for="Id" class="text-danger"></span>
         </div>*@
             <div class="form-group">
-                <label asp-for="ReservationDate" class="control-label"></label>
-                <input asp-for="ReservationDate" class="form-control" />
-                <span asp-validation-for="ReservationDate" class="text-danger"></span>
+                <label asp-for="@ViewData["ReservationDate"]" class="control-label">Reservation Date</label>
+                <input class="date-picker" />
+                <span asp-validation-for="@ViewData["ReservationDate"]" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" />
-                <span asp-validation-for="StartTime" class="text-danger"></span>
+                <label asp-for="@ViewData["StartTime"]" class="control-label">Start Time</label>
+                <select asp-for="@ViewData["StartTime"]" class="form-control" />
+                <span asp-validation-for="@ViewData["StartTime"]" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EndTime" class="control-label"></label>
-                <input asp-for="EndTime" class="form-control" />
-                <span asp-validation-for="EndTime" class="text-danger"></span>
+                <label asp-for="@ViewData["EndTime"]" class="control-label">End Time</label>
+                <select asp-for="@ViewData["EndTime"]" class="form-control" />
+                <span asp-validation-for="@ViewData["EndTime"]" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="DateBooked" />
+            <div class="form-group">
+                @*<label asp-for="OwnedSpotID" class="control-label"></label>*@
+                <input type="hidden" for="OwnedSpotID" class="form-control" value="@ViewData["OwnedSpotID"]" />
+                @*<span asp-validation-for="OwnedSpotID" class="text-danger"></span>*@
+            </div>
+            <input type="hidden" for="DateBooked" />
             @*<div class="form-group">
             <label asp-for="DateBooked" class="control-label"></label>
             <input asp-for="DateBooked" class="form-control" />
             <span asp-validation-for="DateBooked" class="text-danger"></span>
         </div>*@
-            <input type="hidden" asp-for="EstimatedCost" />
+            <input type="hidden" for="EstimatedCost" />
             @*<div class="form-group">
-                <label asp-for="EstimatedCost" class="control-label"></label>
-                <input asp-for="EstimatedCost" class="form-control" />
-                <span asp-validation-for="EstimatedCost" class="text-danger"></span>
-            </div>*@
+            <label asp-for="EstimatedCost" class="control-label"></label>
+            <input asp-for="EstimatedCost" class="form-control" />
+            <span asp-validation-for="EstimatedCost" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -56,6 +115,24 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <!-- jQuery UI CSS Reference -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <!-- Required jQuery and jQuery UI Javascript references -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Code to wire up your DatePicker -->
+    <script type="text/javascript">
+        $(function () {
+            // This will make every element with the class "date-picker" into a DatePicker element
+            $(".date-picker").datepicker();
+        })
+    </script>
 }
+
+

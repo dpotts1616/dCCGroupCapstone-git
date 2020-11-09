@@ -232,11 +232,13 @@ namespace ParkingApp.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ReservationDate = table.Column<DateTime>(nullable: false),
-                    StartTime = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<DateTime>(nullable: false),
+                    StartTime = table.Column<TimeSpan>(nullable: false),
+                    EndTime = table.Column<TimeSpan>(nullable: false),
                     DateBooked = table.Column<DateTime>(nullable: false),
                     EstimatedCost = table.Column<double>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: true)
+                    CustomerId = table.Column<int>(nullable: true),
+                    OwnedSpotID = table.Column<int>(nullable: true),
+                    BookedCustomerID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -267,6 +269,7 @@ namespace ParkingApp.Migrations
                     Longitude = table.Column<double>(nullable: false),
                     OwnerId = table.Column<int>(nullable: true),
                     IsPaid = table.Column<bool>(nullable: false),
+                    IsBooked = table.Column<bool>(nullable: false),
                     EntryTime = table.Column<DateTime>(nullable: false),
                     ExitTime = table.Column<DateTime>(nullable: false)
                 },
@@ -317,12 +320,12 @@ namespace ParkingApp.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "c7de8821-98a8-455c-9a6a-db92ce0ed613", "Customer", "CUSTOMER" });
+                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "80a5ce22-a6f8-474e-9205-980bf4fbb67e", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "e13f7e5a-8ae8-473b-a56a-46c6f9bdb456", "Contractor", "CONTRACTOR" });
+                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "e4438d2b-8796-4f79-9a2c-ff032f250f65", "Contractor", "CONTRACTOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

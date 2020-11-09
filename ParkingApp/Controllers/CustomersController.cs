@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -189,23 +191,23 @@ namespace ParkingApp.Controllers
         // GET: CustomersController/BookASpot/
         public ActionResult BookASpot(int? id)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+            var spot = _context.ParkingSpots.Find(id);
+            var reservations = _context.Reservations.Where(c => c.OwnedSpotID == spot.ID);
 
-            if (customer == null)
-            {
-                return RedirectToAction("Create");
-            }
-            else
-            {
-                return View(customer);
-            }
+            //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+
+            ViewData["OwnedSpotID"] = id;
+            ViewData["ReservationDate"] = new DateTime();
+            ViewData["StartTime"] = new TimeSpan();
+            ViewData["EndTime"] = new TimeSpan();
+            return View(reservations);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         // POST: CustomersController/BookASpot/
-        public ActionResult BookASpot([Bind("ReservationDate,StartTime,EndTime")] Reservation reservation, int ID)
+        public ActionResult BookASpot([Bind("ReservationDate,StartTime,EndTime, OwnedSpotID")] Reservation reservation, int ID)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
