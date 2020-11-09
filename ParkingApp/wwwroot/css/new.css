@@ -90,3 +90,11 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.header{
+    width: 500px;
+    border: 10px black solid;
+    padding: 50px;
+    margin: 30px;
+    background-color: white;
+    box-shadow: 10px 10px 5px #888888;
+}
