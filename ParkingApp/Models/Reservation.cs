@@ -11,14 +11,19 @@ namespace ParkingApp.Models
         [Key]
         public int Id { get; set; }
         [Display(Name ="Reservation Date")]
+        [DataType(DataType.Date)]
         public DateTime ReservationDate { get; set; }
         [Display(Name ="Start Time")]
+        [DataType(DataType.Time)]
         public DateTime StartTime { get; set; }
         [Display(Name = "End Time")]
+        [DataType(DataType.Time)]
         public DateTime EndTime { get; set; }
         public DateTime DateBooked { get; set; }
         public double EstimatedCost { get; set; }
         public Customer Customer { get; set; }
+        public int? OwnedSpotID { get; set; }
+        public int? BookedCustomerID { get; set; }
         
     }
 }

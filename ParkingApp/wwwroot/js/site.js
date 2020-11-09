@@ -50,5 +50,6 @@ function consoleText(words, id, colors) {
         }
     }, 400)
 }
+
 //fireworks 
 

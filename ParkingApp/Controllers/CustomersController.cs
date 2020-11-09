@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -9,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ParkingApp.Data;
 using ParkingApp.Models;
+using ParkingApp.Services;
 
 namespace ParkingApp.Controllers
 {
@@ -185,32 +188,53 @@ namespace ParkingApp.Controllers
         // GET: CustomersController/BookASpot/
         public ActionResult BookASpot(int? id)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+            var spot = _context.ParkingSpots.Find(id);
+            var reservations = _context.Reservations.Where(c => c.OwnedSpotID == spot.ID);
 
-            if (customer == null)
-            {
-                return RedirectToAction("Create");
-            }
-            else
-            {
-                return View(customer);
-            }
+            //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+
+            ViewData["OwnedSpotID"] = id;
+            ViewData["ReservationDate"] = new DateTime();
+            ViewData["StartTime"] = new TimeSpan();
+            ViewData["EndTime"] = new TimeSpan();
+            return View(reservations);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         // POST: CustomersController/BookASpot/
-        public ActionResult BookASpot([Bind("ReservationDate,StartTime,EndTime")] Reservation reservation, int ID)
+        public ActionResult BookASpot([Bind("ReservationDate,StartTime,EndTime, OwnedSpotID")] Reservation reservation, int ID)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             //var parkingSpotToReserve = _context.ParkingSpots.Where(c => c.ID == ID).SingleOrDefault();
 
-            //reservation.Id = customer.Id;
+            if(reservation.EndTime.TimeOfDay < reservation.StartTime.TimeOfDay)
+            {
+                return RedirectToAction(nameof(BookASpot));
+            }
+            
+            var reservations = _context.Reservations.Where(c => c.OwnedSpotID == reservation.OwnedSpotID)
+                .Where(a => a.ReservationDate == reservation.ReservationDate);
+           foreach(var item in reservations)
+            {
+                if ((item.StartTime.TimeOfDay < reservation.StartTime.TimeOfDay && reservation.StartTime.TimeOfDay < item.EndTime.TimeOfDay)
+                    || (item.StartTime.TimeOfDay < reservation.EndTime.TimeOfDay && reservation.EndTime.TimeOfDay < item.EndTime.TimeOfDay)
+                    || (item.StartTime.TimeOfDay > reservation.StartTime.TimeOfDay && item.EndTime.TimeOfDay < reservation.EndTime.TimeOfDay))
+                {
+                    return RedirectToAction(nameof(BookASpot));
+                }
+            }
+            var spot = _context.ParkingSpots.Find(reservation.OwnedSpotID);
+
+            reservation.Customer = customer;
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
-            ReserveTheSpot(reservation, ID);
+            string subject = "Reservation Confirmed";
+            string body = $"{customer.FirstName}, you have reserved a parking spot at {spot.Address} on {reservation.ReservationDate.Date} " +
+                $"from {reservation.StartTime.TimeOfDay} to {reservation.EndTime.TimeOfDay}";
+            SendMail.SendEmail(customer.EmailAddress, subject, body);
             return RedirectToAction(nameof(Index));
         }
 
@@ -317,24 +341,6 @@ namespace ParkingApp.Controllers
 
 
 
-        //public async Task<IActionResult> BookASpot(int? ID)
-        //{
-        //    if (ID == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //     = customer.Id;
-        //    var spotToReserve = await _context.Customers
-        //        .Include(c => c.Car)
-        //        .Include(c => c.IdentityUser)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (customer == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(customer);
-        //}
         //public ActionResult PayBill()
         //{
         //    var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];

@@ -350,5 +350,6 @@ MigrationBackup/
 .ionide/
 
 APIKeys.cs
+PrivateInfo.cs
 # Ignore all migrations in the /Data/Migrations directory
 *ParkingApp/Data/Migrations

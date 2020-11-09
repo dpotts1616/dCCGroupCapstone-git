@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ParkingApp.Data;
 
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201109154454_changed datetime to timespan")]
+    partial class changeddatetimetotimespan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,22 +51,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "8eb6e691-faff-4c43-9182-f7226bee2528",
-=======
-                            ConcurrencyStamp = "a7d87012-dab4-4516-8d2c-431b287b9420",
->>>>>>> aab6180c9de9cf1d39a706ceb37d075b969ad549
+                            ConcurrencyStamp = "a7429f16-c507-4df2-9e92-6c0c71c96081",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "99e1ebc6-32ca-4636-a6ff-96176501f446",
-=======
-                            ConcurrencyStamp = "e18e6e85-27b9-4ac9-a53a-a9473b2c4923",
->>>>>>> aab6180c9de9cf1d39a706ceb37d075b969ad549
+                            ConcurrencyStamp = "78a05678-6914-433b-bef8-d2c62f143b50",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -456,8 +450,8 @@ namespace ParkingApp.Migrations
                     b.Property<DateTime>("DateBooked")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
 
                     b.Property<double>("EstimatedCost")
                         .HasColumnType("float");
@@ -468,8 +462,8 @@ namespace ParkingApp.Migrations
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
 
                     b.HasKey("Id");
 
