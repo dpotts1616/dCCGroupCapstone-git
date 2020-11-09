@@ -5,55 +5,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<head>Please Enter In Your Information
-    <link rel="stylesheet" href="/css/new.css">
-    </head>
+<link rel="stylesheet" href="/css/new.css">
+<h1 style="text-align: center; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 50px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Please Enter In Your Information
+    
+    </h1>
 <body class="bodyContractorCreate">
 </body>
 <div>
     <div class="row">
-        <div class="col-md-4 scroller">
+        <div style="width: 500px; margin: auto; padding: 20px 20px 15px 10px; color:#808080; background-color: #ffffff; border: 1px solid black; box-shadow: 5px 6px 6px black;">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
+                <div class="form-group" style="margin: 0 auto; color: black; padding: 5px 5px 5px 5px; border-color: black; ">
                     <label asp-for="FirstName" class="control-label"></label>
                     <input asp-for="FirstName" class="form-control" />
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="margin: 0 auto; color: black; padding: 5px 5px 5px 5px; border-color: black; ">
                     <label asp-for="LastName" class="control-label"></label>
                     <input asp-for="LastName" class="form-control" />
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="margin: 0 auto; color: black; padding: 5px 5px 5px 5px; border-color: black;">
                     <label asp-for="Address" class="control-label"></label>
                     <input asp-for="Address" class="form-control" />
                     <span asp-validation-for="Address" class="text-warning"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="margin: 0 auto; color: black; padding: 5px 5px 5px 5px; border-color: black;">
                     <label asp-for="City" class="control-label"></label>
                     <input asp-for="City" class="form-control" />
                     <span asp-validation-for="City" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="margin: 0 auto; color: black; padding: 5px 5px 5px 5px; border-color: black;">
                     <label asp-for="State" class="control-label"></label>
                     <input asp-for="State" class="form-control" />
                     <span asp-validation-for="State" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="margin: 0 auto; color: black; padding: 5px 5px 5px 5px; border-color: black;">
                     <label asp-for="ZipCode" class="control-label"></label>
                     <input asp-for="ZipCode" class="form-control" />
                     <span asp-validation-for="ZipCode" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    @*<label asp-for="IdentityUserId" class="control-label"></label>*@
-                    <input type="hidden" asp-for="IdentityUserId" class="form-control" asp-items="ViewBag.IdentityUserId" />
-                </div>
-                <div class="form-group">
-                    @*<label asp-for="SpotID" class="control-label"></label>*@
-                    <input type="hidden" asp-for="SpotID" class="form-control" />
-                    <span asp-validation-for="SpotID" class="text-danger"></span>
                 </div>
                 
                 <input type="submit" value="Create" class="btn btn-warning" />
