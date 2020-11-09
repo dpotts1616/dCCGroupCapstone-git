@@ -24,7 +24,7 @@ namespace ParkingApp.Models
         public string State { get; set; }
         [Display(Name = "Zip Code:")]
         public string ZipCode { get; set; }
-        public string BankRoutingNumber { get; set; }
+        //public string BankRoutingNumber { get; set; }
 
 
         [ForeignKey("IdentityUser")]

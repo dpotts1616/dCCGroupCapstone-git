@@ -387,6 +387,20 @@ namespace ParkingApp.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public ActionResult PostRating(int rating, int mid)
+        {
+            StarRating rt = new StarRating();
+            rt.Rate = rating;
+            rt.CustomerId = mid;
+
+            _context.Ratings.Add(rt);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult Charge(string stripeEmail, string stripeToken)
