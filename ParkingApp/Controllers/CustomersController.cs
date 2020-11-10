@@ -199,7 +199,7 @@ namespace ParkingApp.Controllers
             return View(reservations);
         }
 
-        POST: CustomersController/BookASpot/
+        //POST: CustomersController/BookASpot/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult BookASpot([Bind("ReservationDate,StartTime,EndTime, OwnedSpotID")] Reservation reservation, int ID)
@@ -253,7 +253,7 @@ namespace ParkingApp.Controllers
         }
 
 
-        GET: CustomersController/AddVehicle/
+        //GET: CustomersController/AddVehicle/
     public ActionResult AddVehicle(int? id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -270,7 +270,7 @@ namespace ParkingApp.Controllers
             }
         }
 
-        POST: CustomersController/AddVehicle/
+        //POST: CustomersController/AddVehicle/
     [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddVehicle([Bind("CarMake,CarModel,CarYear")] Car car)
@@ -286,7 +286,7 @@ namespace ParkingApp.Controllers
         }
 
 
-        GET: CustomersController/ViewVehicles/
+        //GET: CustomersController/ViewVehicles/
     public ActionResult ViewVehicles(int? id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -306,7 +306,7 @@ namespace ParkingApp.Controllers
 
         }
 
-        GET: CustomersController/ViewVehicles/
+        //GET: CustomersController/ViewVehicles/
     public ActionResult YourReservations(int? id)
         {
             var reservations = _context.Reservations.Where(c => c.BookedCustomerID == id);
@@ -316,7 +316,7 @@ namespace ParkingApp.Controllers
         }
 
 
-        GET: Cancel Reservtion
+        //GET: Cancel Reservtion
     public async Task<IActionResult> CancelReservation(int? id)
         {
             if (id == null)
@@ -387,7 +387,6 @@ namespace ParkingApp.Controllers
             return View();
         }
 
-<<<<<<< HEAD
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Charge(string stripeEmail, string stripeToken)
@@ -413,7 +412,6 @@ namespace ParkingApp.Controllers
 
             return View();
         }
-=======
 
         [HttpPost]
         public ActionResult PostRating(int rating, int mid)
@@ -428,32 +426,32 @@ namespace ParkingApp.Controllers
             return Ok();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Charge(string stripeEmail, string stripeToken)
-        //{
-        //    var customers = new Stripe.CustomerCreateOptions();
-        //    var charges = new Stripe.CustomerCreateOptions();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Charge(string stripeEmail, string stripeToken)
+        {
+            var customers = new Stripe.CustomerCreateOptions();
+            var charges = new Stripe.CustomerCreateOptions();
 
-        //    var customer = customers.Create(new CustomerCreateOptions
-        //    {
-        //        Email = stripeEmail,
-        //        SourceToken = stripeToken
-        //    });
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                SourceToken = stripeToken
+            });
 
-        //    var charge = charges.Create(new CustomerCreateOptions
-        //    {
-        //        Amount = 500,//charge in cents
-        //        Description = "Sample Charge",
-        //        Currency = "usd",
-        //        CustomerId = customer.Id
-        //    });
+            var charge = charges.Create(new CustomerCreateOptions
+            {
+                Amount = 500,//charge in cents
+                Description = "Sample Charge",
+                Currency = "usd",
+                CustomerId = customer.Id
+            });
 
-        //    // further application specific code goes here
+            // further application specific code goes here
 
-        //    return View();
-        //}
->>>>>>> 51b3db193290f822ed3cfe787fcf6cebf414c163
+            return View();
+        }
+
 
 
     }
