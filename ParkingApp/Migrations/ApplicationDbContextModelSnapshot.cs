@@ -49,14 +49,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "243e9dee-f639-4770-be84-460098ab9aba",
+                            ConcurrencyStamp = "1267f639-b029-4192-9787-a515267bce2d",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "1351607a-5831-4125-81b0-c9dfb7f6b020",
+                            ConcurrencyStamp = "a45db918-2b68-4fe6-964d-609b9f5767f0",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -263,9 +263,6 @@ namespace ParkingApp.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BankRoutingNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")

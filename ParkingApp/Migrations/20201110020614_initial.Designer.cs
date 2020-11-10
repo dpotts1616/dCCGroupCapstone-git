@@ -10,8 +10,8 @@ using ParkingApp.Data;
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201109200011_added spot id to reservtion")]
-    partial class addedspotidtoreservtion
+    [Migration("20201110020614_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,14 +51,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "d64071ec-a650-4f69-9573-92b09388dc87",
+                            ConcurrencyStamp = "392405ec-56e2-41cf-a944-90d19c8fc0e5",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "d99bf75f-52c0-4416-ad87-3d7bdf8b449f",
+                            ConcurrencyStamp = "563ecab4-f6cf-4651-9f0c-499913f031f6",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -598,7 +598,7 @@ namespace ParkingApp.Migrations
             modelBuilder.Entity("ParkingApp.Models.StarRating", b =>
                 {
                     b.HasOne("ParkingApp.Models.Customer", "customer")
-                        .WithMany("ratings")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

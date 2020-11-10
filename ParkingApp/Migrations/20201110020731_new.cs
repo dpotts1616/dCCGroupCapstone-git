@@ -2,49 +2,40 @@
 
 namespace ParkingApp.Migrations
 {
-    public partial class ratingssystem : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "BankRoutingNumber",
-                table: "Contractors",
-                nullable: true);
-
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
                 column: "ConcurrencyStamp",
-                value: "243e9dee-f639-4770-be84-460098ab9aba");
+                value: "1267f639-b029-4192-9787-a515267bce2d");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: "77e60802-3e18-40cf-8999-79aa642defb1",
                 column: "ConcurrencyStamp",
-                value: "1351607a-5831-4125-81b0-c9dfb7f6b020");
+                value: "a45db918-2b68-4fe6-964d-609b9f5767f0");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "BankRoutingNumber",
-                table: "Contractors");
-
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
                 column: "ConcurrencyStamp",
-                value: "c0dcb9e0-6fa4-4140-94c1-13265a7f2372");
+                value: "392405ec-56e2-41cf-a944-90d19c8fc0e5");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: "77e60802-3e18-40cf-8999-79aa642defb1",
                 column: "ConcurrencyStamp",
-                value: "22c8f712-a1d1-405d-9e23-512e41339c65");
+                value: "563ecab4-f6cf-4651-9f0c-499913f031f6");
         }
     }
 }

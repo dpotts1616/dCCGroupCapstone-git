@@ -343,12 +343,12 @@ namespace ParkingApp.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "c0dcb9e0-6fa4-4140-94c1-13265a7f2372", "Customer", "CUSTOMER" });
+                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "392405ec-56e2-41cf-a944-90d19c8fc0e5", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "22c8f712-a1d1-405d-9e23-512e41339c65", "Contractor", "CONTRACTOR" });
+                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "563ecab4-f6cf-4651-9f0c-499913f031f6", "Contractor", "CONTRACTOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -417,7 +417,9 @@ namespace ParkingApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ParkingSpots_ReservationId",
                 table: "ParkingSpots",
-                column: "ReservationId");
+                column: "ReservationId",
+                unique: true,
+                filter: "[ReservationId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_CustomerId",
