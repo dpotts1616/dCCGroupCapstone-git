@@ -36,10 +36,10 @@ namespace ParkingApp.Controllers
                 return RedirectToAction(nameof(Create));
             }
 
-                customer = await _context.Customers
-               //.Include(c => c.Car)
-               .Include(c => c.IdentityUser)
-               .FirstOrDefaultAsync(m => m.Id == customer.Id);
+            customer = await _context.Customers
+           //.Include(c => c.Car)
+           .Include(c => c.IdentityUser)
+           .FirstOrDefaultAsync(m => m.Id == customer.Id);
 
             return View(customer);
 
@@ -93,7 +93,7 @@ namespace ParkingApp.Controllers
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
-      
+
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -199,7 +199,7 @@ namespace ParkingApp.Controllers
             return View(reservations);
         }
 
-       // POST: CustomersController/BookASpot/
+        //POST: CustomersController/BookASpot/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult BookASpot([Bind("ReservationDate,StartTime,EndTime, OwnedSpotID")] Reservation reservation, int ID)
@@ -255,7 +255,7 @@ namespace ParkingApp.Controllers
 
 
         //GET: CustomersController/AddVehicle/
-         public ActionResult AddVehicle(int? id)
+        public ActionResult AddVehicle(int? id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
@@ -271,10 +271,10 @@ namespace ParkingApp.Controllers
             }
         }
 
-       // POST: CustomersController/AddVehicle/
+        //POST: CustomersController/AddVehicle/
         [HttpPost]
         [ValidateAntiForgeryToken]
-         public ActionResult AddVehicle([Bind("CarMake,CarModel,CarYear")] Car car)
+        public ActionResult AddVehicle([Bind("CarMake,CarModel,CarYear")] Car car)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
@@ -288,7 +288,7 @@ namespace ParkingApp.Controllers
 
 
         //GET: CustomersController/ViewVehicles/
-         public ActionResult ViewVehicles(int? id)
+        public ActionResult ViewVehicles(int? id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
@@ -307,7 +307,7 @@ namespace ParkingApp.Controllers
 
         }
 
-        // GET: CustomersController/ViewVehicles/
+        //GET: CustomersController/ViewVehicles/
         public ActionResult YourReservations(int? id)
         {
             var reservations = _context.Reservations.Where(c => c.BookedCustomerID == id);
@@ -317,7 +317,7 @@ namespace ParkingApp.Controllers
         }
 
 
-        // GET: Cancel Reservtion
+        //GET: Cancel Reservtion
         public async Task<IActionResult> CancelReservation(int? id)
         {
             if (id == null)
@@ -388,20 +388,6 @@ namespace ParkingApp.Controllers
             return View();
         }
 
-
-        [HttpPost]
-        public ActionResult PostRating(int rating, int mid)
-        {
-            StarRating rt = new StarRating();
-            rt.Rate = rating;
-            rt.CustomerId = mid;
-
-            _context.Ratings.Add(rt);
-            _context.SaveChanges();
-
-            return Ok();
-        }
-
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult Charge(string stripeEmail, string stripeToken)
@@ -427,6 +413,21 @@ namespace ParkingApp.Controllers
 
         //    return View();
         //}
+
+        [HttpPost]
+        public ActionResult PostRating(int rating, int mid)
+        {
+            StarRating rt = new StarRating();
+            rt.Rate = rating;
+            rt.CustomerId = mid;
+
+            _context.Ratings.Add(rt);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+     
 
 
     }

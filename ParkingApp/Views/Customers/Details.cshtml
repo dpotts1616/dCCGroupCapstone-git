@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 style="margin: 0 auto; justify-content: space-around; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 20px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">
+<h1 style="margin: 0 auto; text-align: center; justify-content: space-around; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 20px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">
     Details
 </h1>
 <link rel="stylesheet" href="/css/new.css">
@@ -44,7 +44,7 @@
         </form>
     </div>
 </body>
-<div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a class="btn btn-primary" asp-action="Index">Back to main menu</a>
+<div style="margin: 0 auto; ">
+    <a style="margin: 0 auto;" class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a style="margin: 0 auto;" class="btn btn-warning" asp-action="Index">Back to main menu</a>
 </div>

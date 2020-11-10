@@ -5,31 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 style="margin: 0 auto; justify-content: space-around; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 20px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Delete</h1>
 
-<h3 style="margin: 0 auto; justify-content: space-around; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 20px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Are you sure you want to delete this?</h3>
+
+<h3 style="border-bottom: 1px solid black; margin: 0 auto; justify-content: space-around; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 20px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Are you sure you want to delete this?</h3>
 <body class="bodyCustomerDelete">
     <link rel="stylesheet" href="/css/new.css">
-    <div id="container">
+    <div class="box">
 
         <form>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center; font-weight: bold;">
                 @Html.DisplayNameFor(model => model.FirstName)
                 @Html.DisplayFor(model => model.FirstName)
             </p>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center; font-weight: bold;">
                 @Html.DisplayNameFor(model => model.LastName)
                 @Html.DisplayFor(model => model.LastName)
             </p>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center; font-weight: bold; ">
                 @Html.DisplayNameFor(model => model.EmailAddress)
                 @Html.DisplayFor(model => model.EmailAddress)
             </p>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center; font-weight: bold;">
                 @Html.DisplayNameFor(model => model.PhoneNumber)
                 @Html.DisplayFor(model => model.PhoneNumber)
             </p>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center; font-weight: bold; ">
                 @Html.DisplayNameFor(model => model.LicenseIDNumber)
                 @Html.DisplayFor(model => model.LicenseIDNumber)
             </p>
@@ -38,8 +38,8 @@
 
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
-            <input class="btn btn-primary" type="submit" value="Delete" /> |
-            <a class="btn btn-primary" asp-action="Index">Back to main menu</a>
+            <input class="btn btn-warning" type="submit" value="Delete" style="margin: 0 auto;"/> |
+            <a class="btn btn-warning" style="margin: 0 auto;" asp-action="Index">Back to main menu</a>
         </form>
 
     </div>

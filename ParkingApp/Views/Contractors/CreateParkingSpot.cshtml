@@ -6,52 +6,53 @@
 }
 
 <link rel="stylesheet" href="/css/new.css">
-<h1 style="text-align: center; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 50px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Welcome!</h1>
-<h4 style="text-align: center; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 50px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Enter in details for your parking spot below:</h4>
+<h4 class="headers">Please register your parking spot information below</h4>
 <body class="bodyContractorCreateParkingSpot">
 </body>
 
 <div>
-    <div style="width: 500px; margin: auto; padding: 20px 20px 15px 10px; color:#808080; background-color: #ffffff; border: 1px solid black; box-shadow: 5px 6px 6px black;">
+    <div style="color: black; text-align: center; width: 500px; margin: 0 auto; padding: 20px 20px 20px 20px; background-color: #ffffff; border: 1px solid black; box-shadow: 5px 6px 6px black;">
         <form asp-action="CreateParkingSpot">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group" style="margin: 0 auto;">
                 <label asp-for="Address" class="control-label"></label>
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin: 0 auto;">
                 <label asp-for="City" class="control-label"></label>
                 <input asp-for="City" class="form-control" />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin: 0 auto;">
                 <label asp-for="State" class="control-label"></label>
                 <input asp-for="State" class="form-control" />
                 <span asp-validation-for="State" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin: 0 auto;">
                 <label asp-for="ZipCode" class="control-label"></label>
                 <input asp-for="ZipCode" class="form-control" />
                 <span asp-validation-for="ZipCode" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin: 0 auto;">
                 <label asp-for="HourlyRate" class="control-label"></label>
                 <input asp-for="HourlyRate" class="form-control" />
                 <span asp-validation-for="HourlyRate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin: 0 auto;">
                 <label asp-for="CoveredSpot" class="control-label"></label>
                 <input asp-for="CoveredSpot" class="form-control" />
                 <span asp-validation-for="CoveredSpot" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin: 0 auto;">
                 <label asp-for="Notes" class="control-label"></label>
                 <input asp-for="Notes" class="form-control" />
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a class="btn btn-primary" asp-action="Index">Back To Home</a>
+            <div style="padding: 5px 5px 5px 5px;">
+                <input type="submit" value="Create" class="btn btn-warning" />
+                <a class="btn btn-warning" asp-action="Index">Back To Home</a>
+            </div>
 
         </form>
     </div>

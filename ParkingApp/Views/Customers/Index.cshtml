@@ -14,33 +14,35 @@
 </h1>
 <body class="bodyCustomerIndex">
     <link rel="stylesheet" href="/css/new.css">
-    <div id="container">
+    <div class="box">
         <form>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center;">
 
-                @Html.ActionLink("Find a spot", "AllSpots", new { id = Model.Id })
-
-            </p>
-            <p class="box">
                 @Html.ActionLink("Profile Details", "Details", new { id = Model.Id })
+               
+
             </p>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center;">
                 @Html.ActionLink("Edit Your Information", "Edit", new { id = Model.Id })
             </p>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center;">
+             
+                @Html.ActionLink("Find a spot", "AllSpots", new { id = Model.Id })
+            </p>
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center;">
                 @Html.ActionLink("Delete your profile", "Delete", new { id = Model.Id })
             </p>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center;">
                 @Html.ActionLink("Add a vehicle to your account", "AddVehicle", new { id = Model.Id })
             </p>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center;">
                 @Html.ActionLink("Your vehicles", "ViewVehicles", new { id = Model.Id })
             </p>
-            <p class="box">
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center;">
                 @Html.ActionLink("Your Reservations", "YourReservations", new { id = Model.Id })
             </p>
-            <p class="box">
-                @Html.ActionLink("Pay for your spot", "PayBill", new { id = Model.Id })
+            <p style="border: 2px solid black; padding: 4px 4px 4px 4px; text-align: center;">
+                @Html.ActionLink("Pay Your Bill", "PayBill", new { id = Model.Id })
             </p>
         </form>
     </div>
