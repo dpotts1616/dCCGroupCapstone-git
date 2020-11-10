@@ -190,7 +190,7 @@ namespace ParkingApp.Controllers
             //var contractor = _context.Contractors.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             var contractor = await _context.Contractors.FindAsync(id);
 
-
+            
 
             var parkingSpots = _context.ParkingSpots.Where(w => w.OwnerId == contractor.Id);
 
@@ -215,7 +215,7 @@ namespace ParkingApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateParkingSpot([Bind("Id,Address, City, State, ZipCode, HourlyRate, CoveredSpot, Notes")] ParkingSpot parkingSpot)
+        public async Task<IActionResult> CreateParkingSpot([Bind("Id,Address, City, State, ZipCode, HourlyRate, CoveredSpot, Notes")]ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {
@@ -225,7 +225,7 @@ namespace ParkingApp.Controllers
                 parkingSpot = await _geocodingService.AttachLatAndLong(parkingSpot);
 
 
-
+                 
                 //contractor.SpotID = parkingSpot.ID;
                 parkingSpot.OwnerId = contractor.Id;
                 _context.ParkingSpots.Add(parkingSpot);
@@ -243,7 +243,7 @@ namespace ParkingApp.Controllers
             var contractor = _context.Contractors.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             var spots = _context.ParkingSpots.Where(c => c.OwnerId == contractor.Id);
             var reservations = new List<Reservation>();
-            foreach (var item in spots)
+            foreach(var item in spots)
             {
                 reservations.AddRange(_context.Reservations.Where(c => c.OwnedSpotID == item.ID).ToList());
             }
@@ -265,32 +265,59 @@ namespace ParkingApp.Controllers
 
         //Cancel Reservation
 
-        [HttpPost, ActionName("CancelReservation")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CancelConfirmed(int id)
-        {
-            var reservation = await _context.Reservations.FindAsync(id);
-            var customer = _context.Customers.Find(reservation.BookedCustomerID);
-            var spot = _context.ParkingSpots.Find(reservation.OwnedSpotID);
+        //[HttpPost, ActionName("CancelReservation")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> CancelConfirmed(int id)
+        //{
+        //    var reservation = await _context.Reservations.FindAsync(id);
+        //    var customer = _context.Customers.Find(reservation.BookedCustomerID);
+        //    var spot = _context.ParkingSpots.Find(reservation.OwnedSpotID);
 
-            _context.Reservations.Remove(reservation);
-            await _context.SaveChangesAsync();
+        //    _context.Reservations.Remove(reservation);
+        //    await _context.SaveChangesAsync();
 
-            string subject = "Reservation Cancelled";
-            string body = $"{customer.FirstName}, your parking spot reservation at {spot.Address} on {reservation.ReservationDate.Date} " +
-                $"from {reservation.StartTime.TimeOfDay} to {reservation.EndTime.TimeOfDay} has been cancelled by the owner.";
-            SendMail.SendEmail(customer.EmailAddress, subject, body);
+        //    string subject = "Reservation Cancelled";
+        //    string body = $"{customer.FirstName}, your parking spot reservation at {spot.Address} on {reservation.ReservationDate.Date} " +
+        //        $"from {reservation.StartTime.TimeOfDay} to {reservation.EndTime.TimeOfDay} has been cancelled by the owner.";
+        //    SendMail.SendEmail(customer.EmailAddress, subject, body);
 
-            return RedirectToAction(nameof(Index));
-        }
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        public IActionResult ViewCustomerDetails(int id)
-        {
-            var customer = _context.Customers.Find(id);
+        //public IActionResult ViewCustomerDetails(int id)
+        //{
+        //    var customer = _context.Customers.Find(id);
 
-            return View(customer);
-        }
+        //    return View(customer);
+        //}
+
+        //[HttpPost, ActionName("CancelReservation")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> CancelConfirmed(int id)
+        //{
+        //    var reservation = await _context.Reservations.FindAsync(id);
+        //    var customer = _context.Customers.Find(reservation.BookedCustomerID);
+        //    var spot = _context.ParkingSpots.Find(reservation.OwnedSpotID);
+
+        //    _context.Reservations.Remove(reservation);
+        //    await _context.SaveChangesAsync();
+
+        //    string subject = "Reservation Cancelled";
+        //    string body = $"{customer.FirstName}, your parking spot reservation at {spot.Address} on {reservation.ReservationDate.Date} " +
+        //        $"from {reservation.StartTime.TimeOfDay} to {reservation.EndTime.TimeOfDay} has been cancelled by the owner.";
+        //    SendMail.SendEmail(customer.EmailAddress, subject, body);
+
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+        //public IActionResult ViewCustomerDetails(int id)
+        //{
+        //    var customer = _context.Customers.Find(id);
+
+        //    return View(customer);
+        //}
 
 
     }
 }
+ 

@@ -107,6 +107,12 @@
     background-size: cover;
   
 }
+.bodyContractorViewReservations {
+    background-image: url("../css/Images/parkedcars.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 .header {
     width: 500px;
@@ -158,7 +164,7 @@
     margin: 0 auto; 
     white-space: nowrap; 
     color: black; 
-    padding: 20px 20px 20px 20px; 
+    padding: 10px 10px 10px 10px; 
     font-size: 10px; 
 }
 .headers{
