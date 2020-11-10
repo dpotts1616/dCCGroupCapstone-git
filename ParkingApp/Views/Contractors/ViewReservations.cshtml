@@ -22,9 +22,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.EndTime)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateBooked)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -41,9 +38,6 @@
                 @Html.DisplayFor(modelItem => item.EndTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateBooked.Date)
-            </td>
-            <td>
                 <a asp-action="ViewCustomerDetails" asp-route-id="@item.BookedCustomerID">Customer Details</a> |
                 <a asp-action="CancelReservation" asp-route-id="@item.Id">Cancel Reservation</a>
             </td>
@@ -52,5 +46,5 @@
     </tbody>
 </table>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Index">Back To Main Menu</a>
 </p>

@@ -10,12 +10,8 @@ using ParkingApp.Data;
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<< HEAD:ParkingApp/Migrations/20201110010640_initial.Designer.cs
-    [Migration("20201110010640_initial")]
-=======
-    [Migration("20201110020614_initial")]
->>>>>>> 82b99edc4d419bd33083fe79d161103921096544:ParkingApp/Migrations/20201110020614_initial.Designer.cs
-    partial class initial
+    [Migration("20201110135247_back to datebooked original")]
+    partial class backtodatebookedoriginal
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,14 +51,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "392405ec-56e2-41cf-a944-90d19c8fc0e5",
+                            ConcurrencyStamp = "d64071ec-a650-4f69-9573-92b09388dc87",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "563ecab4-f6cf-4651-9f0c-499913f031f6",
+                            ConcurrencyStamp = "d99bf75f-52c0-4416-ad87-3d7bdf8b449f",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });

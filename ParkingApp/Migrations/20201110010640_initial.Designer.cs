@@ -10,11 +10,7 @@ using ParkingApp.Data;
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<< HEAD:ParkingApp/Migrations/20201110010640_initial.Designer.cs
     [Migration("20201110010640_initial")]
-=======
-    [Migration("20201110020614_initial")]
->>>>>>> 82b99edc4d419bd33083fe79d161103921096544:ParkingApp/Migrations/20201110020614_initial.Designer.cs
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

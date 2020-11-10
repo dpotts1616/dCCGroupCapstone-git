@@ -342,20 +342,12 @@ namespace ParkingApp.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-<<<<<<< HEAD:ParkingApp/Migrations/20201110010640_initial.cs
                 values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "d64071ec-a650-4f69-9573-92b09388dc87", "Customer", "CUSTOMER" });
-=======
-                values: new object[] { "1bd87b74-3b02-4126-98e3-b9acb0767fc6", "392405ec-56e2-41cf-a944-90d19c8fc0e5", "Customer", "CUSTOMER" });
->>>>>>> 82b99edc4d419bd33083fe79d161103921096544:ParkingApp/Migrations/20201110020614_initial.cs
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-<<<<<<< HEAD:ParkingApp/Migrations/20201110010640_initial.cs
                 values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "d99bf75f-52c0-4416-ad87-3d7bdf8b449f", "Contractor", "CONTRACTOR" });
-=======
-                values: new object[] { "77e60802-3e18-40cf-8999-79aa642defb1", "563ecab4-f6cf-4651-9f0c-499913f031f6", "Contractor", "CONTRACTOR" });
->>>>>>> 82b99edc4d419bd33083fe79d161103921096544:ParkingApp/Migrations/20201110020614_initial.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

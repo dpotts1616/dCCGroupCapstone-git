@@ -10,8 +10,8 @@ using ParkingApp.Data;
 namespace ParkingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201110020731_new")]
-    partial class @new
+    [Migration("20201110134710_fixed date booked")]
+    partial class fixeddatebooked
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,14 +51,14 @@ namespace ParkingApp.Migrations
                         new
                         {
                             Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
-                            ConcurrencyStamp = "1267f639-b029-4192-9787-a515267bce2d",
+                            ConcurrencyStamp = "d64071ec-a650-4f69-9573-92b09388dc87",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "77e60802-3e18-40cf-8999-79aa642defb1",
-                            ConcurrencyStamp = "a45db918-2b68-4fe6-964d-609b9f5767f0",
+                            ConcurrencyStamp = "d99bf75f-52c0-4416-ad87-3d7bdf8b449f",
                             Name = "Contractor",
                             NormalizedName = "CONTRACTOR"
                         });
@@ -490,9 +490,6 @@ namespace ParkingApp.Migrations
 
                     b.Property<string>("IpAddress")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Rate")
                         .HasColumnType("int");

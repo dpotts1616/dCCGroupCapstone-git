@@ -20,6 +20,8 @@ namespace ParkingApp.Models
         [Display(Name = "End Time")]
         [DataType(DataType.Time)]
         public DateTime EndTime { get; set; }
+        [Display(Name = "Date Booked")]
+        [DataType(DataType.Date)]
         public DateTime DateBooked { get; set; }
         public double EstimatedCost { get; set; }
         public Customer Customer { get; set; }

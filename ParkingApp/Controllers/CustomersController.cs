@@ -231,7 +231,7 @@ namespace ParkingApp.Controllers
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
             string subject = "Reservation Confirmed";
-            string body = $"{customer.FirstName}, you have reserved a parking spot at {spot.Address} on {reservation.ReservationDate.Date} " +
+            string body = $"{customer.FirstName}, you have reserved a parking spot at {spot.Address} on {reservation.ReservationDate} " +
                 $"from {reservation.StartTime.TimeOfDay} to {reservation.EndTime.TimeOfDay}";
             SendMail.SendEmail(customer.EmailAddress, subject, body);
             return RedirectToAction(nameof(Index));
@@ -343,7 +343,7 @@ namespace ParkingApp.Controllers
             await _context.SaveChangesAsync();
 
             string subject = "Reservation Cancelled";
-            string body = $"{customer.FirstName}, your parking spot reservation at {spot.Address} on {reservation.ReservationDate.Date} " +
+            string body = $"{customer.FirstName}, your parking spot reservation at {spot.Address} on {reservation.ReservationDate} " +
                 $"from {reservation.StartTime.TimeOfDay} to {reservation.EndTime.TimeOfDay} has been cancelled by the owner.";
             SendMail.SendEmail(customer.EmailAddress, subject, body);
 
