@@ -23,6 +23,7 @@ namespace ParkingApp.Data
             new IdentityRole
             {
                 Id = "1bd87b74-3b02-4126-98e3-b9acb0767fc6",
+                ConcurrencyStamp = "d64071ec-a650-4f69-9573-92b09388dc87",
                 Name = "Customer",
                 NormalizedName = "CUSTOMER"
             }
@@ -32,6 +33,7 @@ namespace ParkingApp.Data
            new IdentityRole
            {
                Id = "77e60802-3e18-40cf-8999-79aa642defb1",
+               ConcurrencyStamp = "d99bf75f-52c0-4416-ad87-3d7bdf8b449f",
                Name = "Contractor",
                NormalizedName = "CONTRACTOR"
            }

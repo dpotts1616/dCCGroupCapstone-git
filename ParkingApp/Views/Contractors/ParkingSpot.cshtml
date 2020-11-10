@@ -32,28 +32,10 @@
                 @Html.DisplayNameFor(model => model.CoveredSpot)
             </th>
             <th >
-                @Html.DisplayNameFor(model => model.Reservation)
-            </th>
-            <th >
                 @Html.DisplayNameFor(model => model.Notes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Latitude)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Longitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OwnerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPaid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EntryTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExitTime)
             </th>
             <th>
 
@@ -84,28 +66,7 @@
                     @Html.DisplayFor(modelItem => item.CoveredSpot)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Reservation.Id)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Notes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Latitude)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Longitude)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OwnerId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsPaid)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EntryTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExitTime)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

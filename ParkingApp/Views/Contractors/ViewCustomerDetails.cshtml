@@ -69,14 +69,10 @@
 
             <img src="~/lib/Images/EmptyStar.png" alt="Star Rating" align="middle" id="5" class="rating" mid="@Html.DisplayFor(model => model.Id)" style="height:20px; width:20px;" />
 
-            @*(@Model.RateCount) @{if (@Model.RateCount > 0)
+            (@Model.RateCount) @{if (Model.RateCount > 0)
                 {
-                    decimal a = @Model.RateAvg / @Model.RateCount.Value; <span class="avr"> @a</span> } }<br />*@
+                    decimal a = Model.RateAvg / Model.RateCount.Value; <span class="avr"> @a</span> } }<br />
 
-
-
-
-            @Html.DisplayNameFor(model => model.Rating)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Rating)

@@ -24,9 +24,6 @@
             <th scope="col">
                 @Html.DisplayNameFor(model => model.CarYear)
             </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.OwnerId)
-            </th>
             
         </tr>
     </thead>
@@ -44,9 +41,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CarYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwnerId)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

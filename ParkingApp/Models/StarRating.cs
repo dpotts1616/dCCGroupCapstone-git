@@ -13,9 +13,8 @@ namespace ParkingApp.Models
         public int RateId { get; set; }
         public int Rate { get; set; }
         public string IpAddress { get; set; }
-        public int MovieId { get; set; }
-        [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
+        [ForeignKey("CustomerId")]
         public virtual Customer customer { get; set; }
 
     }

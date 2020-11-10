@@ -227,6 +227,7 @@ namespace ParkingApp.Controllers
             var spot = _context.ParkingSpots.Find(reservation.OwnedSpotID);
 
             reservation.Customer = customer;
+            reservation.BookedCustomerID = customer.Id;
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
             string subject = "Reservation Confirmed";
