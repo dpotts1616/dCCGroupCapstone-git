@@ -426,32 +426,7 @@ namespace ParkingApp.Controllers
             return Ok();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Charge(string stripeEmail, string stripeToken)
-        //{
-        //    var customers = new Stripe.CustomerCreateOptions();
-        //    var charges = new Stripe.CustomerCreateOptions();
-
-        //    var customer = customers.Create(new CustomerCreateOptions
-        //    {
-        //        Email = stripeEmail,
-        //        SourceToken = stripeToken
-        //    });
-
-        //    var charge = charges.Create(new CustomerCreateOptions
-        //    {
-        //        Amount = 500,//charge in cents
-        //        Description = "Sample Charge",
-        //        Currency = "usd",
-        //        CustomerId = customer.Id
-        //    });
-
-        //    // further application specific code goes here
-
-        //    return View();
-        //}
-
+     
 
 
     }

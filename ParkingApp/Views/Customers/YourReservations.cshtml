@@ -4,58 +4,60 @@
     ViewData["Title"] = "YourReservations";
 }
 
-<h1>YourReservations</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<h4 style="margin: 0 auto; width: 300px; border: 1px solid black; padding: 20px; background-color: white; box-shadow: 5px 5px 5px black;">Your Reservations</h4>
+<link rel="stylesheet" href="/css/new.css">
+<body class="bodyCustomerViewVehicles">
+</body>
+<table class="table table-hover" style="margin-top: auto; margin: 0 auto;">
     <thead>
-        <tr>
+        <tr class="table-light">
             @*<th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>*@
-            <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>*@
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.ReservationDate)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.StartTime)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.EndTime)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.DateBooked)
             </th>
-            <th></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.ReservationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndTime)
-            </td>
-            <td>
-            @Html.DisplayFor(modelItem => item.DateBooked)
-        </td>
-            <td>
-        @Html.ActionLink("Details", "ReservationDetails", new {  id=item.OwnedSpotID }) |
-        @Html.ActionLink("Cancel", "CancelReservation", new { id=item.Id })
-            </td>
-        </tr>
+            <tr class="table-light">
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateBooked)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "ReservationDetails", new { id = item.OwnedSpotID }) |
+                    @Html.ActionLink("Cancel", "CancelReservation", new { id = item.Id })
+                </td>
+            </tr>
         }
     </tbody>
 </table>
-
-<div><a class="btn btn-primary" asp-action="Index">Back to main menu</a></div>
+<p>
+    <a class="btn btn-warning" asp-action="Create">Create New Reservation</a> |
+</p>
+<div><a class="btn btn-warning" asp-action="Index">Back to main menu</a></div>

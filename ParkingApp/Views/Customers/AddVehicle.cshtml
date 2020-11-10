@@ -5,9 +5,8 @@
 }
 
 <link rel="stylesheet" href="/css/new.css">
-<h1 style="text-align: center; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 50px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Add Vehicle</h1>
-<body class="bodyCustomerCreate">
-</body>
+<h4 class="headers">Add your vehicle information below</h4>
+<body class="bodyCustomerAddVehicle"></body>
 
 <div class="row">
     <div style="width: 500px; margin: auto; padding: 20px 20px 15px 10px; color:#808080; background-color: #ffffff; border: 1px solid black; box-shadow: 5px 6px 6px black;">
@@ -19,33 +18,35 @@
             <input asp-for="Id" class="form-control" />
             <span asp-validation-for="Id" class="text-danger"></span>
         </div>*@
-            <div class="form-group">
+            <div class="form-group" style="margin: 0 auto; color: black; padding: 4px 4px 4px 4px;">
                 <label asp-for="CarMake" class="control-label"></label>
                 <input asp-for="CarMake" class="form-control" />
                 <span asp-validation-for="CarMake" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin: 0 auto; color: black; padding: 4px 4px 4px 4px;">
                 <label asp-for="CarModel" class="control-label"></label>
                 <input asp-for="CarModel" class="form-control" />
                 <span asp-validation-for="CarModel" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin: 0 auto; color: black; padding: 4px 4px 4px 4px;">
                 <label asp-for="CarYear" class="control-label"></label>
                 <input asp-for="CarYear" class="form-control" />
                 <span asp-validation-for="CarYear" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="OwnerId" />
             @*<div class="form-group">
-            <label asp-for="OwnerId" class="control-label"></label>
-            <input asp-for="OwnerId" class="form-control" />
-            <span asp-validation-for="OwnerId" class="text-danger"></span>
+        <label asp-for="OwnerId" class="control-label"></label>
+        <input asp-for="OwnerId" class="form-control" />
+        <span asp-validation-for="OwnerId" class="text-danger"></span>
         </div>*@
-           
-           <input type="submit" value="Create" class="btn btn-warning" style="text-align: center;" />
-           <a style="text-align: center;" class="btn btn-warning" asp-action="Index">Back to List</a>
-            
+        <div style="padding: 5px 5px 5px 5px; margin: 0 auto; ">
+            <input type="submit" value="Create" class="btn btn-warning" style="text-align: center;"/> |
+            <a style="text-align: center;" class="btn btn-warning" asp-action="Index">Back to List</a>
+        </div>
         </form>
+
     </div>
+  
 </div>
 
 

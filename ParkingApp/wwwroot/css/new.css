@@ -139,26 +139,20 @@
     }
 
 .box {
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 2px solid black;
-    width: 100%;
+    border: 1px solid black; 
+    width: 50%;
     background-color: white;
     white-space: nowrap;
+    text-align: center; 
     color: black;
     font-family: 'Abel', sans-serif;
     font-size: 100%;
-    box-shadow: 2px 2px 2px #888888;
-    padding: 5px 5px 5px 5px;
+    box-shadow: 5px 5px 5px black;
+    padding: 15px 5px 5px 5px;
+    margin: 0 auto;
 }
 
-#container label {
-    font-family: 'Abel', sans-serif;
-    color: white;
-    padding: 20px 50px 50px 20px;
-    white-space: nowrap;
-}
+
 .buttonMargins{
     background-color: white; 
     margin: 0 auto; 

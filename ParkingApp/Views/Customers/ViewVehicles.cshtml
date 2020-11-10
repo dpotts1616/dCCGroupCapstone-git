@@ -4,17 +4,15 @@
     ViewData["Title"] = "ViewVehicles";
 }
 
-<h1 style="margin: 0 auto; justify-content: space-around; width: 500px; border: 1px solid black; border-bottom-color: transparent; padding: 20px; margin: 0 auto; background-color: white; box-shadow: 5px 5px 5px black;">Vehicles</h1>
+<h4 style="margin: 0 auto; width: 300px; border: 1px solid black; padding: 20px; background-color: white; box-shadow: 5px 5px 5px black;">Vehicles</h4>
 <link rel="stylesheet" href="/css/new.css">
 <body class="bodyCustomerViewVehicles">
 </body>
 
-<table class="table table-hover">
+<table class="table table-hover" style="margin-top: auto; margin: 0 auto; justify-content: space-around; ">
     <thead>
-        <tr class="table-secondary">
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
+        <tr class="table-light">
+            
             <th scope="col">
                 @Html.DisplayNameFor(model => model.CarMake)
             </th>
@@ -24,18 +22,18 @@
             <th scope="col">
                 @Html.DisplayNameFor(model => model.CarYear)
             </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.OwnerId)
-            </th>
             
+            <th scope="col">
+               
+            </th>
+            <th scope="col">
+              
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr class="table-secondary">
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
+        <tr class="table-light">
             <td>
                 @Html.DisplayFor(modelItem => item.CarMake)
             </td>
@@ -45,9 +43,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CarYear)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwnerId)
-            </td>
+           
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
