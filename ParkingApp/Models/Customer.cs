@@ -42,14 +42,22 @@ namespace ParkingApp.Models
         [StringLength(5)]
         public string Rating { get; set; }
 
-
-
         [NotMapped]
-        public decimal RateAvg;
-
-        
-        public int? RateCount
-
+        public int?  RateCount
+        {
+            get {
+                if (ratings == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return ratings.Count;
+                }
+                }
+        }
+        [NotMapped]
+        public decimal RateAvg
         {
             get
             {
@@ -59,15 +67,13 @@ namespace ParkingApp.Models
                 }
                 else
                 {
-                   return (int?)(decimal)(RateTotal / RateCount);
+                   return (decimal)(RateTotal / RateCount);
                 }
                    
             }
         }
 
-
         [NotMapped]
-
         public int? RateTotal
         {
             get
@@ -80,9 +86,7 @@ namespace ParkingApp.Models
                 return (ratings.Sum(m => m.Rate));
             }
         }
-
         [NotMapped]
-
         public virtual ICollection<StarRating> ratings { get; set; }
 
 

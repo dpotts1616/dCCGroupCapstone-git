@@ -387,6 +387,7 @@ namespace ParkingApp.Controllers
             return View();
         }
 
+<<<<<<< HEAD
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Charge(string stripeEmail, string stripeToken)
@@ -412,6 +413,47 @@ namespace ParkingApp.Controllers
 
             return View();
         }
+=======
+
+        [HttpPost]
+        public ActionResult PostRating(int rating, int mid)
+        {
+            StarRating rt = new StarRating();
+            rt.Rate = rating;
+            rt.CustomerId = mid;
+
+            _context.Ratings.Add(rt);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Charge(string stripeEmail, string stripeToken)
+        //{
+        //    var customers = new Stripe.CustomerCreateOptions();
+        //    var charges = new Stripe.CustomerCreateOptions();
+
+        //    var customer = customers.Create(new CustomerCreateOptions
+        //    {
+        //        Email = stripeEmail,
+        //        SourceToken = stripeToken
+        //    });
+
+        //    var charge = charges.Create(new CustomerCreateOptions
+        //    {
+        //        Amount = 500,//charge in cents
+        //        Description = "Sample Charge",
+        //        Currency = "usd",
+        //        CustomerId = customer.Id
+        //    });
+
+        //    // further application specific code goes here
+
+        //    return View();
+        //}
+>>>>>>> 51b3db193290f822ed3cfe787fcf6cebf414c163
 
 
     }

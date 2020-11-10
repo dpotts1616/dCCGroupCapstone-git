@@ -10,106 +10,98 @@
     <h4>Customer</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Id)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Id)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.EmailAddress)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EmailAddress)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LicenseIDNumber)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LicenseIDNumber)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdentityUserId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdentityUserId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CarID)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CarID)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PaymentID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PaymentID)
-        </dd>
         <dt class="col-sm-2">
-            <img src="~/images/EmptyStar.png" alt="Star Rating" align="middle" id="1" class="rating" mid="@Model.Id" />
+            <img src="~/lib/Images/EmptyStar.png" alt="Star Rating" align="middle" id="1" class="rating" mid="@Html.DisplayFor(model => model.Id)" style="height:20px; width:20px;" />
 
-            <img src="~/images/EmptyStar.png" alt="Star Rating" align="middle" id="2" class="rating" mid="@Model.Id" />
+            <img src="~/lib/Images/EmptyStar.png" alt="Star Rating" align="middle" id="2" class="rating" mid="@Html.DisplayFor(model => model.Id)" style="height:20px; width:20px;" />
 
-            <img src="~/images/EmptyStar.png" alt="Star Rating" align="middle" id="3" class="rating" mid="@Model.Id" />
+            <img src="~/lib/Images/EmptyStar.png" alt="Star Rating" align="middle" id="3" class="rating" mid="@Html.DisplayFor(model => model.Id)" style="height:20px; width:20px;" />
 
-            <img src="~/images/EmptyStar.png" alt="Star Rating" align="middle" id="4" class="rating" mid="@Model.Id" />
+            <img src="~/lib/Images/EmptyStar.png" alt="Star Rating" align="middle" id="4" class="rating" mid="@Html.DisplayFor(model => model.Id)" style="height:20px; width:20px;" />
 
-            <img src="~/images/EmptyStar.png" alt="Star Rating" align="middle" id="5" class="rating" mid="@Model.Id" />
+            <img src="~/lib/Images/EmptyStar.png" alt="Star Rating" align="middle" id="5" class="rating" mid="@Html.DisplayFor(model => model.Id)" style="height:20px; width:20px;" />
 
-            (@Model.RateCount) @{if (Model.RateCount > 0)
+            @*(@Model.RateCount) @{if (@Model.RateCount > 0)
                 {
-                    decimal a = Model.RateAvg / Model.RateCount.Value; <span class="avr"> @a</span> } }<br />
-
+                    decimal a = @Model.RateAvg / @Model.RateCount.Value; <span class="avr"> @a</span> } }<br />*@
 
 
 
 
             @Html.DisplayNameFor(model => model.Rating)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Rating)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RateCount)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.RateCount)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RateTotal)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.RateTotal)
         </dd>
     </dl>
 </div>
-
 <div>
-    <a asp-action="ViewReservations">Back to List</a>
     <a asp-action="Index">Back to List</a>
 
  </div>
 
-
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script type="text/javascript">
 
 
@@ -117,93 +109,49 @@
 
             $('#ViewCustomerDetails > tbody  > tr').each(function () {
 
-
-
                 var av = $(this).find("span.avr").text();
-
-
-
                 if (av != "" || av != null) {
-
                     // alert(av);
-
                     // fillRating(parseInt(av));
-
                     var img = $(this).find("img[id='" + parseInt(av) + "']");
-
-                    img.attr("src", "/images/FilledStar.png").prevAll("img.rating").attr("src", "/images/FilledStar.png");
-
+                    img.attr("src", "/lib/Images/FilledStar.png").prevAll("img.rating").attr("src", "/lib/Images/FilledStar.png");
                 }
-
-
-
             });
-
-
-
-
-
-
 
             $("img.rating").mouseover(function () {
-
                 giveRating($(this), "FilledStar.png");
-
                 $(this).css("cursor", "pointer");
-
             });
 
-
-
             $("img.rating").mouseout(function () {
-
                 giveRating($(this), "EmptyStar.png");
-
                 refilRating($(this));
 
             });
 
 
-
             $("img.rating").click(function (e) {
-
-                // $("img.rating").unbind("mouseout mouseover click");
-
+                $("img.rating").unbind("mouseout mouseover click");
                 $(this).css('color', 'red');
-
-                // alert(e.currentTarget + ' was clicked!');
-
+                //alert(e.currentTarget + ' was clicked!');
                 // call ajax methods to update database
-
-                var url = "/CustomersController/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
-
+                var url = "/Contractors/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
                 $.post(url, null, function (data) {
-
                     $(e.currentTarget).closest('tr').find('div.result').text(data).css('color', 'red') // $("#result").text(data);
-
                 });
-
             });
-
         });
 
-
-
         function giveRating(img, image) {
-
-            img.attr("src", "/Images/" + image)
-
-                .prevAll("img.rating").attr("src", "/Images/" + image);
-
+            img.attr("src", "/lib/Images/" + image)
+                .prevAll("img.rating").attr("src", "/lib/Images/" + image);
         }
 
         function refilRating(img1) {
-
             var rt = $(img1).closest('tr').find("span.avr").text();
-
             var img = $(img1).closest('tr').find("img[id='" + parseInt(rt) + "']");
-
-            img.attr("src", "/images/FilledStar.png").prevAll("img.rating").attr("src", "/images/FilledStar.png");
+            img.attr("src", "/lib/Images/FilledStar.png").prevAll("img.rating").attr("src", "/lib/Images/FilledStar.png");
 
         }
     </script>
+}

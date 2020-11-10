@@ -318,6 +318,18 @@ namespace ParkingApp.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult PostRating(int rating, int mid)
+        {
+            StarRating rt = new StarRating();
+            rt.Rate = rating;
+            rt.CustomerId = mid;
+
+            _context.Ratings.Add(rt);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
  
